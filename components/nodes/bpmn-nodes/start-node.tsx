@@ -6,9 +6,10 @@ import { memo, useState, useEffect, useRef } from "react"
 import { Handle, Position, type NodeProps } from "reactflow"
 import type { NodeData } from "@/types/kaos-types"
 import Shape from "@/components/shapes"
+import { CircleIcon, CircleTimeIcon } from "@/components/icons/bpmn-icons"
 
 
-function StartEventNode({ data, selected, id }: NodeProps<NodeData>) {
+function StartEventNode({ data, type, id }: NodeProps<NodeData>) {
     const [isEditing, setIsEditing] = useState(false)
     const [label, setLabel] = useState(data.label)
     const inputRef = useRef<HTMLInputElement>(null)
@@ -56,11 +57,21 @@ function StartEventNode({ data, selected, id }: NodeProps<NodeData>) {
         }
     }
 
+    function renderIconByType(type: string, size: number) {
+        switch (type) {
+            case "time":
+                return <CircleTimeIcon className={`h-${size} w-${size} text-green-500`} />
+            default:
+                return <CircleIcon className={`h-${size} w-${size} text-green-500`} />
+        }
+    }
+
+
     return (
         <div className="relative" onDoubleClick={handleDoubleClick} style={{ width: `${size}px`, height: `${size}px` }}>
 
             <div className="pt-0 pb-0">
-                <Shape type="ellipse" width={size} height={size} fill="#D1FAE5" stroke="#6EE7B7" strokeWidth={2} />
+                {renderIconByType(type, size)}
             </div>
 
             <Handle
@@ -87,7 +98,7 @@ function StartEventNode({ data, selected, id }: NodeProps<NodeData>) {
                         {data.label}
                     </div>)}
             </div>
-        </div>
+        </div >
     )
 }
 
