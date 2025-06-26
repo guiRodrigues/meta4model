@@ -7,48 +7,13 @@ import { Handle, Position, type NodeProps } from "reactflow"
 import type { NodeData } from "@/types/kaos-types"
 import Shape from "@/components/shapes"
 
-// Add this helper function before the component
-const renderStereotypeAndTaggedValues = (data: NodeData) => {
-    const hasStereotype = data.stereotype && data.stereotype.trim()
-    const hasTaggedValues = data.taggedValues && data.taggedValues.length > 0
-
-    if (!hasStereotype && !hasTaggedValues) return null
-
-    return (
-        <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-1 pointer-events-none">
-            {hasStereotype && (
-                <div className="text-xs text-gray-500 bg-white/80 px-2 py-0.5 rounded border whitespace-nowrap">
-                    {data.stereotype}
-                </div>
-            )}
-            {hasTaggedValues && (
-                <div className="flex flex-wrap gap-1 justify-center max-w-48">
-                    {data.taggedValues.slice(0, 3).map((tv, index) => (
-                        <div
-                            key={index}
-                            className="text-xs text-gray-500 bg-white/80 px-1.5 py-0.5 rounded border whitespace-nowrap"
-                        >
-                            {tv.key}={tv.value}
-                        </div>
-                    ))}
-                    {data.taggedValues.length > 3 && (
-                        <div className="text-xs text-gray-500 bg-white/80 px-1.5 py-0.5 rounded border">
-                            +{data.taggedValues.length - 3}
-                        </div>
-                    )}
-                </div>
-            )}
-        </div>
-    )
-}
 
 function StartEventNode({ data, selected, id }: NodeProps<NodeData>) {
     const [isEditing, setIsEditing] = useState(false)
     const [label, setLabel] = useState(data.label)
     const inputRef = useRef<HTMLInputElement>(null)
 
-    // Use our fixed node size hook with significantly increased padding
-    // Set mounted state after initial render
+    // Use our fixed node size
     const size = 60
 
     useEffect(() => {
@@ -93,14 +58,11 @@ function StartEventNode({ data, selected, id }: NodeProps<NodeData>) {
 
     return (
         <div className="relative" onDoubleClick={handleDoubleClick} style={{ width: `${size}px`, height: `${size}px` }}>
-            {/* Standard rectangular selection outline */}
 
-            {/* Add margin for connection edges */}
             <div className="pt-0 pb-0">
                 <Shape type="ellipse" width={size} height={size} fill="#D1FAE5" stroke="#6EE7B7" strokeWidth={2} />
             </div>
 
-            {/* Standard top target and bottom source handles with increased margin */}
             <Handle
                 type="source"
                 position={Position.Right}
