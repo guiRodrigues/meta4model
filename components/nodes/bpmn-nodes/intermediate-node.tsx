@@ -5,10 +5,10 @@ import type React from "react"
 import { memo, useState, useEffect, useRef } from "react"
 import { Handle, Position, type NodeProps } from "reactflow"
 import type { NodeData } from "@/types/kaos-types"
-import { CircleIcon } from "@/components/icons/bpmn-icons"
+import { CircleIntermediateIcon } from "@/components/icons/bpmn-icons"
 
 
-function StartEventNode({ data, type, id }: NodeProps<NodeData>) {
+function IntermediateEventNode({ data, type, id }: NodeProps<NodeData>) {
     const [isEditing, setIsEditing] = useState(false)
     const [label, setLabel] = useState(data.label)
     const inputRef = useRef<HTMLInputElement>(null)
@@ -43,13 +43,13 @@ function StartEventNode({ data, type, id }: NodeProps<NodeData>) {
 
     const handleBlur = () => {
         setIsEditing(false)
-        data.label = label.trim() || "Start"
+        data.label = label.trim() || "Intermediate"
     }
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter") {
             setIsEditing(false)
-            data.label = label.trim() || "Start"
+            data.label = label.trim() || "Intermediate"
         } else if (e.key === "Escape") {
             setIsEditing(false)
             setLabel(data.label)
@@ -60,7 +60,7 @@ function StartEventNode({ data, type, id }: NodeProps<NodeData>) {
         <div className="relative" onDoubleClick={handleDoubleClick} style={{ width: `${size}px`, height: `${size}px` }}>
 
             <div className="pt-0 pb-0">
-                <CircleIcon className={`h-${size} w-${size} text-green-500`}/>
+                <CircleIntermediateIcon className={`h-${size} w-${size} text-blue-500`} />
             </div>
 
             <Handle
@@ -91,4 +91,4 @@ function StartEventNode({ data, type, id }: NodeProps<NodeData>) {
     )
 }
 
-export default memo(StartEventNode)
+export default memo(IntermediateEventNode)

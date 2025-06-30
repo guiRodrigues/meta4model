@@ -1,4 +1,5 @@
-import { CircleIcon, CircleTimeIcon } from "@/components/icons/bpmn-icons"
+import { CircleIcon, CircleIntermediateIcon } from "@/components/icons/bpmn-icons"
+import IntermediateNode from "@/components/nodes/bpmn-nodes/intermediate-node"
 import StartNode from "@/components/nodes/bpmn-nodes/start-node"
 import type { ModelDefinition } from "@/types/model-types"
 
@@ -10,7 +11,7 @@ export const bpmnModel: ModelDefinition = {
 
     nodeTypes: {
         start: StartNode,
-        time: StartNode
+        intermediate: IntermediateNode
     },
 
     edgeTypes: {
@@ -20,23 +21,23 @@ export const bpmnModel: ModelDefinition = {
         {
             type: "start",
             label: "Start",
-            category: "Start Events",
-            diagramType: "Start Diagram",
+            category: "Events",
+            diagramType: "BPMN 2.0 Diagram",
             component: StartNode,
             icon: <CircleIcon className="h-5 w-5 text-green-500" />,
             color: "#3b82f6",
             description: "Start event in BPMN, indicating the beginning of a process.",
         },
         {
-            type: "time",
-            label: "Time",
-            category: "Start Events",
-            diagramType: "Time Diagram",
+            type: "intermediate",
+            label: "Intermediate",
+            category: "Events",
+            diagramType: "BPMN 2.0 Diagram",
             component: StartNode,
-            icon: <CircleTimeIcon className="h-5 w-5 text-green-500" />,
-            color: "#3b82f6",
-            description: "Time event in BPMN, indicating a specific time condition in a process.",
-        }
+            icon: <CircleIntermediateIcon className="h-5 w-5 text-blue-500" />,
+            color: "#60a5fa",
+            description: "Start event in BPMN, indicating the beginning of a process.",
+        },
     ],
 
     defaultConnections: [
