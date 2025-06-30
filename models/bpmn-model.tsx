@@ -1,4 +1,5 @@
-import { CircleIcon, CircleIntermediateIcon } from "@/components/icons/bpmn-icons"
+import { CircleEndIcon, CircleIcon, CircleIntermediateIcon } from "@/components/icons/bpmn-icons"
+import EndNode from "@/components/nodes/bpmn-nodes/end-node"
 import IntermediateNode from "@/components/nodes/bpmn-nodes/intermediate-node"
 import StartNode from "@/components/nodes/bpmn-nodes/start-node"
 import type { ModelDefinition } from "@/types/model-types"
@@ -11,7 +12,8 @@ export const bpmnModel: ModelDefinition = {
 
     nodeTypes: {
         start: StartNode,
-        intermediate: IntermediateNode
+        intermediate: IntermediateNode,
+        end: EndNode
     },
 
     edgeTypes: {
@@ -36,7 +38,17 @@ export const bpmnModel: ModelDefinition = {
             component: StartNode,
             icon: <CircleIntermediateIcon className="h-5 w-5 text-blue-500" />,
             color: "#60a5fa",
-            description: "Start event in BPMN, indicating the beginning of a process.",
+            description: "Intermediate event in BPMN, used to capture events that occur during a process.",
+        },
+        {
+            type: "end",
+            label: "End",
+            category: "Events",
+            diagramType: "BPMN 2.0 Diagram",
+            component: EndNode,
+            icon: <CircleEndIcon className="h-5 w-5 text-red-500" />,
+            color: "#ef4444",
+            description: "End event in BPMN, indicating the conclusion of a process.",
         },
     ],
 
