@@ -1,5 +1,6 @@
-import { CircleEndIcon, CircleIcon, CircleIntermediateIcon } from "@/components/icons/bpmn-icons"
+import { CircleEndIcon, CircleIcon, CircleIntermediateIcon, DiamondExclusiveIcon, DiamondIcon, DiamondParallelIcon } from "@/components/icons/bpmn-icons"
 import EndNode from "@/components/nodes/bpmn-nodes/end-node"
+import GatewayNode from "@/components/nodes/bpmn-nodes/gateway-node"
 import IntermediateNode from "@/components/nodes/bpmn-nodes/intermediate-node"
 import StartNode from "@/components/nodes/bpmn-nodes/start-node"
 import type { ModelDefinition } from "@/types/model-types"
@@ -13,7 +14,10 @@ export const bpmnModel: ModelDefinition = {
     nodeTypes: {
         start: StartNode,
         intermediate: IntermediateNode,
-        end: EndNode
+        end: EndNode,
+        gateway: GatewayNode,
+        exclusive: GatewayNode,
+        parallel: GatewayNode,
     },
 
     edgeTypes: {
@@ -49,6 +53,36 @@ export const bpmnModel: ModelDefinition = {
             icon: <CircleEndIcon className="h-5 w-5 text-red-500" />,
             color: "#ef4444",
             description: "End event in BPMN, indicating the conclusion of a process.",
+        },
+        {
+            type: "gateway",
+            label: "Gateway",
+            category: "Gateways",
+            diagramType: "BPMN 2.0 Diagram",
+            component: GatewayNode,
+            icon: <DiamondIcon  className="h-5 w-5 text-gray-500" />,
+            color: "#9ca3af",
+            description: "Gateway in BPMN, used to control the flow of the process based on conditions.",
+        },
+        {
+            type: "exclusive",
+            label: "Exclusive Gateway",
+            category: "Gateways",
+            diagramType: "BPMN 2.0 Diagram",
+            component: GatewayNode,
+            icon: <DiamondExclusiveIcon className="h-5 w-5 text-gray-500" />,
+            color: "#ef4444",
+            description: "Exclusive gateway in BPMN, used to control the flow of the process based on conditions.",
+        },
+        {
+            type: "parallel",
+            label: "Parallel Gateway",
+            category: "Gateways",
+            diagramType: "BPMN 2.0 Diagram",
+            component: GatewayNode,
+            icon: <DiamondParallelIcon className="h-5 w-5 text-gray-500" />,
+            color: "#ef4444",
+            description: "Parallel gateway in BPMN, used to split or join multiple paths in a process.",
         },
     ],
 
