@@ -10,10 +10,9 @@ export function CircleIcon({ className }: { className?: string }) {
         cx="12"
         cy="12"
         r="9"
-        fill="currentColor"
-        fillOpacity="0.1"
+        fill="#dcfce7"
         stroke="currentColor"
-        strokeWidth="0.5"
+        strokeWidth="0.8"
       />
     </svg>
   );
@@ -31,10 +30,9 @@ export function CircleIntermediateIcon({ className }: { className?: string }) {
         cx="12"
         cy="12"
         r="9"
-        fill="currentColor"
-        fillOpacity="0.1"
+        fill="#dbeafe"
         stroke="currentColor"
-        strokeWidth="0.5"
+        strokeWidth="0.8"
       />
       <circle cx="12" cy="12" r="8" stroke="currentColor" strokeWidth="0.5" />
     </svg>
@@ -53,10 +51,9 @@ export function CircleEndIcon({ className }: { className?: string }) {
         cx="12"
         cy="12"
         r="9"
-        fill="currentColor"
-        fillOpacity="0.1"
+        fill="#fee2e2"
         stroke="currentColor"
-        strokeWidth="1.5"
+        strokeWidth="1.8"
       />
     </svg>
   );
@@ -72,8 +69,7 @@ export function DiamondIcon({ className }: { className?: string }) {
     >
       <polygon
         points="12,3 21,12 12,21 3,12"
-        fill="currentColor"
-        fillOpacity="0.1"
+        fill="#f3f4f6"
         stroke="black"
         strokeWidth="0.5"
       />
@@ -91,8 +87,7 @@ export function DiamondExclusiveIcon({ className }: { className?: string }) {
     >
       <polygon
         points="12,3 21,12 12,21 3,12"
-        fill="currentColor"
-        fillOpacity="0.1"
+        fill="#f3f4f6"
         stroke="black"
         strokeWidth="0.5"
       />
@@ -112,8 +107,7 @@ export function DiamondParallelIcon({ className }: { className?: string }) {
     >
       <polygon
         points="12,3 21,12 12,21 3,12"
-        fill="currentColor"
-        fillOpacity="0.1"
+        fill="#f3f4f6"
         stroke="black"
         strokeWidth="0.5"
       />

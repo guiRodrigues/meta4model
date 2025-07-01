@@ -13,13 +13,13 @@ function TaskNode({ data, type, id }: NodeProps<NodeData>) {
   const [label, setLabel] = useState(data.label);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const nodeHeight = 95;
+  const nodeHeight = 80;
 
   // Use our fixed node size hook with significantly increased padding
   const nodeWidth = useFixedNodeSize(data.label, {
     extraWidthForMetadata: data.priority ? 40 : 0,
-    padding: 100,
-    minWidth: 160,
+    padding: 30,
+    minWidth: 150,
   });
 
   useEffect(() => {
@@ -70,7 +70,7 @@ function TaskNode({ data, type, id }: NodeProps<NodeData>) {
     >
       <div className="absolute inset-0 flex items-center justify-center">
         <Shape
-          type="rectangle"
+          type="rectangleTask"
           width={nodeWidth}
           height={nodeHeight}
           fill={data.fillColor || "#f3f4f6"}
@@ -97,7 +97,7 @@ function TaskNode({ data, type, id }: NodeProps<NodeData>) {
             className="w-4/5 bg-white/80 text-sm font-medium outline-none border-b border-blue-500 text-center text-gray-600 rounded px-1"
           />
         ) : (
-          <div className="px-12 text-sm font-medium text-center max-w-full flex flex-col justify-center h-full">
+          <div className="px-12 text-sm font-medium text-center max-w-full flex flex-col justify-center h-full break-words whitespace-normal">
             <div className="break-words text-gray-600">{data.label}</div>
           </div>
         )}
