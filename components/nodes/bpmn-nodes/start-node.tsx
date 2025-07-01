@@ -68,8 +68,8 @@ function StartEventNode({ data, type, id }: NodeProps<NodeData>) {
       <Handle
         type="source"
         position={Position.Right}
-        className="!bg-green-400"
-        style={{ right: -4 }}
+        className="!bg-blue-500 react-flow__handle-right"
+        style={{ right: -4 }} // Move handle down by 4px
       />
 
       <div className="absolute inset-0 flex items-center justify-center text-center">

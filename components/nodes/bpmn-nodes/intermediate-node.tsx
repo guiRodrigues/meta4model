@@ -67,6 +67,19 @@ function IntermediateEventNode({ data, type, id }: NodeProps<NodeData>) {
         />
       </div>
 
+      <Handle
+        type="target"
+        position={Position.Left}
+        className="!bg-blue-500 react-flow__handle-left"
+        style={{ left: -4 }} // Move handle up by 4px
+      />
+      <Handle
+        type="source"
+        position={Position.Right}
+        className="!bg-blue-500 react-flow__handle-right"
+        style={{ right: -4 }} // Move handle down by 4px
+      />
+
       <div className="absolute inset-0 flex items-center justify-center text-center">
         {isEditing ? (
           <div className="flex justify-center mt-1">
