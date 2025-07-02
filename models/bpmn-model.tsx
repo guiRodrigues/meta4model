@@ -1,3 +1,4 @@
+import AssociationEdge from "@/components/edges/bpmn-edges/association-edge";
 import SequenceFlowEdge from "@/components/edges/bpmn-edges/sequence-flow-edge";
 import {
   CircleEndIcon,
@@ -15,7 +16,7 @@ import StartNode from "@/components/nodes/bpmn-nodes/start-node";
 import TaskNode from "@/components/nodes/bpmn-nodes/task-node";
 import type { ModelDefinition } from "@/types/model-types";
 import { validateConnection } from "@/utils/connection-validation";
-import { ArrowRight, GitCommitIcon, Layers } from "lucide-react";
+import { ArrowRight, GitCommitIcon, Layers, Link } from "lucide-react";
 
 export const bpmnModel: ModelDefinition = {
   id: "bpmn",
@@ -36,6 +37,7 @@ export const bpmnModel: ModelDefinition = {
 
   edgeTypes: {
     sequence: SequenceFlowEdge,
+    association: AssociationEdge,
   },
 
   defaultNodes: [
@@ -125,6 +127,15 @@ export const bpmnModel: ModelDefinition = {
       color: "#a855f7",
       description:
         "Sequence flow in BPMN, representing the flow of control between elements in a process.",
+    },
+    {
+      type: "association",
+      label: "Association",
+      component: AssociationEdge,
+      icon: <Link className="h-5 w-5 text-gray-500" />,
+      color: "#a855f7",
+      description:
+        "Association in BPMN, representing a relationship between elements in a process.",
     },
   ],
 
