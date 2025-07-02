@@ -897,6 +897,8 @@ function DiagramEditor({ model }: { model: ModelDefinition }) {
         return <LinkIcon className="h-4 w-4 text-green-500" />;
       case "aggregation":
         return <Layers className="h-4 w-4 text-purple-500" />;
+      case "sequence":
+        return <Layers className="h-4 w-4 text-gray-500" />;
       default:
         return <GitMerge className="h-4 w-4 text-gray-500" />;
     }

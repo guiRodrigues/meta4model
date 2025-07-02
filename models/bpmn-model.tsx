@@ -1,3 +1,4 @@
+import SequenceFlowEdge from "@/components/edges/bpmn-edges/sequence-flow-edge";
 import {
   CircleEndIcon,
   CircleIcon,
@@ -13,6 +14,8 @@ import IntermediateNode from "@/components/nodes/bpmn-nodes/intermediate-node";
 import StartNode from "@/components/nodes/bpmn-nodes/start-node";
 import TaskNode from "@/components/nodes/bpmn-nodes/task-node";
 import type { ModelDefinition } from "@/types/model-types";
+import { validateConnection } from "@/utils/connection-validation";
+import { ArrowRight, GitCommitIcon, Layers } from "lucide-react";
 
 export const bpmnModel: ModelDefinition = {
   id: "bpmn",
@@ -31,7 +34,9 @@ export const bpmnModel: ModelDefinition = {
     task: TaskNode,
   },
 
-  edgeTypes: {},
+  edgeTypes: {
+    sequence: SequenceFlowEdge,
+  },
 
   defaultNodes: [
     {
@@ -111,6 +116,22 @@ export const bpmnModel: ModelDefinition = {
     },
   ],
 
+  defaultConnections: [
+    {
+      type: "sequence",
+      label: "Sequence Flow",
+      component: SequenceFlowEdge,
+      icon: <ArrowRight className="h-5 w-5 text-gray-500" />,
+      color: "#a855f7",
+      description:
+        "Sequence flow in BPMN, representing the flow of control between elements in a process.",
+    },
+  ],
+
+  validationRules: {
+    validateConnection,
+  },
+
   diagramTypes: [
     {
       id: "bpmn-diagram",
@@ -128,6 +149,4 @@ export const bpmnModel: ModelDefinition = {
       ],
     },
   ],
-
-  defaultConnections: [],
 };
