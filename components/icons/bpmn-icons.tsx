@@ -18,6 +18,96 @@ export function CircleIcon({ className }: { className?: string }) {
   );
 }
 
+export function ClockIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <circle
+        cx="12"
+        cy="12"
+        r="6"
+        stroke="currentColor"
+        strokeWidth="1"
+        fill="none"
+      />
+      <line
+        x1="12"
+        y1="12"
+        x2="12"
+        y2="8"
+        stroke="currentColor"
+        strokeWidth="1"
+        strokeLinecap="round"
+      />
+      <line
+        x1="12"
+        y1="12"
+        x2="15"
+        y2="14"
+        stroke="currentColor"
+        strokeWidth="1"
+        strokeLinecap="round"
+      />
+    </svg>
+  )
+}
+
+
+export function DashedCircleIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <circle
+        cx="12"
+        cy="12"
+        r="9"
+        stroke="currentColor"
+        strokeWidth="1"
+        strokeDasharray="2 2"
+        fill="#dcfce7"
+      />
+    </svg>
+  )
+}
+
+export function EnvelopeIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      {/* Caixa pequena (8×6), centralizada em x=8, y=9 */}
+      <rect
+        x="8"
+        y="9"
+        width="8"
+        height="6"
+        stroke="currentColor"
+        strokeWidth="1"
+        fill="none"
+      />
+      {/* Aba do envelope: vai até o ponto médio y = 12 */}
+      <path
+        d="M8 9 L12 12 L16 9"
+        stroke="currentColor"
+        strokeWidth="1"
+        fill="none"
+      />
+    </svg>
+  );
+}
+
+
 export function CircleIntermediateIcon({ className }: { className?: string }) {
   return (
     <svg
@@ -35,6 +125,35 @@ export function CircleIntermediateIcon({ className }: { className?: string }) {
         strokeWidth="0.8"
       />
       <circle cx="12" cy="12" r="8" stroke="currentColor" strokeWidth="0.5" />
+    </svg>
+  );
+}
+
+export function CircleNoninterruptingMessage({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+    <DashedCircleIcon/>
+    <EnvelopeIcon/>
+    </svg>
+  );
+}
+
+export function CircleInterruptingTime({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+    <CircleIcon/>
+    <CircleIcon className="w-5 h-5"/>
+    <ClockIcon/>
     </svg>
   );
 }

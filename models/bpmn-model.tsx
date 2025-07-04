@@ -5,6 +5,8 @@ import {
   CircleEndIcon,
   CircleIcon,
   CircleIntermediateIcon,
+  CircleInterruptingTime,
+  CircleNoninterruptingMessage,
   DiamondExclusiveIcon,
   DiamondIcon,
   DiamondParallelIcon,
@@ -13,7 +15,9 @@ import { RectangleIcon } from "@/components/icons/kaos-icons";
 import EndNode from "@/components/nodes/bpmn-nodes/end-node";
 import GatewayNode from "@/components/nodes/bpmn-nodes/gateway-node";
 import IntermediateNode from "@/components/nodes/bpmn-nodes/intermediate-node";
-import StartNode from "@/components/nodes/bpmn-nodes/start-node";
+import startInterruptingTimerNode from "@/components/nodes/bpmn-nodes/start-event/start-interrupting-timer-node";
+import startNoInterruptingMsg from "@/components/nodes/bpmn-nodes/start-event/start-no-interrupting-msg";
+import StartNode from "@/components/nodes/bpmn-nodes/start-event/start-node";
 import TaskNode from "@/components/nodes/bpmn-nodes/task-node";
 import type { ModelDefinition } from "@/types/model-types";
 import { validateConnection } from "@/utils/connection-validation";
@@ -23,6 +27,7 @@ import {
   Layers,
   Link,
   MessageSquare,
+  Star,
 } from "lucide-react";
 
 export const bpmnModel: ModelDefinition = {
@@ -39,7 +44,9 @@ export const bpmnModel: ModelDefinition = {
     gateway: GatewayNode,
     exclusive: GatewayNode,
     parallel: GatewayNode,
+    startNonInterruptingMessage: startNoInterruptingMsg, 
     task: TaskNode,
+    startInterruptingTimerNode: startInterruptingTimerNode,
   },
 
   edgeTypes: {
@@ -56,6 +63,28 @@ export const bpmnModel: ModelDefinition = {
       diagramType: "BPMN Diagram",
       component: StartNode,
       icon: <CircleIcon className="h-5 w-5 text-green-500" />,
+      color: "#3b82f6",
+      description:
+        "Start event in BPMN, indicating the beginning of a process.",
+    },
+    {
+      type: "startInterruptingTimerNode",
+      label: "Start",
+      category: "Events",
+      diagramType: "BPMN Diagram",
+      component: startInterruptingTimerNode,
+      icon: <CircleInterruptingTime className="h-5 w-5 text-green-500" />,
+      color: "#3b82f6",
+      description:
+        "Start event in BPMN, indicating the beginning of a process.",
+    },
+    {
+      type: "startNonInterruptingMessage",
+      label: "Start",
+      category: "Events",
+      diagramType: "BPMN Diagram",
+      component: startNoInterruptingMsg,
+      icon: <CircleNoninterruptingMessage className="h-5 w-5 text-green-500" />,
       color: "#3b82f6",
       description:
         "Start event in BPMN, indicating the beginning of a process.",
@@ -92,6 +121,7 @@ export const bpmnModel: ModelDefinition = {
       description:
         "Gateway in BPMN, used to control the flow of the process based on conditions.",
     },
+    
     {
       type: "exclusive",
       label: "Exclusive Gateway",
@@ -174,6 +204,8 @@ export const bpmnModel: ModelDefinition = {
         "exclusive",
         "parallel",
         "task",
+        "startNonInterruptingMessage",
+        "startInterruptingTimerNode",
       ],
     },
   ],
