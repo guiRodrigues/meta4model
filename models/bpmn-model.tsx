@@ -5,6 +5,7 @@ import {
   CircleEndIcon,
   CircleIcon,
   CircleIntermediateIcon,
+  CircleInterruptingConditional,
   CircleInterruptingTime,
   CircleNoninterruptingMessage,
   DiamondExclusiveIcon,
@@ -15,6 +16,7 @@ import { RectangleIcon } from "@/components/icons/kaos-icons";
 import EndNode from "@/components/nodes/bpmn-nodes/end-node";
 import GatewayNode from "@/components/nodes/bpmn-nodes/gateway-node";
 import IntermediateNode from "@/components/nodes/bpmn-nodes/intermediate-node";
+import startInterruptingConditionalNode from "@/components/nodes/bpmn-nodes/start-event/start-interrupting-conditional-node";
 import startInterruptingTimerNode from "@/components/nodes/bpmn-nodes/start-event/start-interrupting-timer-node";
 import startNoInterruptingMsg from "@/components/nodes/bpmn-nodes/start-event/start-no-interrupting-msg";
 import StartNode from "@/components/nodes/bpmn-nodes/start-event/start-node";
@@ -47,6 +49,7 @@ export const bpmnModel: ModelDefinition = {
     startNonInterruptingMessage: startNoInterruptingMsg, 
     task: TaskNode,
     startInterruptingTimerNode: startInterruptingTimerNode,
+    startInterruptingConditional: startInterruptingConditionalNode, // Assuming this is the same as the timer node
   },
 
   edgeTypes: {
@@ -74,6 +77,17 @@ export const bpmnModel: ModelDefinition = {
       diagramType: "BPMN Diagram",
       component: startInterruptingTimerNode,
       icon: <CircleInterruptingTime className="h-5 w-5 text-green-500" />,
+      color: "#3b82f6",
+      description:
+        "Start event in BPMN, indicating the beginning of a process.",
+    },
+    {
+      type: "startInterruptingConditional",
+      label: "Start",
+      category: "Events",
+      diagramType: "BPMN Diagram",
+      component: startInterruptingConditionalNode,
+      icon: <CircleInterruptingConditional className="h-5 w-5 text-green-500" />,
       color: "#3b82f6",
       description:
         "Start event in BPMN, indicating the beginning of a process.",
@@ -206,6 +220,7 @@ export const bpmnModel: ModelDefinition = {
         "task",
         "startNonInterruptingMessage",
         "startInterruptingTimerNode",
+        "startInterruptingConditional",
       ],
     },
   ],
