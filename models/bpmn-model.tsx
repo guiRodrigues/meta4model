@@ -7,6 +7,8 @@ import {
   CircleIntermediateIcon,
   CircleInterruptingConditional,
   CircleInterruptingTime,
+  CircleNoInterruptingConditional,
+  CircleNoInterruptingTime,
   CircleNoninterruptingMessage,
   DiamondExclusiveIcon,
   DiamondIcon,
@@ -16,6 +18,7 @@ import { RectangleIcon } from "@/components/icons/kaos-icons";
 import EndNode from "@/components/nodes/bpmn-nodes/end-node";
 import GatewayNode from "@/components/nodes/bpmn-nodes/gateway-node";
 import IntermediateNode from "@/components/nodes/bpmn-nodes/intermediate-node";
+import startNoInterruptingConditionalNode from "@/components/nodes/bpmn-nodes/start-event/start-no-interrupting-conditional-node";
 import startInterruptingConditionalNode from "@/components/nodes/bpmn-nodes/start-event/start-interrupting-conditional-node";
 import startInterruptingTimerNode from "@/components/nodes/bpmn-nodes/start-event/start-interrupting-timer-node";
 import startNoInterruptingMsg from "@/components/nodes/bpmn-nodes/start-event/start-no-interrupting-msg";
@@ -31,6 +34,8 @@ import {
   MessageSquare,
   Star,
 } from "lucide-react";
+import { start } from "repl";
+import startNoInterruptingTimerNode from "@/components/nodes/bpmn-nodes/start-event/start-no-interrupting-timer-node.";
 
 export const bpmnModel: ModelDefinition = {
   id: "bpmn",
@@ -48,8 +53,11 @@ export const bpmnModel: ModelDefinition = {
     parallel: GatewayNode,
     startNonInterruptingMessage: startNoInterruptingMsg, 
     task: TaskNode,
-    startInterruptingTimerNode: startInterruptingTimerNode,
+    startInterruptingTimer: startInterruptingTimerNode,
+    startNoInterruptingTimer: startNoInterruptingTimerNode, // Assuming this is the same as the timer node
     startInterruptingConditional: startInterruptingConditionalNode, // Assuming this is the same as the timer node
+    startNoInterruptingConditional: startNoInterruptingConditionalNode, // Assuming this is the same as the timer node
+    
   },
 
   edgeTypes: {
@@ -71,7 +79,7 @@ export const bpmnModel: ModelDefinition = {
         "Start event in BPMN, indicating the beginning of a process.",
     },
     {
-      type: "startInterruptingTimerNode",
+      type: "startInterruptingTimer",
       label: "Start",
       category: "Events",
       diagramType: "BPMN Diagram",
@@ -82,12 +90,34 @@ export const bpmnModel: ModelDefinition = {
         "Start event in BPMN, indicating the beginning of a process.",
     },
     {
-      type: "startInterruptingConditional",
+      type: "startNoInterruptingTimer",
       label: "Start",
+      category: "Events",
+      diagramType: "BPMN Diagram",
+      component: startNoInterruptingTimerNode,
+      icon: <CircleNoInterruptingTime className="h-5 w-5 text-green-500" />,
+      color: "#3b82f6",
+      description:
+        "Start event in BPMN, indicating the beginning of a process.",
+    },
+    {
+      type: "startInterruptingConditional",
+      label: "Interrupting Conditional",
       category: "Events",
       diagramType: "BPMN Diagram",
       component: startInterruptingConditionalNode,
       icon: <CircleInterruptingConditional className="h-5 w-5 text-green-500" />,
+      color: "#3b82f6",
+      description:
+        "Start event in BPMN, indicating the beginning of a process.",
+    },
+    {
+      type: "startNoInterruptingConditional",
+      label: "Start",
+      category: "Events",
+      diagramType: "BPMN Diagram",
+      component: startNoInterruptingConditionalNode,
+      icon: <CircleNoInterruptingConditional className="h-5 w-5 text-green-500" />,
       color: "#3b82f6",
       description:
         "Start event in BPMN, indicating the beginning of a process.",
@@ -219,8 +249,10 @@ export const bpmnModel: ModelDefinition = {
         "parallel",
         "task",
         "startNonInterruptingMessage",
-        "startInterruptingTimerNode",
+        "startInterruptingTimer",
         "startInterruptingConditional",
+        "startNoInterruptingConditional",
+        "startNoInterruptingTimer",  
       ],
     },
   ],

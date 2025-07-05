@@ -209,6 +209,20 @@ export function CircleInterruptingConditional({ className }: { className?: strin
   );
 }
 
+export function CircleNoInterruptingConditional({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+    <DashedCircleIcon/>
+    <DocumentIcon/>
+    </svg>
+  );
+}
+
 export function CircleInterruptingTime({ className }: { className?: string }) {
   return (
     <svg
@@ -219,6 +233,21 @@ export function CircleInterruptingTime({ className }: { className?: string }) {
     >
     <CircleIcon/>
     <CircleIcon className="w-5 h-5"/>
+    <ClockIcon/>
+    </svg>
+  );
+}
+
+export function CircleNoInterruptingTime({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+    
+    <DashedCircleIcon/>
     <ClockIcon/>
     </svg>
   );
