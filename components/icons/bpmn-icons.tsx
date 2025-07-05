@@ -130,6 +130,24 @@ export function DashedCircleIcon({ className }: { className?: string }) {
   )
 }
 
+export function SignalIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <polygon
+        points="12,7 16,15 8,15"
+        stroke="currentColor"
+        strokeWidth="1"
+        fill="none"
+      />
+    </svg>
+  )
+}
+
 export function EnvelopeIcon({ className }: { className?: string }) {
   return (
     <svg
@@ -249,6 +267,36 @@ export function CircleNoInterruptingTime({ className }: { className?: string }) 
     
     <DashedCircleIcon/>
     <ClockIcon/>
+    </svg>
+  );
+}
+
+export function CircleInterruptingSignal({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+    
+    <CircleIcon/>
+    <SignalIcon/>
+    </svg>
+  );
+}
+
+export function CircleNoInterruptingSignal({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+    
+    <DashedCircleIcon/> 
+    <SignalIcon/>
     </svg>
   );
 }

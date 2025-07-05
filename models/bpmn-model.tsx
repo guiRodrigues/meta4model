@@ -6,8 +6,10 @@ import {
   CircleIcon,
   CircleIntermediateIcon,
   CircleInterruptingConditional,
+  CircleInterruptingSignal,
   CircleInterruptingTime,
   CircleNoInterruptingConditional,
+  CircleNoInterruptingSignal,
   CircleNoInterruptingTime,
   CircleNoninterruptingMessage,
   DiamondExclusiveIcon,
@@ -36,6 +38,8 @@ import {
 } from "lucide-react";
 import { start } from "repl";
 import startNoInterruptingTimerNode from "@/components/nodes/bpmn-nodes/start-event/start-no-interrupting-timer-node.";
+import startInterruptingSignal from "@/components/nodes/bpmn-nodes/start-event/start-interrupting-signal-node";
+import startNoInterruptingSignalNode from "@/components/nodes/bpmn-nodes/start-event/start-no-interrupting-signal-node";
 
 export const bpmnModel: ModelDefinition = {
   id: "bpmn",
@@ -57,6 +61,8 @@ export const bpmnModel: ModelDefinition = {
     startNoInterruptingTimer: startNoInterruptingTimerNode, // Assuming this is the same as the timer node
     startInterruptingConditional: startInterruptingConditionalNode, // Assuming this is the same as the timer node
     startNoInterruptingConditional: startNoInterruptingConditionalNode, // Assuming this is the same as the timer node
+    startInterruptingSignal: startInterruptingSignal, // Assuming this is the same as the timer node
+    startNoInterruptingSignal: startNoInterruptingSignalNode, // Assuming this is the same as the timer node
     
   },
 
@@ -80,7 +86,7 @@ export const bpmnModel: ModelDefinition = {
     },
     {
       type: "startInterruptingTimer",
-      label: "Start",
+      label: "Interrupting Time",
       category: "Events",
       diagramType: "BPMN Diagram",
       component: startInterruptingTimerNode,
@@ -91,7 +97,7 @@ export const bpmnModel: ModelDefinition = {
     },
     {
       type: "startNoInterruptingTimer",
-      label: "Start",
+      label: "No Interrupting Timer",
       category: "Events",
       diagramType: "BPMN Diagram",
       component: startNoInterruptingTimerNode,
@@ -113,7 +119,7 @@ export const bpmnModel: ModelDefinition = {
     },
     {
       type: "startNoInterruptingConditional",
-      label: "Start",
+      label: "No Interrupting Conditional",
       category: "Events",
       diagramType: "BPMN Diagram",
       component: startNoInterruptingConditionalNode,
@@ -124,11 +130,33 @@ export const bpmnModel: ModelDefinition = {
     },
     {
       type: "startNonInterruptingMessage",
-      label: "Start",
+      label: "No Interrupting Message",
       category: "Events",
       diagramType: "BPMN Diagram",
       component: startNoInterruptingMsg,
       icon: <CircleNoninterruptingMessage className="h-5 w-5 text-green-500" />,
+      color: "#3b82f6",
+      description:
+        "Start event in BPMN, indicating the beginning of a process.",
+    },
+    {
+      type: "startInterruptingSignal",
+      label: "Interrupting Signal",
+      category: "Events",
+      diagramType: "BPMN Diagram",
+      component: startInterruptingSignal,
+      icon: <CircleInterruptingSignal className="h-5 w-5 text-green-500" />,
+      color: "#3b82f6",
+      description:
+        "Start event in BPMN, indicating the beginning of a process.",
+    },
+    {
+      type: "startNoInterruptingSignal",
+      label: "No Interrupting Signal",
+      category: "Events",
+      diagramType: "BPMN Diagram",
+      component: startNoInterruptingSignalNode,
+      icon: <CircleNoInterruptingSignal className="h-5 w-5 text-green-500" />,
       color: "#3b82f6",
       description:
         "Start event in BPMN, indicating the beginning of a process.",
@@ -253,6 +281,8 @@ export const bpmnModel: ModelDefinition = {
         "startInterruptingConditional",
         "startNoInterruptingConditional",
         "startNoInterruptingTimer",  
+        "startInterruptingSignal",
+        "startNoInterruptingSignal",
       ],
     },
   ],
