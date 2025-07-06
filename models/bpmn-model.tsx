@@ -6,11 +6,13 @@ import {
   CircleIcon,
   CircleIntermediateIcon,
   CircleInterruptingConditional,
+  CircleInterruptingEscalation,
   CircleInterruptingMultiple,
   CircleInterruptingParallelMultiple,
   CircleInterruptingSignal,
   CircleInterruptingTime,
   CircleNoInterruptingConditional,
+  CircleNoInterruptingEscalation,
   CircleNoInterruptingMultiple,
   CircleNoInterruptingSignal,
   CircleNoInterruptingTime,
@@ -47,6 +49,8 @@ import startInterruptingMultipleNoed from "@/components/nodes/bpmn-nodes/start-e
 import startInterruptingMultipleNode from "@/components/nodes/bpmn-nodes/start-event/start-interrupting-multiple-node";
 import startNoInterruptingMultipleNode from "@/components/nodes/bpmn-nodes/start-event/start-no-interrupting-multiple-node";
 import startInterruptingParallelNode from "@/components/nodes/bpmn-nodes/start-event/start-interrupting-parallel-node";
+import startInterruptingEscalationNode from "@/components/nodes/bpmn-nodes/start-event/start-interrupting-escalation-node";
+import startNoInterruptingEscalationNode from "@/components/nodes/bpmn-nodes/start-event/start-no-interrupting-escalation-node";
 
 export const bpmnModel: ModelDefinition = {
   id: "bpmn",
@@ -65,14 +69,16 @@ export const bpmnModel: ModelDefinition = {
     startNonInterruptingMessage: startNoInterruptingMsg, 
     task: TaskNode,
     startInterruptingTimer: startInterruptingTimerNode,
-    startNoInterruptingTimer: startNoInterruptingTimerNode, // Assuming this is the same as the timer node
-    startInterruptingConditional: startInterruptingConditionalNode, // Assuming this is the same as the timer node
-    startNoInterruptingConditional: startNoInterruptingConditionalNode, // Assuming this is the same as the timer node
-    startInterruptingSignal: startInterruptingSignal, // Assuming this is the same as the timer node
-    startNoInterruptingSignal: startNoInterruptingSignalNode, // Assuming this is the same as the timer node
+    startNoInterruptingTimer: startNoInterruptingTimerNode, 
+    startInterruptingConditional: startInterruptingConditionalNode, 
+    startNoInterruptingConditional: startNoInterruptingConditionalNode, 
+    startInterruptingSignal: startInterruptingSignal, 
+    startNoInterruptingSignal: startNoInterruptingSignalNode, 
     startInterruptingMultiple: startInterruptingMultipleNode,
     startNoInterruptingMultiple: startNoInterruptingMultipleNode,
     startInterruptingParallel: startInterruptingParallelNode,
+    startInterruptingEscalation: startInterruptingEscalationNode, 
+    startNoInterruptingEscalation: startNoInterruptingEscalationNode, 
     
   },
 
@@ -90,6 +96,28 @@ export const bpmnModel: ModelDefinition = {
       diagramType: "BPMN Diagram",
       component: StartNode,
       icon: <CircleIcon className="h-5 w-5 text-green-500" />,
+      color: "#3b82f6",
+      description:
+        "Start event in BPMN, indicating the beginning of a process.",
+    },
+    {
+      type: "startInterruptingEscalation",
+      label: "Interrupting Escalation",
+      category: "Events",
+      diagramType: "BPMN Diagram",
+      component: startInterruptingEscalationNode,
+      icon: <CircleInterruptingEscalation className="h-5 w-5 text-green-500" />,
+      color: "#3b82f6",
+      description:
+        "Start event in BPMN, indicating the beginning of a process.",
+    },
+    {
+      type: "startNoInterruptingEscalation",
+      label: "No Interrupting Escalation",
+      category: "Events",
+      diagramType: "BPMN Diagram",
+      component: startNoInterruptingConditionalNode,
+      icon: <CircleNoInterruptingEscalation className="h-5 w-5 text-green-500" />,
       color: "#3b82f6",
       description:
         "Start event in BPMN, indicating the beginning of a process.",
@@ -328,7 +356,9 @@ export const bpmnModel: ModelDefinition = {
         "startNoInterruptingSignal",
         "startInterruptingMultiple",
         "startNoInterruptingMultiple",
-        "startInterruptingParallel"
+        "startInterruptingParallel",
+        "startInterruptingEscalation",
+        "startNoInterruptingEscalation",
       ],
     },
   ],

@@ -166,6 +166,24 @@ export function PlusIcon({ className }: { className?: string }) {
   );
 }
 
+export function ArrowIcon({ className }: { className?: string }) {
+    return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M12 7 L7 15 L12 11 L17 15 L12 7 Z"
+        stroke="currentColor"
+        strokeWidth="1"
+        fill="none"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
 
 
 export function DashedCircleIcon({ className }: { className?: string }) {
@@ -417,6 +435,36 @@ export function CircleNoInterruptingParallelMultiple({ className }: { className?
     
     <DashedCircleIcon/>
     <PlusIcon/>
+    </svg>
+  );
+}
+
+export function CircleInterruptingEscalation({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+    
+    <CircleIcon/>
+    <ArrowIcon/>
+    </svg>
+  );
+}
+
+export function CircleNoInterruptingEscalation({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+    
+    <DashedCircleIcon/>
+    <ArrowIcon/>
     </svg>
   );
 }
