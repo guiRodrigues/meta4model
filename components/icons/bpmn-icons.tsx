@@ -207,6 +207,27 @@ export function DashedCircleIcon({ className }: { className?: string }) {
   )
 }
 
+export function ErrorIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M8 16 V8 L16 16 V8"
+        stroke="currentColor"
+        strokeWidth="1"
+        fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  )
+}
+
+
 export function SignalIcon({ className }: { className?: string }) {
   return (
     <svg
@@ -465,6 +486,36 @@ export function CircleNoInterruptingEscalation({ className }: { className?: stri
     
     <DashedCircleIcon/>
     <ArrowIcon/>
+    </svg>
+  );
+}
+
+export function CircleInterruptingError({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+    
+    <CircleIcon/>
+    <ErrorIcon/>
+    </svg>
+  );
+}
+
+export function CircleNoInterruptingError({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+    
+    <DashedCircleIcon/>
+    <ErrorIcon/>
     </svg>
   );
 }
