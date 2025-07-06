@@ -1,4 +1,4 @@
-export function CircleIcon({ className }: { className?: string }) {
+export function CircleIcon({ className}: { className?: string}) {
   return (
     <svg
       className={className}
@@ -9,7 +9,7 @@ export function CircleIcon({ className }: { className?: string }) {
       <circle
         cx="12"
         cy="12"
-        r="9"
+        r= "6"
         fill="#dcfce7"
         stroke="currentColor"
         strokeWidth="0.8"
@@ -29,7 +29,7 @@ export function ClockIcon({ className }: { className?: string }) {
       <circle
         cx="12"
         cy="12"
-        r="6"
+        r="4"
         stroke="currentColor"
         strokeWidth="1"
         fill="none"
@@ -38,7 +38,7 @@ export function ClockIcon({ className }: { className?: string }) {
         x1="12"
         y1="12"
         x2="12"
-        y2="8"
+        y2="10"
         stroke="currentColor"
         strokeWidth="1"
         strokeLinecap="round"
@@ -46,7 +46,7 @@ export function ClockIcon({ className }: { className?: string }) {
       <line
         x1="12"
         y1="12"
-        x2="15"
+        x2="13"
         y2="14"
         stroke="currentColor"
         strokeWidth="1"
@@ -64,19 +64,16 @@ export function PolygonIcon({ className }: { className?: string }) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <polygon
-        points="
-          12,7
-          16.76,10.46
-          14.94,16.04
-          9.06,16.04
-          7.24,10.46
-        "
-        stroke="currentColor"
-        strokeWidth="1"
-        fill="none"
-        strokeLinejoin="round"
-      />
+      {/* Reduce size by 30%: scale 0.7 and center with translate */}
+      <g transform="translate(3.6 3.6) scale(0.7)">
+        <polygon
+          points="12,7 16.76,10.46 14.94,16.04 9.06,16.04 7.24,10.46"
+          stroke="currentColor"
+          strokeWidth="1"
+          fill="none"
+          strokeLinejoin="round"
+        />
+      </g>
     </svg>
   );
 }
@@ -89,24 +86,27 @@ export function CompensationIcon({ className }: { className?: string }) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      {/* Primeiro triângulo (seta apontando à esquerda) */}
-      <polygon
-        points="8,12 12,8 12,16"
-        stroke="currentColor"
-        strokeWidth="1"
-        fill="none"
-        strokeLinejoin="round"
-        strokeLinecap="round"
-      />
-      {/* Segundo triângulo (seta apontando à esquerda) */}
-      <polygon
-        points="12,12 16,8 16,16"
-        stroke="currentColor"
-        strokeWidth="1"
-        fill="none"
-        strokeLinejoin="round"
-        strokeLinecap="round"
-      />
+      {/* Reduz tamanho em 30% (scale 0.7) e centraliza com translate */}
+      <g transform="translate(3.6 3.6) scale(0.7)">
+        {/* Primeiro triângulo (seta apontando à esquerda) */}
+        <polygon
+          points="8,12 12,8 12,16"
+          stroke="currentColor"
+          strokeWidth="1"
+          fill="none"
+          strokeLinejoin="round"
+          strokeLinecap="round"
+        />
+        {/* Segundo triângulo (seta apontando à esquerda) */}
+        <polygon
+          points="12,12 16,8 16,16"
+          stroke="currentColor"
+          strokeWidth="1"
+          fill="none"
+          strokeLinejoin="round"
+          strokeLinecap="round"
+        />
+      </g>
     </svg>
   )
 }
@@ -119,49 +119,53 @@ export function DocumentIcon({ className }: { className?: string }) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      {/* Contorno do “documento” */}
-      <rect
-        x="7"
-        y="7"
-        width="10"
-        height="10"
-        rx="1"
-        stroke="currentColor"
-        strokeWidth="1"
-        fill="none"
-      />
+      {/* Reduz tamanho em 30% (scale 0.7) e centraliza com translate */}
+      <g transform="translate(3.6 3.6) scale(0.7)">
+        {/* Contorno do “documento” */}
+        <rect
+          x="7"
+          y="7"
+          width="10"
+          height="10"
+          rx="1"
+          stroke="currentColor"
+          strokeWidth="1"
+          fill="none"
+        />
 
-      {/* Linhas internas */}
-      <line
-        x1="9"
-        y1="10"
-        x2="15"
-        y2="10"
-        stroke="currentColor"
-        strokeWidth="1"
-        strokeLinecap="round"
-      />
-      <line
-        x1="9"
-        y1="13"
-        x2="15"
-        y2="13"
-        stroke="currentColor"
-        strokeWidth="1"
-        strokeLinecap="round"
-      />
-      <line
-        x1="9"
-        y1="16"
-        x2="15"
-        y2="16"
-        stroke="currentColor"
-        strokeWidth="1"
-        strokeLinecap="round"
-      />
+        {/* Linhas internas */}
+        <line
+          x1="9"
+          y1="10"
+          x2="15"
+          y2="10"
+          stroke="currentColor"
+          strokeWidth="1"
+          strokeLinecap="round"
+        />
+        <line
+          x1="9"
+          y1="13"
+          x2="15"
+          y2="13"
+          stroke="currentColor"
+          strokeWidth="1"
+          strokeLinecap="round"
+        />
+        <line
+          x1="9"
+          y1="16"
+          x2="15"
+          y2="16"
+          stroke="currentColor"
+          strokeWidth="1"
+          strokeLinecap="round"
+        />
+      </g>
     </svg>
   );
 }
+
 
 export function PlusIcon({ className }: { className?: string }) {
   return (
@@ -203,19 +207,23 @@ export function ArrowIcon({ className }: { className?: string }) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <path
-        d="M12 7 L7 15 L12 11 L17 15 L12 7 Z"
-        stroke="currentColor"
-        strokeWidth="1"
-        fill="none"
-        strokeLinejoin="round"
-      />
+      {/* Reduz tamanho em 30% (scale 0.7) e centraliza com translate */}
+      <g transform="translate(3.6 3.6) scale(0.7)">
+        <path
+          d="M12 7 L7 15 L12 11 L17 15 L12 7 Z"
+          stroke="currentColor"
+          strokeWidth="1"
+          fill="none"
+          strokeLinejoin="round"
+        />
+      </g>
     </svg>
   );
 }
 
 
-export function DashedCircleIcon({ className }: { className?: string }) {
+
+export function DashedCircleIcon({ className, r = 6.3}: { className?: string, r?: number }) {
   return (
     <svg
       className={className}
@@ -226,7 +234,7 @@ export function DashedCircleIcon({ className }: { className?: string }) {
       <circle
         cx="12"
         cy="12"
-        r="9"
+        r= {r}
         stroke="currentColor"
         strokeWidth="1"
         strokeDasharray="2 2"
@@ -244,14 +252,17 @@ export function ErrorIcon({ className }: { className?: string }) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <path
-        d="M8 16 V8 L16 16 V8"
-        stroke="currentColor"
-        strokeWidth="1"
-        fill="none"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      {/* Reduz tamanho em 30% (scale 0.7) e centraliza com translate */}
+      <g transform="translate(3.6 3.6) scale(0.7)">
+        <path
+          d="M8 16 V8 L16 16 V8"
+          stroke="currentColor"
+          strokeWidth="1"
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </g>
     </svg>
   )
 }
@@ -265,17 +276,21 @@ export function SignalIcon({ className }: { className?: string }) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <polygon
-        points="12,7 16,15 8,15"
-        stroke="currentColor"
-        strokeWidth="1"
-        fill="none"
-      />
+      {/* Reduz tamanho em 30% (scale 0.7) e centraliza com translate */}
+      <g transform="translate(3.6 3.6) scale(0.7)">
+        <polygon
+          points="12,7 16,15 8,15"
+          stroke="currentColor"
+          strokeWidth="1"
+          fill="none"
+        />
+      </g>
     </svg>
   )
 }
 
-export function EnvelopeIcon({ className }: { className?: string }) {
+
+export function EnvelopeIcon({ className, strokeColor = "currentColor" }: { className?: string, strokeColor?: string }) {
   return (
     <svg
       className={className}
@@ -283,29 +298,28 @@ export function EnvelopeIcon({ className }: { className?: string }) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      {/* Caixa pequena (8×6), centralizada em x=8, y=9 */}
-      <rect
-        x="8"
-        y="9"
-        width="8"
-        height="6"
-        stroke="currentColor"
-        strokeWidth="1"
-        fill="none"
-      />
-      {/* Aba do envelope: vai até o ponto médio y = 12 */}
-      <path
-        d="M8 9 L12 12 L16 9"
-        stroke="currentColor"
-        strokeWidth="1"
-        fill="none"
-      />
+      <g transform="translate(3.6 3.6) scale(0.7)">
+        <rect
+          x="8"
+          y="9"
+          width="8"
+          height="6"
+          stroke={strokeColor}
+          strokeWidth="1"
+          fill="none"
+        />
+        <path
+          d="M8 9 L12 12 L16 9"
+          stroke={strokeColor}
+          strokeWidth="1"
+          fill="none"
+        />
+      </g>
     </svg>
   );
 }
 
-
-export function CircleIntermediateIcon({ className }: { className?: string }) {
+export function CircleIntermediateIcon({ className, r = 6, strokeColor = "#60a5fa"}: { className?: string, r?: number, strokeColor?: string}) {
   return (
     <svg
       className={className}
@@ -316,14 +330,35 @@ export function CircleIntermediateIcon({ className }: { className?: string }) {
       <circle
         cx="12"
         cy="12"
-        r="9"
+        r= {r}
         fill="#dbeafe"
-        stroke="currentColor"
-        strokeWidth="0.8"
+        stroke={strokeColor}
+        strokeWidth="0.5"
       />
-      <circle cx="12" cy="12" r="8" stroke="currentColor" strokeWidth="0.5" />
+      <circle cx="12" cy="12" r="5" stroke={strokeColor}strokeWidth="0.5" />
     </svg>
   );
+}
+
+export function DashedIntermediateCircleIcon({ className, r = 6.2, strokeWidth = 1, strokeColor = "#60a5fa"}: { className?: string, r?: number, strokeWidth?: number, strokeColor?: string}) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <circle
+        cx="12"
+        cy="12"
+        r= {r}
+        stroke={strokeColor}
+        strokeWidth= {strokeWidth}
+        strokeDasharray="2 2"
+        fill="#dbeafe"
+      />
+    </svg>
+  )
 }
 
 export function CircleNoninterruptingMessage({ className }: { className?: string }) {
@@ -640,3 +675,35 @@ export function DiamondParallelIcon({ className }: { className?: string }) {
     </svg>
   );
 }
+
+export function InterCircleInterruptingMenssage ({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <DashedIntermediateCircleIcon/>
+      <DashedIntermediateCircleIcon r = {4.5} strokeWidth = {0.8}/>
+      <EnvelopeIcon strokeColor="#60a5fa"/>
+    
+    </svg>
+  );
+}
+
+export function InterCircleNoInterruptingMenssage ({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <CircleIntermediateIcon/>
+      <EnvelopeIcon strokeColor="#60a5fa"/>
+    </svg>
+  );
+}
+
+

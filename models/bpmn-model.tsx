@@ -23,11 +23,13 @@ import {
   DiamondExclusiveIcon,
   DiamondIcon,
   DiamondParallelIcon,
+  InterCircleInterruptingMenssage,
+  InterCircleNoInterruptingMenssage,
 } from "@/components/icons/bpmn-icons";
 import { RectangleIcon } from "@/components/icons/kaos-icons";
 import EndNode from "@/components/nodes/bpmn-nodes/end-node";
 import GatewayNode from "@/components/nodes/bpmn-nodes/gateway-node";
-import IntermediateNode from "@/components/nodes/bpmn-nodes/intermediate-node";
+import IntermediateNode from "@/components/nodes/bpmn-nodes/intermediate-event/intermediate-node";
 import startNoInterruptingConditionalNode from "@/components/nodes/bpmn-nodes/start-event/start-no-interrupting-conditional-node";
 import startInterruptingConditionalNode from "@/components/nodes/bpmn-nodes/start-event/start-interrupting-conditional-node";
 import startInterruptingTimerNode from "@/components/nodes/bpmn-nodes/start-event/start-interrupting-timer-node";
@@ -58,6 +60,8 @@ import startInterruptingErrorNode from "@/components/nodes/bpmn-nodes/start-even
 import startNoInterruptingErroNode from "@/components/nodes/bpmn-nodes/start-event/start-no-interrupting-erro-node";
 import startInterruptionCompensationNode from "@/components/nodes/bpmn-nodes/start-event/start-interrupting-compensation-node";
 import startInterruptingCompensationNode from "@/components/nodes/bpmn-nodes/start-event/start-interrupting-compensation-node";
+import intermediateInterruptingMenssageNode from "@/components/nodes/bpmn-nodes/intermediate-event/intermediate-interrupting-menssage-node";
+import intermediateNoInterruptingMenssageNode from "@/components/nodes/bpmn-nodes/intermediate-event/intermediate-no-interrupting-menssage-node";
 
 export const bpmnModel: ModelDefinition = {
   id: "bpmn",
@@ -89,6 +93,8 @@ export const bpmnModel: ModelDefinition = {
     startInterruptingError: startInterruptingErrorNode, // Assuming this is the same as interrupting conditional
     startNoInterruptingError: startNoInterruptingErroNode, // Assuming this is the
     startInterruptingCompensation: startInterruptingCompensationNode, // Assuming this is the same as interrupting conditional
+    intermediateInterruptingMenssage: intermediateInterruptingMenssageNode,
+    intermediateNoInterruptingMenssage: intermediateNoInterruptingMenssageNode,
     
   },
 
@@ -287,6 +293,28 @@ export const bpmnModel: ModelDefinition = {
         "Intermediate event in BPMN, used to capture events that occur during a process.",
     },
     {
+      type: "intermediateInterruptingMenssage",
+      label: "Interrupting Menssage",
+      category: "Events",
+      diagramType: "BPMN Diagram",
+      component: intermediateInterruptingMenssageNode,
+      icon: <InterCircleInterruptingMenssage className="h-5 w-5 text-blue-500" />,
+      color: "#60a5fa",
+      description:
+        "Intermediate event in BPMN, used to capture events that occur during a process.",
+    },
+    {
+    type: "intermediateNoInterruptingMenssage",
+      label: "No Interrupting Menssage",
+      category: "Events",
+      diagramType: "BPMN Diagram",
+      component: intermediateNoInterruptingMenssageNode,
+      icon: <InterCircleNoInterruptingMenssage className="h-5 w-5 text-blue-500" />,
+      color: "#60a5fa",
+      description:
+        "Intermediate event in BPMN, used to capture events that occur during a process.",
+    },
+    {
       type: "end",
       label: "End",
       category: "Events",
@@ -405,6 +433,8 @@ export const bpmnModel: ModelDefinition = {
         "startInterruptingError",
         "startNoInterruptingError",
         "startInterruptionCompensation",
+        "intermediateInterruptingMenssage",
+        "intermediateNoInterruptingMenssage",
       ],
     },
   ],
