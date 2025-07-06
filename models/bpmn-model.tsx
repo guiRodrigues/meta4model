@@ -5,6 +5,7 @@ import {
   CircleEndIcon,
   CircleIcon,
   CircleIntermediateIcon,
+  CircleInterruptingCompensation,
   CircleInterruptingConditional,
   CircleInterruptingError,
   CircleInterruptingEscalation,
@@ -55,6 +56,8 @@ import startInterruptingEscalationNode from "@/components/nodes/bpmn-nodes/start
 import startNoInterruptingEscalationNode from "@/components/nodes/bpmn-nodes/start-event/start-no-interrupting-escalation-node";
 import startInterruptingErrorNode from "@/components/nodes/bpmn-nodes/start-event/start-interrupting-error-node";
 import startNoInterruptingErroNode from "@/components/nodes/bpmn-nodes/start-event/start-no-interrupting-erro-node";
+import startInterruptionCompensationNode from "@/components/nodes/bpmn-nodes/start-event/start-interrupting-compensation-node";
+import startInterruptingCompensationNode from "@/components/nodes/bpmn-nodes/start-event/start-interrupting-compensation-node";
 
 export const bpmnModel: ModelDefinition = {
   id: "bpmn",
@@ -85,6 +88,7 @@ export const bpmnModel: ModelDefinition = {
     startNoInterruptingEscalation: startNoInterruptingEscalationNode, 
     startInterruptingError: startInterruptingErrorNode, // Assuming this is the same as interrupting conditional
     startNoInterruptingError: startNoInterruptingErroNode, // Assuming this is the
+    startInterruptingCompensation: startInterruptingCompensationNode, // Assuming this is the same as interrupting conditional
     
   },
 
@@ -250,6 +254,17 @@ export const bpmnModel: ModelDefinition = {
         "Start event in BPMN, indicating the beginning of a process.",
     },
     {
+      type: "startInterruptingCompensation",
+      label: "Interrupting Compensation",
+      category: "Events",
+      diagramType: "BPMN Diagram",
+      component: startNoInterruptingConditionalNode,
+      icon: <CircleInterruptingCompensation className="h-5 w-5 text-green-500" />,
+      color: "#3b82f6",
+      description:
+        "Start event in BPMN, indicating the beginning of a process.",
+    },
+    {
       type: "startInterruptingParallel",
       label: "Interrupting Parallel",
       category: "Events",
@@ -389,6 +404,7 @@ export const bpmnModel: ModelDefinition = {
         "startNoInterruptingEscalation",
         "startInterruptingError",
         "startNoInterruptingError",
+        "startInterruptionCompensation",
       ],
     },
   ],

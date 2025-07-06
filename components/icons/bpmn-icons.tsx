@@ -81,6 +81,35 @@ export function PolygonIcon({ className }: { className?: string }) {
   );
 }
 
+export function CompensationIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      {/* Primeiro triângulo (seta apontando à esquerda) */}
+      <polygon
+        points="8,12 12,8 12,16"
+        stroke="currentColor"
+        strokeWidth="1"
+        fill="none"
+        strokeLinejoin="round"
+        strokeLinecap="round"
+      />
+      {/* Segundo triângulo (seta apontando à esquerda) */}
+      <polygon
+        points="12,12 16,8 16,16"
+        stroke="currentColor"
+        strokeWidth="1"
+        fill="none"
+        strokeLinejoin="round"
+        strokeLinecap="round"
+      />
+    </svg>
+  )
+}
 
 export function DocumentIcon({ className }: { className?: string }) {
   return (
@@ -518,6 +547,20 @@ export function CircleNoInterruptingError({ className }: { className?: string })
     <ErrorIcon/>
     </svg>
   );
+}
+
+export function CircleInterruptingCompensation({ className }: { className?: string }) {
+   return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+    <CircleIcon/>
+    <CompensationIcon/>
+    </svg>
+  )
 }
 
 export function CircleEndIcon({ className }: { className?: string }) {
