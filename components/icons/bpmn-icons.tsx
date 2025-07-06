@@ -56,6 +56,32 @@ export function ClockIcon({ className }: { className?: string }) {
   )
 }
 
+export function PolygonIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <polygon
+        points="
+          12,7
+          16.76,10.46
+          14.94,16.04
+          9.06,16.04
+          7.24,10.46
+        "
+        stroke="currentColor"
+        strokeWidth="1"
+        fill="none"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+
 export function DocumentIcon({ className }: { className?: string }) {
   return (
     <svg
@@ -297,6 +323,37 @@ export function CircleNoInterruptingSignal({ className }: { className?: string }
     
     <DashedCircleIcon/> 
     <SignalIcon/>
+    </svg>
+  );
+}
+
+
+export function CircleInterruptingMultiple({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+    
+    <CircleIcon/>
+    <PolygonIcon/>
+    </svg>
+  );
+}
+
+export function CircleNoInterruptingMultiple({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+    
+    <DashedCircleIcon/>
+    <PolygonIcon/>
     </svg>
   );
 }

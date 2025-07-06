@@ -6,9 +6,11 @@ import {
   CircleIcon,
   CircleIntermediateIcon,
   CircleInterruptingConditional,
+  CircleInterruptingMultiple,
   CircleInterruptingSignal,
   CircleInterruptingTime,
   CircleNoInterruptingConditional,
+  CircleNoInterruptingMultiple,
   CircleNoInterruptingSignal,
   CircleNoInterruptingTime,
   CircleNoninterruptingMessage,
@@ -40,6 +42,9 @@ import { start } from "repl";
 import startNoInterruptingTimerNode from "@/components/nodes/bpmn-nodes/start-event/start-no-interrupting-timer-node.";
 import startInterruptingSignal from "@/components/nodes/bpmn-nodes/start-event/start-interrupting-signal-node";
 import startNoInterruptingSignalNode from "@/components/nodes/bpmn-nodes/start-event/start-no-interrupting-signal-node";
+import startInterruptingMultipleNoed from "@/components/nodes/bpmn-nodes/start-event/start-interrupting-multiple-node";
+import startInterruptingMultipleNode from "@/components/nodes/bpmn-nodes/start-event/start-interrupting-multiple-node";
+import startNoInterruptingMultipleNode from "@/components/nodes/bpmn-nodes/start-event/start-no-interrupting-multiple-node";
 
 export const bpmnModel: ModelDefinition = {
   id: "bpmn",
@@ -63,6 +68,8 @@ export const bpmnModel: ModelDefinition = {
     startNoInterruptingConditional: startNoInterruptingConditionalNode, // Assuming this is the same as the timer node
     startInterruptingSignal: startInterruptingSignal, // Assuming this is the same as the timer node
     startNoInterruptingSignal: startNoInterruptingSignalNode, // Assuming this is the same as the timer node
+    startInterruptingMultiple: startInterruptingMultipleNode,
+    startNoInterruptingMultiple: startNoInterruptingMultipleNode,
     
   },
 
@@ -157,6 +164,28 @@ export const bpmnModel: ModelDefinition = {
       diagramType: "BPMN Diagram",
       component: startNoInterruptingSignalNode,
       icon: <CircleNoInterruptingSignal className="h-5 w-5 text-green-500" />,
+      color: "#3b82f6",
+      description:
+        "Start event in BPMN, indicating the beginning of a process.",
+    },
+    {
+      type: "startInterruptingMultiple",
+      label: "Interrupting Multiple",
+      category: "Events",
+      diagramType: "BPMN Diagram",
+      component: startInterruptingMultipleNode,
+      icon: <CircleInterruptingMultiple className="h-5 w-5 text-green-500" />,
+      color: "#3b82f6",
+      description:
+        "Start event in BPMN, indicating the beginning of a process.",
+    },
+    {
+      type: "startNoInterruptingMultiple",
+      label: "No Interrupting Multiple",
+      category: "Events",
+      diagramType: "BPMN Diagram",
+      component: startNoInterruptingMultipleNode,
+      icon: <CircleNoInterruptingMultiple className="h-5 w-5 text-green-500" />,
       color: "#3b82f6",
       description:
         "Start event in BPMN, indicating the beginning of a process.",
@@ -283,6 +312,8 @@ export const bpmnModel: ModelDefinition = {
         "startNoInterruptingTimer",  
         "startInterruptingSignal",
         "startNoInterruptingSignal",
+        "startInterruptingMultiple",
+        "startNoInterruptingMultiple",
       ],
     },
   ],
