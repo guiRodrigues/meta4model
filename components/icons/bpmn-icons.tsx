@@ -134,6 +134,39 @@ export function DocumentIcon({ className }: { className?: string }) {
   );
 }
 
+export function PlusIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      {/* Linha vertical do “+” */}
+      <line
+        x1="12"
+        y1="9"
+        x2="12"
+        y2="15"
+        stroke="currentColor"
+        strokeWidth="1"
+        strokeLinecap="round"
+      />
+      {/* Linha horizontal do “+” */}
+      <line
+        x1="9"
+        y1="12"
+        x2="15"
+        y2="12"
+        stroke="currentColor"
+        strokeWidth="1"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+
 
 export function DashedCircleIcon({ className }: { className?: string }) {
   return (
@@ -354,6 +387,36 @@ export function CircleNoInterruptingMultiple({ className }: { className?: string
     
     <DashedCircleIcon/>
     <PolygonIcon/>
+    </svg>
+  );
+}
+
+export function CircleInterruptingParallelMultiple({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+    
+    <CircleIcon/>
+    <PlusIcon/>
+    </svg>
+  );
+}
+
+export function CircleNoInterruptingParallelMultiple({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+    
+    <DashedCircleIcon/>
+    <PlusIcon/>
     </svg>
   );
 }
