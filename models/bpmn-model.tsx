@@ -63,6 +63,7 @@ import defaultSequenceFlowEdge from "@/components/edges/bpmn-edges/default-seque
 import directionalAssociationEdge from "@/components/edges/bpmn-edges/directional-association-edge";
 import biDirectionalAssociationEdge from "@/components/edges/bpmn-edges/bi-directional-association-edge";
 import initiatingMessageFlowEdge from "@/components/edges/bpmn-edges/initiating-message-flow.edge";
+import nonInitiatingMessageFlowEdge from "@/components/edges/bpmn-edges/non-initiating-message-flow-edge";
 
 export const bpmnModel: ModelDefinition = {
   id: "bpmn",
@@ -106,8 +107,9 @@ export const bpmnModel: ModelDefinition = {
     association: AssociationEdge,
     directionalAssociation: directionalAssociationEdge,
     biDirectionalAssociation: biDirectionalAssociationEdge,
-    message: MessageFlowEdge, // Changed from MessageFlowEdge to messageFlowEdge
+    message: MessageFlowEdge,
     initiatingMessageFlow: initiatingMessageFlowEdge,
+    nonInitiatingMessageFlow: nonInitiatingMessageFlowEdge
   },
 
   defaultNodes: [
@@ -449,7 +451,15 @@ export const bpmnModel: ModelDefinition = {
       description:
         "Initiating message flow in BPMN, representing the flow of messages between processes.",
     },
-
+    {
+      type: "nonInitiatingMessageFlow",
+      label: "Non-Initiating Message Flow",
+      component: nonInitiatingMessageFlowEdge,
+      icon: <MessageSquare className="h-5 w-5 text-gray-500" />,
+      color: "#a855f7",
+      description:
+        "Non-initiating message flow in BPMN, representing the flow of messages between processes.",
+    },
   ],
 
   validationRules: {
