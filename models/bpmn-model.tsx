@@ -432,7 +432,7 @@ export const bpmnModel: ModelDefinition = {
         "startNoInterruptingEscalation",
         "startInterruptingError",
         "startNoInterruptingError",
-        "startInterruptionCompensation",
+        "startInterruptingCompensation",
         "intermediateInterruptingMenssage",
         "intermediateNoInterruptingMenssage",
       ],
