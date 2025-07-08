@@ -1,9 +1,8 @@
 import { memo } from "react";
 import type { EdgeProps } from "reactflow";
 import FloatingEdgeBase from "../floating-edge-base";
-import { Mail } from "lucide-react";
 
-function InitiatingMessageFlowEdge(props: EdgeProps) {
+function MessageFlowEdge(props: EdgeProps) {
   return (
     <FloatingEdgeBase
       {...props}
@@ -21,8 +20,6 @@ function InitiatingMessageFlowEdge(props: EdgeProps) {
         const markerId = `message-arrow-${id}`;
 
         // Calculate the midpoint of the path
-        const midX = (sourceX + targetX) / 2;
-        const midY = (sourceY + targetY) / 2;
 
         return (
           <>
@@ -38,7 +35,7 @@ function InitiatingMessageFlowEdge(props: EdgeProps) {
                 orient="auto-start-reverse"
               >
                 <path
-                  d="M 0 0 L 10 5 L 0 10 z"
+                  d="M 0 0 L 10 5 L 0 10 Z"
                   fill="white"
                   stroke="#4b5563"
                   strokeWidth="1"
@@ -63,25 +60,6 @@ function InitiatingMessageFlowEdge(props: EdgeProps) {
               stroke="#4b5563"
               strokeWidth="1.5"
             />
-
-            <g transform={`translate(${midX - 8}, ${midY - 6})`}>
-              <rect
-                x="0"
-                y="0"
-                width="16"
-                height="12"
-                fill="white"
-                stroke="#4b5563"
-                strokeWidth="1.2"
-                rx="2"
-              />
-              <path
-                d="M 0 0 L 8 6 L 16 0"
-                stroke="#4b5563"
-                strokeWidth="1.2"
-                fill="none"
-              />
-            </g>
           </>
         );
       }}
@@ -89,4 +67,4 @@ function InitiatingMessageFlowEdge(props: EdgeProps) {
   );
 }
 
-export default memo(InitiatingMessageFlowEdge);
+export default memo(MessageFlowEdge);

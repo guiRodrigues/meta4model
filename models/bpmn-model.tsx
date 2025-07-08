@@ -1,5 +1,6 @@
 import AssociationEdge from "@/components/edges/bpmn-edges/association-edge";
 import SequenceFlowEdge from "@/components/edges/bpmn-edges/sequence-flow-edge";
+import MessageFlowEdge from "@/components/edges/bpmn-edges/message-flow-edge";
 import {
   CircleEndIcon,
   CircleIcon,
@@ -105,6 +106,7 @@ export const bpmnModel: ModelDefinition = {
     association: AssociationEdge,
     directionalAssociation: directionalAssociationEdge,
     biDirectionalAssociation: biDirectionalAssociationEdge,
+    message: MessageFlowEdge, // Changed from MessageFlowEdge to messageFlowEdge
     initiatingMessageFlow: initiatingMessageFlowEdge,
   },
 
@@ -430,6 +432,15 @@ export const bpmnModel: ModelDefinition = {
         "Bi-directional association in BPMN, representing a relationship between elements in a process.",
     },
     {
+      type: "message",
+      label: "Message Flow",
+      component: MessageFlowEdge,
+      icon: <MessageSquare className="h-5 w-5 text-gray-500" />,
+      color: "#a855f7",
+      description:
+        "Message flow in BPMN, representing the flow of messages between processes.",
+    },
+    {
       type: "initiatingMessageFlow",
       label: "Initiating Message Flow",
       component: initiatingMessageFlowEdge,
@@ -438,6 +449,7 @@ export const bpmnModel: ModelDefinition = {
       description:
         "Initiating message flow in BPMN, representing the flow of messages between processes.",
     },
+
   ],
 
   validationRules: {
