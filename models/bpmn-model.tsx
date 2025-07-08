@@ -40,6 +40,7 @@ import type { ModelDefinition } from "@/types/model-types";
 import { validateConnection } from "@/utils/connection-validation";
 import {
   ArrowRight,
+  ArrowUp,
   GitCommitIcon,
   Layers,
   Link,
@@ -62,6 +63,8 @@ import startInterruptionCompensationNode from "@/components/nodes/bpmn-nodes/sta
 import startInterruptingCompensationNode from "@/components/nodes/bpmn-nodes/start-event/start-interrupting-compensation-node";
 import intermediateInterruptingMenssageNode from "@/components/nodes/bpmn-nodes/intermediate-event/intermediate-interrupting-menssage-node";
 import intermediateNoInterruptingMenssageNode from "@/components/nodes/bpmn-nodes/intermediate-event/intermediate-no-interrupting-menssage-node";
+import sequenceFlowEdge from "@/components/edges/bpmn-edges/sequence-flow-edge";
+import conditionalSequenceFlowEdge from "@/components/edges/bpmn-edges/conditional-sequence-flow";
 
 export const bpmnModel: ModelDefinition = {
   id: "bpmn",
@@ -100,6 +103,7 @@ export const bpmnModel: ModelDefinition = {
 
   edgeTypes: {
     sequence: SequenceFlowEdge,
+    conditionalSequence: conditionalSequenceFlowEdge, 
     association: AssociationEdge,
     message: MessageFlowEdge,
   },
@@ -376,6 +380,15 @@ export const bpmnModel: ModelDefinition = {
       label: "Sequence Flow",
       component: SequenceFlowEdge,
       icon: <ArrowRight className="h-5 w-5 text-gray-500" />,
+      color: "#a855f7",
+      description:
+        "Sequence flow in BPMN, representing the flow of control between elements in a process.",
+    },
+      {
+      type: "conditionalSequence",
+      label: "Conditional Sequence Flow",
+      component: conditionalSequenceFlowEdge,
+      icon: <ArrowUp className="h-5 w-5 text-gray-500" />,
       color: "#a855f7",
       description:
         "Sequence flow in BPMN, representing the flow of control between elements in a process.",
