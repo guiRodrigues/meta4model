@@ -3,7 +3,7 @@ import type { EdgeProps } from "reactflow";
 import FloatingEdgeBase from "../floating-edge-base";
 import { Mail } from "lucide-react";
 
-function MessageFlowEdge(props: EdgeProps) {
+function InitiatingMessageFlowEdge(props: EdgeProps) {
   return (
     <FloatingEdgeBase
       {...props}
@@ -89,4 +89,4 @@ function MessageFlowEdge(props: EdgeProps) {
   );
 }
 
-export default memo(MessageFlowEdge);
+export default memo(InitiatingMessageFlowEdge);

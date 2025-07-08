@@ -1,5 +1,4 @@
 import AssociationEdge from "@/components/edges/bpmn-edges/association-edge";
-import MessageFlowEdge from "@/components/edges/bpmn-edges/message-flow.edge";
 import SequenceFlowEdge from "@/components/edges/bpmn-edges/sequence-flow-edge";
 import {
   CircleEndIcon,
@@ -62,6 +61,7 @@ import conditionalSequenceFlowEdge from "@/components/edges/bpmn-edges/condition
 import defaultSequenceFlowEdge from "@/components/edges/bpmn-edges/default-sequence-flow-edge";
 import directionalAssociationEdge from "@/components/edges/bpmn-edges/directional-association-edge";
 import biDirectionalAssociationEdge from "@/components/edges/bpmn-edges/bi-directional-association-edge";
+import initiatingMessageFlowEdge from "@/components/edges/bpmn-edges/initiating-message-flow.edge";
 
 export const bpmnModel: ModelDefinition = {
   id: "bpmn",
@@ -105,7 +105,7 @@ export const bpmnModel: ModelDefinition = {
     association: AssociationEdge,
     directionalAssociation: directionalAssociationEdge,
     biDirectionalAssociation: biDirectionalAssociationEdge,
-    message: MessageFlowEdge,
+    initiatingMessageFlow: initiatingMessageFlowEdge,
   },
 
   defaultNodes: [
@@ -430,13 +430,13 @@ export const bpmnModel: ModelDefinition = {
         "Bi-directional association in BPMN, representing a relationship between elements in a process.",
     },
     {
-      type: "message",
-      label: "Message Flow",
-      component: MessageFlowEdge,
+      type: "initiatingMessageFlow",
+      label: "Initiating Message Flow",
+      component: initiatingMessageFlowEdge,
       icon: <MessageSquare className="h-5 w-5 text-gray-500" />,
       color: "#a855f7",
       description:
-        "Message flow in BPMN, representing the flow of messages between participants in a process.",
+        "Initiating message flow in BPMN, representing the flow of messages between processes.",
     },
   ],
 
