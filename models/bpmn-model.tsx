@@ -40,18 +40,14 @@ import type { ModelDefinition } from "@/types/model-types";
 import { validateConnection } from "@/utils/connection-validation";
 import {
   ArrowRight,
-  ArrowUp,
-  GitCommitIcon,
-  Layers,
+  Diamond,
   Link,
   MessageSquare,
-  Star,
+  Slash,
 } from "lucide-react";
-import { start } from "repl";
 import startNoInterruptingTimerNode from "@/components/nodes/bpmn-nodes/start-event/start-no-interrupting-timer-node.";
 import startInterruptingSignal from "@/components/nodes/bpmn-nodes/start-event/start-interrupting-signal-node";
 import startNoInterruptingSignalNode from "@/components/nodes/bpmn-nodes/start-event/start-no-interrupting-signal-node";
-import startInterruptingMultipleNoed from "@/components/nodes/bpmn-nodes/start-event/start-interrupting-multiple-node";
 import startInterruptingMultipleNode from "@/components/nodes/bpmn-nodes/start-event/start-interrupting-multiple-node";
 import startNoInterruptingMultipleNode from "@/components/nodes/bpmn-nodes/start-event/start-no-interrupting-multiple-node";
 import startInterruptingParallelNode from "@/components/nodes/bpmn-nodes/start-event/start-interrupting-parallel-node";
@@ -59,12 +55,11 @@ import startInterruptingEscalationNode from "@/components/nodes/bpmn-nodes/start
 import startNoInterruptingEscalationNode from "@/components/nodes/bpmn-nodes/start-event/start-no-interrupting-escalation-node";
 import startInterruptingErrorNode from "@/components/nodes/bpmn-nodes/start-event/start-interrupting-error-node";
 import startNoInterruptingErroNode from "@/components/nodes/bpmn-nodes/start-event/start-no-interrupting-erro-node";
-import startInterruptionCompensationNode from "@/components/nodes/bpmn-nodes/start-event/start-interrupting-compensation-node";
 import startInterruptingCompensationNode from "@/components/nodes/bpmn-nodes/start-event/start-interrupting-compensation-node";
 import intermediateInterruptingMenssageNode from "@/components/nodes/bpmn-nodes/intermediate-event/intermediate-interrupting-menssage-node";
 import intermediateNoInterruptingMenssageNode from "@/components/nodes/bpmn-nodes/intermediate-event/intermediate-no-interrupting-menssage-node";
-import sequenceFlowEdge from "@/components/edges/bpmn-edges/sequence-flow-edge";
 import conditionalSequenceFlowEdge from "@/components/edges/bpmn-edges/conditional-sequence-flow";
+import defaultSequenceFlowEdge from "@/components/edges/bpmn-edges/default-sequence-flow-edge";
 
 export const bpmnModel: ModelDefinition = {
   id: "bpmn",
@@ -103,7 +98,8 @@ export const bpmnModel: ModelDefinition = {
 
   edgeTypes: {
     sequence: SequenceFlowEdge,
-    conditionalSequence: conditionalSequenceFlowEdge, 
+    conditionalSequence: conditionalSequenceFlowEdge,
+    defaultSequence: defaultSequenceFlowEdge,
     association: AssociationEdge,
     message: MessageFlowEdge,
   },
@@ -384,14 +380,23 @@ export const bpmnModel: ModelDefinition = {
       description:
         "Sequence flow in BPMN, representing the flow of control between elements in a process.",
     },
-      {
+    {
       type: "conditionalSequence",
       label: "Conditional Sequence Flow",
       component: conditionalSequenceFlowEdge,
-      icon: <ArrowUp className="h-5 w-5 text-gray-500" />,
+      icon: <Diamond className="h-5 w-5 text-gray-500" />,
       color: "#a855f7",
       description:
-        "Sequence flow in BPMN, representing the flow of control between elements in a process.",
+        "Conditional sequence flow in BPMN, representing a flow that occurs based on a condition.",
+    },
+    {
+      type: "defaultSequence",
+      label: "Default Sequence Flow",
+      component: defaultSequenceFlowEdge,
+      icon: <Slash className="h-5 w-5 text-gray-500" />,
+      color: "#a855f7",
+      description:
+        "Default sequence flow in BPMN, representing the flow of control between elements in a process.",
     },
     {
       type: "association",
