@@ -60,6 +60,7 @@ import intermediateInterruptingMenssageNode from "@/components/nodes/bpmn-nodes/
 import intermediateNoInterruptingMenssageNode from "@/components/nodes/bpmn-nodes/intermediate-event/intermediate-no-interrupting-menssage-node";
 import conditionalSequenceFlowEdge from "@/components/edges/bpmn-edges/conditional-sequence-flow";
 import defaultSequenceFlowEdge from "@/components/edges/bpmn-edges/default-sequence-flow-edge";
+import directionalAssociationEdge from "@/components/edges/bpmn-edges/directional-association-edge";
 
 export const bpmnModel: ModelDefinition = {
   id: "bpmn",
@@ -101,6 +102,7 @@ export const bpmnModel: ModelDefinition = {
     conditionalSequence: conditionalSequenceFlowEdge,
     defaultSequence: defaultSequenceFlowEdge,
     association: AssociationEdge,
+    directionalAssociation: directionalAssociationEdge,
     message: MessageFlowEdge,
   },
 
@@ -406,6 +408,15 @@ export const bpmnModel: ModelDefinition = {
       color: "#a855f7",
       description:
         "Association in BPMN, representing a relationship between elements in a process.",
+    },
+    {
+      type: "directionalAssociation",
+      label: "Directional Association",
+      component: directionalAssociationEdge,
+      icon: <Link className="h-5 w-5 text-gray-500" />,
+      color: "#a855f7",
+      description:
+        "Directional association in BPMN, representing a relationship between elements in a process.",
     },
     {
       type: "message",
