@@ -40,7 +40,10 @@ import type { ModelDefinition } from "@/types/model-types";
 import { validateConnection } from "@/utils/connection-validation";
 import {
   ArrowRight,
+  Database,
+  DatabaseZap,
   Diamond,
+  File,
   Link,
   MessageSquare,
   Slash,
@@ -64,6 +67,7 @@ import directionalAssociationEdge from "@/components/edges/bpmn-edges/directiona
 import biDirectionalAssociationEdge from "@/components/edges/bpmn-edges/bi-directional-association-edge";
 import initiatingMessageFlowEdge from "@/components/edges/bpmn-edges/initiating-message-flow.edge";
 import nonInitiatingMessageFlowEdge from "@/components/edges/bpmn-edges/non-initiating-message-flow-edge";
+import dataAssociationEdge from "@/components/edges/bpmn-edges/data-association-edge";
 
 export const bpmnModel: ModelDefinition = {
   id: "bpmn",
@@ -107,6 +111,7 @@ export const bpmnModel: ModelDefinition = {
     association: AssociationEdge,
     directionalAssociation: directionalAssociationEdge,
     biDirectionalAssociation: biDirectionalAssociationEdge,
+    dataAssociation: dataAssociationEdge,
     message: MessageFlowEdge,
     initiatingMessageFlow: initiatingMessageFlowEdge,
     nonInitiatingMessageFlow: nonInitiatingMessageFlowEdge
@@ -432,6 +437,15 @@ export const bpmnModel: ModelDefinition = {
       color: "#a855f7",
       description:
         "Bi-directional association in BPMN, representing a relationship between elements in a process.",
+    },
+    {
+      type: "dataAssociation",
+      label: "Data Association",
+      component: dataAssociationEdge,
+      icon: <File className="h-5 w-5 text-gray-500" />,
+      color: "#a855f7",
+      description:
+        "Data association in BPMN, representing the flow of data between elements in a process.",
     },
     {
       type: "message",
