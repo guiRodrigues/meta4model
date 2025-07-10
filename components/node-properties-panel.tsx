@@ -39,7 +39,12 @@ export function NodePropertiesPanel({ selectedNode, onUpdateNode, onDeleteNode, 
     }
   }, [selectedNode])
 
-  if (!selectedNode || selectedNode.type === "group") return null
+  if (
+    !selectedNode || 
+    selectedNode.type === "group" || 
+    selectedNode.type === "pool" || 
+    selectedNode.type === "lane") 
+    return null
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target

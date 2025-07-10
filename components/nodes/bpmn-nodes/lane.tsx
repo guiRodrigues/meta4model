@@ -39,7 +39,7 @@ function Lane({ id, data }: NodeProps<NodeData>) {
 
   return (
     <div 
-      className="w-[800px] h-[170px] bg-gray-100 flex items-center "
+      className="w-[800px] h-[170px] bg-gray-100 flex items-center stroke-gray-300 border border-black relative"
       onDoubleClick={handleDoubleClick}
       >
 

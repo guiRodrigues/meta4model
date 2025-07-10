@@ -69,7 +69,6 @@ import biDirectionalAssociationEdge from "@/components/edges/bpmn-edges/bi-direc
 import initiatingMessageFlowEdge from "@/components/edges/bpmn-edges/initiating-message-flow.edge";
 import nonInitiatingMessageFlowEdge from "@/components/edges/bpmn-edges/non-initiating-message-flow-edge";
 import dataAssociationEdge from "@/components/edges/bpmn-edges/data-association-edge";
-import { group } from "console";
 import lane from "@/components/nodes/bpmn-nodes/lane";
 
 export const bpmnModel: ModelDefinition = {
@@ -80,7 +79,7 @@ export const bpmnModel: ModelDefinition = {
   thumbnail: "/models/bpmn-placeholder.png",
 
   nodeTypes: {
-    group: lane,
+    lane: lane,
     start: StartNode,
     intermediate: IntermediateNode,
     end: EndNode,
@@ -123,7 +122,7 @@ export const bpmnModel: ModelDefinition = {
 
   defaultNodes: [
     {
-      type: "group",
+      type: "lane",
       label: "Lane",
       category: "Swinlanes",
       diagramType: "BPMN Diagram",
@@ -526,7 +525,7 @@ export const bpmnModel: ModelDefinition = {
         "startInterruptingCompensation",
         "intermediateInterruptingMenssage",
         "intermediateNoInterruptingMenssage",
-        "group"
+        "lane"
       ],
     },
   ],

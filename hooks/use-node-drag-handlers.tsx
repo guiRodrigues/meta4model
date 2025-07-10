@@ -8,12 +8,12 @@ export function useNodeDragHandlers() {
 
   const onNodeDragStop: NodeDragHandler = useCallback(
     (_, node) => {
-      if (node.type === 'group' && !node.parentId) {
+      if ((node.type === 'pool') && !node.parentId) {
         return;
       }
 
       const intersections = getIntersectingNodes(node).filter(
-        (n) => n.type === 'group'
+        (n) => n.type === 'pool' || n.type === 'lane'
       );
       const groupNode = intersections[0];
 
@@ -51,12 +51,12 @@ export function useNodeDragHandlers() {
 
   const onNodeDrag: NodeDragHandler = useCallback(
     (_, node) => {
-      if (node.type !== 'node' && !node.parentId) {
+      if ((node.type === 'pool' || node.type === 'lane') && !node.parentId) {
         return;
       }
 
       const intersections = getIntersectingNodes(node).filter(
-        (n) => n.type === 'group'
+        (n) => n.type === 'pool' || n.type === 'lane'
       );
       const groupClassName =
         intersections.length && node.parentId !== intersections[0]?.id
@@ -65,7 +65,7 @@ export function useNodeDragHandlers() {
       console.log(groupClassName);
       setNodes((nds) => {
         return nds.map((n) => {
-          if (n.type === 'group') {
+          if (n.type === 'pool' || n.type === 'lane') {
             return {
               ...n,
               className: groupClassName,
