@@ -3,14 +3,25 @@
 import type React from "react";
 
 import { memo, useState, useEffect, useRef } from "react";
-import { Handle, Position, type NodeProps } from "reactflow";
+import { Handle, NodeToolbar, Position, useReactFlow, useStore, type NodeProps } from "reactflow";
 import type { NodeData } from "@/types/kaos-types";
 import { CircleIcon } from "@/components/icons/bpmn-icons";
+import useDetachNodes from "@/hooks/use-detach-nodes";
 
 function StartEventNode({ data, type, id }: NodeProps<NodeData>) {
   const [isEditing, setIsEditing] = useState(false);
   const [label, setLabel] = useState(data.label);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const hasParent = useStore((store) => {
+    const node = store.getNodes().find((n) => n.id === id);
+    return !!node?.parentId;
+  });
+  const { deleteElements } = useReactFlow();
+  const detachNodes = useDetachNodes();
+
+  const onDelete = () => deleteElements({ nodes: [{ id }] });
+  const onDetach = () => detachNodes([id]);
 
   // Use our fixed node size
   const size = 60;
@@ -65,6 +76,11 @@ function StartEventNode({ data, type, id }: NodeProps<NodeData>) {
         <CircleIcon className={`h-${size} w-${size} text-green-500`} />
       </div>
 
+      <NodeToolbar className="nodrag">
+        <button onClick={onDelete}>Delete</button>
+        {hasParent && <button onClick={onDetach}>Detach</button>}
+      </NodeToolbar>
+
       <Handle
         type="source"
         position={Position.Right}
@@ -86,7 +102,7 @@ function StartEventNode({ data, type, id }: NodeProps<NodeData>) {
           </div>
         ) : (
           <div
-            className="text-xs font-medium text-gray-700 text-center absolute top-full mt-1 left-1/2 transform -translate-x-1/2 break-words whitespace-normal"
+            className="text-xs font-medium text-gray-700 text-center absolute top-12 left-1/2 transform -translate-x-1/2 break-words whitespace-normal"
             style={{ maxWidth: "160px", width: "max-content" }}
           >
             {data.label}

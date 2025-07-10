@@ -46,6 +46,7 @@ import {
   File,
   Link,
   MessageSquare,
+  RectangleHorizontal,
   Slash,
 } from "lucide-react";
 import startNoInterruptingTimerNode from "@/components/nodes/bpmn-nodes/start-event/start-no-interrupting-timer-node.";
@@ -68,6 +69,8 @@ import biDirectionalAssociationEdge from "@/components/edges/bpmn-edges/bi-direc
 import initiatingMessageFlowEdge from "@/components/edges/bpmn-edges/initiating-message-flow.edge";
 import nonInitiatingMessageFlowEdge from "@/components/edges/bpmn-edges/non-initiating-message-flow-edge";
 import dataAssociationEdge from "@/components/edges/bpmn-edges/data-association-edge";
+import { group } from "console";
+import lane from "@/components/nodes/bpmn-nodes/lane";
 
 export const bpmnModel: ModelDefinition = {
   id: "bpmn",
@@ -77,6 +80,7 @@ export const bpmnModel: ModelDefinition = {
   thumbnail: "/models/bpmn-placeholder.png",
 
   nodeTypes: {
+    group: lane,
     start: StartNode,
     intermediate: IntermediateNode,
     end: EndNode,
@@ -118,6 +122,17 @@ export const bpmnModel: ModelDefinition = {
   },
 
   defaultNodes: [
+    {
+      type: "group",
+      label: "Lane",
+      category: "Swinlanes",
+      diagramType: "BPMN Diagram",
+      component: lane,
+      icon: <RectangleHorizontal className="h-5 w-5 text-gray-500" />,
+      color: "#9ca3af",
+      description:
+        "Lane in BPMN, used to organize and categorize activities within a process.",
+    },
     {
       type: "start",
       label: "Start",
@@ -511,6 +526,7 @@ export const bpmnModel: ModelDefinition = {
         "startInterruptingCompensation",
         "intermediateInterruptingMenssage",
         "intermediateNoInterruptingMenssage",
+        "group"
       ],
     },
   ],

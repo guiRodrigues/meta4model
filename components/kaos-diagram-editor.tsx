@@ -56,6 +56,7 @@ import {
 import { QuickTipsDialog } from "@/components/quick-tips-dialog";
 import type { ModelDefinition } from "@/types/model-types";
 import { useUndoRedo } from "@/hooks/use-undo-redo";
+import { useNodeDragHandlers } from "@/hooks/use-node-drag-handlers";
 
 interface KAOSDiagramEditorProps {
   model: ModelDefinition;
@@ -104,6 +105,8 @@ function DiagramEditor({ model }: { model: ModelDefinition }) {
   const [validTargetTypes, setValidTargetTypes] = useState<string[]>([]);
   const [selectedEdge, setSelectedEdge] = useState<Edge | null>(null);
   const [hoveredEdge, setHoveredEdge] = useState<Edge | null>(null);
+  const { onNodeDrag, onNodeDragStop } = useNodeDragHandlers();
+
   const [edgeTooltip, setEdgeTooltip] = useState<{
     x: number;
     y: number;
@@ -1281,6 +1284,10 @@ function DiagramEditor({ model }: { model: ModelDefinition }) {
             onEdgeMouseLeave={onEdgeMouseLeave}
             onNodeDragStart={onNodeDragStart}
             onSelectionDragStart={onSelectionDragStart}
+            fitView
+            onNodeDrag={onNodeDrag}
+            onNodeDragStop={onNodeDragStop}
+            selectNodesOnDrag={false}
           >
             <Controls className="bg-white border shadow-sm rounded-lg m-4">
               <div className="flex flex-col gap-1 p-1">
