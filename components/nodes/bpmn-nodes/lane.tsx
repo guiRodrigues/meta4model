@@ -21,8 +21,6 @@ function Lane({ id, data }: NodeProps<NodeData>) {
   const [isEditing, setIsEditing] = useState(false);
 
   const onDelete = () => deleteElements({ nodes: [{ id }] });
-  const onDetach = () => detachNodes([id]);
-
   const handleDoubleClick = () => {
     setIsEditing(true);
   };
@@ -37,11 +35,17 @@ function Lane({ id, data }: NodeProps<NodeData>) {
       }
     };
 
+
+
   return (
     <div 
       className="w-[800px] h-[170px] bg-gray-100 flex items-center "
       onDoubleClick={handleDoubleClick}
       >
+
+    <NodeToolbar>
+      <button onClick={onDelete}>Delete</button>
+    </NodeToolbar>
     {isEditing ? (
           <div className="flex justify-center mt-1">
             <input
@@ -55,7 +59,6 @@ function Lane({ id, data }: NodeProps<NodeData>) {
           <div>
            <div
             className="transform -rotate-90 text-xs font-medium text-gray-700 text-center break-words whitespace-normal"
-            //className="text-xs font-medium text-gray-700 text-center absolute top-full mt-1 left-1/2 transform -translate-x-1/2 break-words whitespace-normal"
             style={{ maxWidth: "80px", width: "max-content" }}
            >
              {data.label}
