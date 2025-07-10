@@ -46,6 +46,7 @@ import {
   File,
   Link,
   MessageSquare,
+  RectangleEllipsis,
   RectangleHorizontal,
   Slash,
 } from "lucide-react";
@@ -70,6 +71,7 @@ import initiatingMessageFlowEdge from "@/components/edges/bpmn-edges/initiating-
 import nonInitiatingMessageFlowEdge from "@/components/edges/bpmn-edges/non-initiating-message-flow-edge";
 import dataAssociationEdge from "@/components/edges/bpmn-edges/data-association-edge";
 import lane from "@/components/nodes/bpmn-nodes/lane";
+import pool from "@/components/nodes/bpmn-nodes/pool";
 
 export const bpmnModel: ModelDefinition = {
   id: "bpmn",
@@ -79,6 +81,7 @@ export const bpmnModel: ModelDefinition = {
   thumbnail: "/models/bpmn-placeholder.png",
 
   nodeTypes: {
+    pool: pool,
     lane: lane,
     start: StartNode,
     intermediate: IntermediateNode,
@@ -121,6 +124,17 @@ export const bpmnModel: ModelDefinition = {
   },
 
   defaultNodes: [
+    {
+      type: "pool",
+      label: "Pool",
+      category: "Swinlanes",
+      diagramType: "BPMN Diagram",
+      component: pool,
+      icon: <RectangleEllipsis className="h-5 w-5 text-gray-500" />,
+      color: "#9ca3af",
+      description:
+        "Pool in BPMN, representing a participant in a process, typically an organization or entity.",
+    },
     {
       type: "lane",
       label: "Lane",
@@ -525,6 +539,7 @@ export const bpmnModel: ModelDefinition = {
         "startInterruptingCompensation",
         "intermediateInterruptingMenssage",
         "intermediateNoInterruptingMenssage",
+        "pool",
         "lane"
       ],
     },
