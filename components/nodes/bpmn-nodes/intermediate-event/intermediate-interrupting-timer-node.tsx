@@ -5,22 +5,22 @@ import type React from "react";
 import { memo, useState, useEffect, useRef } from "react";
 import { Handle, NodeToolbar, Position, useReactFlow, useStore, type NodeProps } from "reactflow";
 import type { NodeData } from "@/types/kaos-types";
-import { CircleNoInterruptingTime } from "@/components/icons/bpmn-icons";
+import { CircleEndIcon, InterCircleInterruptingMenssage, InterCircleInterruptingTimer } from "@/components/icons/bpmn-icons";
 import useDetachNodes from "@/hooks/use-detach-nodes";
 
-function StartNoInterruptingTime({ data, type, id }: NodeProps<NodeData>) {
+function IntermediateInterruptingTimer({ data, type, id }: NodeProps<NodeData>) {
   const [isEditing, setIsEditing] = useState(false);
   const [label, setLabel] = useState(data.label);
   const inputRef = useRef<HTMLInputElement>(null);
   const hasParent = useStore((store) => {
-    const node = store.getNodes().find((n) => n.id === id);
-    return !!node?.parentId;
-  });
-  const { deleteElements } = useReactFlow();
-  const detachNodes = useDetachNodes();
-
-  const onDelete = () => deleteElements({ nodes: [{ id }] });
-  const onDetach = () => detachNodes([id]);
+      const node = store.getNodes().find((n) => n.id === id);
+      return !!node?.parentId;
+    });
+    const { deleteElements } = useReactFlow();
+    const detachNodes = useDetachNodes();
+  
+    const onDelete = () => deleteElements({ nodes: [{ id }] });
+    const onDetach = () => detachNodes([id]);
   // Use our fixed node size
   const size = 60;
 
@@ -51,13 +51,13 @@ function StartNoInterruptingTime({ data, type, id }: NodeProps<NodeData>) {
 
   const handleBlur = () => {
     setIsEditing(false);
-    data.label = label.trim() || "Start";
+    data.label = label.trim() || "End";
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       setIsEditing(false);
-      data.label = label.trim() || "Start";
+      data.label = label.trim() || "End";
     } else if (e.key === "Escape") {
       setIsEditing(false);
       setLabel(data.label);
@@ -71,20 +71,20 @@ function StartNoInterruptingTime({ data, type, id }: NodeProps<NodeData>) {
       style={{ width: `${size}px`, height: `${size}px` }}
     >
       <div className="pt-0 pb-0">
-        <CircleNoInterruptingTime className={`h-${size} w-${size} text-green-500`} />
+        <InterCircleInterruptingTimer className={`h-${size} w-${size} text-red-500`} />
       </div>
 
       <Handle
-        type="source"
-        position={Position.Right}
-        className="!bg-blue-500 react-flow__handle-right"
-        style={{ right: -4 }} // Move handle down by 4px
+        type="target"
+        position={Position.Left}
+        className="!bg-blue-500 react-flow__handle-left"
+        style={{ left: -4 }} // Move handle up by 4px
       />
 
       <NodeToolbar className="nodrag">
-        <button onClick={onDelete}>Delete</button>
-        {hasParent && <button onClick={onDetach}>Detach</button>}
-      </NodeToolbar>
+              <button onClick={onDelete}>Delete</button>
+              {hasParent && <button onClick={onDetach}>Detach</button>}
+            </NodeToolbar>
 
       <div className="absolute inset-0 flex items-center justify-center text-center">
         {isEditing ? (
@@ -111,4 +111,4 @@ function StartNoInterruptingTime({ data, type, id }: NodeProps<NodeData>) {
   );
 }
 
-export default memo(StartNoInterruptingTime);
+export default memo(IntermediateInterruptingTimer);

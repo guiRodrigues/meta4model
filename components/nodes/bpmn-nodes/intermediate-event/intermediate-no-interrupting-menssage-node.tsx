@@ -3,15 +3,24 @@
 import type React from "react";
 
 import { memo, useState, useEffect, useRef } from "react";
-import { Handle, Position, type NodeProps } from "reactflow";
+import { Handle, NodeToolbar, Position, useReactFlow, useStore, type NodeProps } from "reactflow";
 import type { NodeData } from "@/types/kaos-types";
 import {InterCircleNoInterruptingMenssage, } from "@/components/icons/bpmn-icons";
+import useDetachNodes from "@/hooks/use-detach-nodes";
 
 function IntermediateNoInterruptingMenssage({ data, type, id }: NodeProps<NodeData>) {
   const [isEditing, setIsEditing] = useState(false);
   const [label, setLabel] = useState(data.label);
   const inputRef = useRef<HTMLInputElement>(null);
+  const hasParent = useStore((store) => {
+    const node = store.getNodes().find((n) => n.id === id);
+    return !!node?.parentId;
+  });
+  const { deleteElements } = useReactFlow();
+  const detachNodes = useDetachNodes();
 
+  const onDelete = () => deleteElements({ nodes: [{ id }] });
+  const onDetach = () => detachNodes([id]);
   // Use our fixed node size
   const size = 60;
 
@@ -72,6 +81,11 @@ function IntermediateNoInterruptingMenssage({ data, type, id }: NodeProps<NodeDa
         style={{ left: -4 }} // Move handle up by 4px
       />
 
+      <NodeToolbar className="nodrag">
+              <button onClick={onDelete}>Delete</button>
+              {hasParent && <button onClick={onDetach}>Detach</button>}
+            </NodeToolbar>
+
       <div className="absolute inset-0 flex items-center justify-center text-center">
         {isEditing ? (
           <div className="flex justify-center mt-1">
@@ -86,7 +100,7 @@ function IntermediateNoInterruptingMenssage({ data, type, id }: NodeProps<NodeDa
           </div>
         ) : (
           <div
-            className="text-xs font-medium text-gray-700 text-center absolute top-full mt-1 left-1/2 transform -translate-x-1/2 break-words whitespace-normal"
+            className="text-xs font-medium text-gray-700 text-center absolute top-12 mt-1 left-1/2 transform -translate-x-1/2 break-words whitespace-normal"
             style={{ maxWidth: "160px", width: "max-content" }}
           >
             {data.label}

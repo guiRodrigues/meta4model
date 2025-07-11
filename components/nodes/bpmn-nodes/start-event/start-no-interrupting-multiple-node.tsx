@@ -3,7 +3,7 @@
 import type React from "react";
 
 import { memo, useState, useEffect, useRef } from "react";
-import { Handle, Position, useReactFlow, useStore, type NodeProps } from "reactflow";
+import { Handle, NodeToolbar, Position, useReactFlow, useStore, type NodeProps } from "reactflow";
 import type { NodeData } from "@/types/kaos-types";
 import { CircleNoInterruptingMultiple, CircleNoInterruptingTime } from "@/components/icons/bpmn-icons";
 import useDetachNodes from "@/hooks/use-detach-nodes";
@@ -80,6 +80,11 @@ function StartNoInterruptingMultiple({ data, type, id }: NodeProps<NodeData>) {
         className="!bg-blue-500 react-flow__handle-right"
         style={{ right: -4 }} // Move handle down by 4px
       />
+
+      <NodeToolbar className="nodrag">
+        <button onClick={onDelete}>Delete</button>
+        {hasParent && <button onClick={onDetach}>Detach</button>}
+      </NodeToolbar>
 
       <div className="absolute inset-0 flex items-center justify-center text-center">
         {isEditing ? (

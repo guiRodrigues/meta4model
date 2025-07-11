@@ -18,7 +18,7 @@ export function CircleIcon({ className}: { className?: string}) {
   );
 }
 
-export function ClockIcon({ className }: { className?: string }) {
+export function ClockIcon({ className, strokeColor = "currentColor" }: { className?: string, strokeColor?: string;}) {
   return (
     <svg
       className={className}
@@ -29,9 +29,9 @@ export function ClockIcon({ className }: { className?: string }) {
       <circle
         cx="12"
         cy="12"
-        r="4"
-        stroke="currentColor"
-        strokeWidth="1"
+        r="3.5"
+        stroke= {strokeColor}
+        strokeWidth="0.7"
         fill="none"
       />
       <line
@@ -39,7 +39,7 @@ export function ClockIcon({ className }: { className?: string }) {
         y1="12"
         x2="12"
         y2="10"
-        stroke="currentColor"
+        stroke= {strokeColor}
         strokeWidth="1"
         strokeLinecap="round"
       />
@@ -48,7 +48,7 @@ export function ClockIcon({ className }: { className?: string }) {
         y1="12"
         x2="13"
         y2="14"
-        stroke="currentColor"
+        stroke= {strokeColor}
         strokeWidth="1"
         strokeLinecap="round"
       />
@@ -365,6 +365,7 @@ export function DashedIntermediateCircleIcon({ className, r = 6, strokeWidth = 0
         strokeDasharray="3 1"
         fill="#dbeafe"
       />
+      <circle cx="12" cy="12" r="5" stroke={strokeColor} strokeWidth="0.5" strokeDasharray="3 1"/>
     </svg>
   )
 }
@@ -693,7 +694,7 @@ export function InterCircleInterruptingMenssage ({ className }: { className?: st
       xmlns="http://www.w3.org/2000/svg"
     >
       <DashedIntermediateCircleIcon/>
-      <DashedIntermediateCircleIcon r = {5} strokeWidth = {0.5}/>
+      {/* <DashedIntermediateCircleIcon r = {5} strokeWidth = {0.5}/> */}
       <EnvelopeIcon strokeColor="#60a5fa"/>
     
     </svg>
@@ -728,5 +729,36 @@ export function InterCircleThrowMenssage ({ className }: { className?: string })
     </svg>
   );
 }
+
+export function InterCircleInterruptingTimer ({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <CircleIntermediateIcon/>
+      <ClockIcon strokeColor="#60a5fa" />
+    </svg>
+  );
+}
+
+export function InterCircleNoInterruptingTimer ({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <DashedIntermediateCircleIcon/>
+      
+      <ClockIcon strokeColor="#60a5fa" />
+    </svg>
+  );
+}
+  
+
 
 

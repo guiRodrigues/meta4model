@@ -3,7 +3,7 @@
 import type React from "react";
 
 import { memo, useState, useEffect, useRef } from "react";
-import { Handle, Position, useReactFlow, useStore, type NodeProps } from "reactflow";
+import { Handle, NodeToolbar, Position, useReactFlow, useStore, type NodeProps } from "reactflow";
 import type { NodeData } from "@/types/kaos-types";
 import { CircleIcon, CircleInterruptingCompensation, CircleInterruptingTime } from "@/components/icons/bpmn-icons";
 import useDetachNodes from "@/hooks/use-detach-nodes";
@@ -13,14 +13,14 @@ function StartInterruptingCompensation({ data, type, id }: NodeProps<NodeData>) 
   const [label, setLabel] = useState(data.label);
   const inputRef = useRef<HTMLInputElement>(null);
   const hasParent = useStore((store) => {
-      const node = store.getNodes().find((n) => n.id === id);
-      return !!node?.parentId;
-    });
-    const { deleteElements } = useReactFlow();
-    const detachNodes = useDetachNodes();
-  
-    const onDelete = () => deleteElements({ nodes: [{ id }] });
-    const onDetach = () => detachNodes([id]);
+    const node = store.getNodes().find((n) => n.id === id);
+    return !!node?.parentId;
+  });
+  const { deleteElements } = useReactFlow();
+  const detachNodes = useDetachNodes();
+
+  const onDelete = () => deleteElements({ nodes: [{ id }] });
+  const onDetach = () => detachNodes([id]);
   // Use our fixed node size
   const size = 60;
 
@@ -73,7 +73,12 @@ function StartInterruptingCompensation({ data, type, id }: NodeProps<NodeData>) 
       <div className="pt-0 pb-0">
         <CircleInterruptingCompensation className={`h-${size} w-${size} text-green-500`} />
       </div>
-
+    
+     <NodeToolbar className="nodrag">
+        <button onClick={onDelete}>Delete</button>
+        {hasParent && <button onClick={onDetach}>Detach</button>}
+      </NodeToolbar>
+      
       <Handle
         type="source"
         position={Position.Right}
