@@ -3,15 +3,24 @@
 import type React from "react";
 
 import { memo, useState, useEffect, useRef } from "react";
-import { Handle, Position, type NodeProps } from "reactflow";
+import { Handle, Position, useReactFlow, useStore, type NodeProps } from "reactflow";
 import type { NodeData } from "@/types/kaos-types";
-import { CircleEndIcon, InterCircleInterruptingMenssage } from "@/components/icons/bpmn-icons";
+import {InterCircleNoInterruptingMenssage, InterCircleThrowMenssage, } from "@/components/icons/bpmn-icons";
+import useDetachNodes from "@/hooks/use-detach-nodes";
 
-function IntermediateInterruptingMenssage({ data, type, id }: NodeProps<NodeData>) {
+function IntermediateThrowMenssage({ data, type, id }: NodeProps<NodeData>) {
   const [isEditing, setIsEditing] = useState(false);
   const [label, setLabel] = useState(data.label);
   const inputRef = useRef<HTMLInputElement>(null);
-
+    const hasParent = useStore((store) => {
+      const node = store.getNodes().find((n) => n.id === id);
+      return !!node?.parentId;
+    });
+    const { deleteElements } = useReactFlow();
+    const detachNodes = useDetachNodes();
+  
+    const onDelete = () => deleteElements({ nodes: [{ id }] });
+    const onDetach = () => detachNodes([id]);
   // Use our fixed node size
   const size = 60;
 
@@ -62,7 +71,7 @@ function IntermediateInterruptingMenssage({ data, type, id }: NodeProps<NodeData
       style={{ width: `${size}px`, height: `${size}px` }}
     >
       <div className="pt-0 pb-0">
-        <InterCircleInterruptingMenssage className={`h-${size} w-${size} text-red-500`} />
+        <InterCircleThrowMenssage className={`h-${size} w-${size} text-red-500`} />
       </div>
 
       <Handle
@@ -97,4 +106,4 @@ function IntermediateInterruptingMenssage({ data, type, id }: NodeProps<NodeData
   );
 }
 
-export default memo(IntermediateInterruptingMenssage);
+export default memo(IntermediateThrowMenssage);

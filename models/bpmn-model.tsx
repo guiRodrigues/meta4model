@@ -25,6 +25,7 @@ import {
   DiamondParallelIcon,
   InterCircleInterruptingMenssage,
   InterCircleNoInterruptingMenssage,
+  InterCircleThrowMenssage,
 } from "@/components/icons/bpmn-icons";
 import { RectangleIcon } from "@/components/icons/kaos-icons";
 import EndNode from "@/components/nodes/bpmn-nodes/end-node";
@@ -72,6 +73,7 @@ import nonInitiatingMessageFlowEdge from "@/components/edges/bpmn-edges/non-init
 import dataAssociationEdge from "@/components/edges/bpmn-edges/data-association-edge";
 import lane from "@/components/nodes/bpmn-nodes/lane";
 import pool from "@/components/nodes/bpmn-nodes/pool";
+import intermediateThrowMenssageNode from "@/components/nodes/bpmn-nodes/intermediate-event/intermediate-throw-menssage-node";
 
 export const bpmnModel: ModelDefinition = {
   id: "bpmn",
@@ -107,6 +109,7 @@ export const bpmnModel: ModelDefinition = {
     startInterruptingCompensation: startInterruptingCompensationNode, // Assuming this is the same as interrupting conditional
     intermediateInterruptingMenssage: intermediateInterruptingMenssageNode,
     intermediateNoInterruptingMenssage: intermediateNoInterruptingMenssageNode,
+    intermediateThrowMenssage: intermediateThrowMenssageNode,
     
   },
 
@@ -335,7 +338,7 @@ export const bpmnModel: ModelDefinition = {
     },
     {
       type: "intermediateInterruptingMenssage",
-      label: "Interrupting Menssage",
+      label: "No Interrupting Menssage",
       category: "Events",
       diagramType: "BPMN Diagram",
       component: intermediateInterruptingMenssageNode,
@@ -346,11 +349,22 @@ export const bpmnModel: ModelDefinition = {
     },
     {
     type: "intermediateNoInterruptingMenssage",
-      label: "No Interrupting Menssage",
+      label: "Interrupting Menssage",
       category: "Events",
       diagramType: "BPMN Diagram",
       component: intermediateNoInterruptingMenssageNode,
       icon: <InterCircleNoInterruptingMenssage className="h-5 w-5 text-blue-500" />,
+      color: "#60a5fa",
+      description:
+        "Intermediate event in BPMN, used to capture events that occur during a process.",
+    },
+    {
+      type: "intermediateThrowMenssage",
+      label: "Throw Menssage",
+      category: "Events",
+      diagramType: "BPMN Diagram",
+      component: intermediateThrowMenssageNode,
+      icon: <InterCircleThrowMenssage className="h-5 w-5 text-blue-500" />,
       color: "#60a5fa",
       description:
         "Intermediate event in BPMN, used to capture events that occur during a process.",
@@ -540,7 +554,8 @@ export const bpmnModel: ModelDefinition = {
         "intermediateInterruptingMenssage",
         "intermediateNoInterruptingMenssage",
         "pool",
-        "lane"
+        "lane",
+        "intermediateThrowMenssage",
       ],
     },
   ],

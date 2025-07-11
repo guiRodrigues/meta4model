@@ -223,7 +223,7 @@ export function ArrowIcon({ className }: { className?: string }) {
 
 
 
-export function DashedCircleIcon({ className, r = 6.3}: { className?: string, r?: number }) {
+export function DashedCircleIcon({ className, r = 6}: { className?: string, r?: number }) {
   return (
     <svg
       className={className}
@@ -237,7 +237,7 @@ export function DashedCircleIcon({ className, r = 6.3}: { className?: string, r?
         r= {r}
         stroke="currentColor"
         strokeWidth="1"
-        strokeDasharray="2 2"
+        strokeDasharray="1 1"
         fill="#dcfce7"
       />
     </svg>
@@ -290,7 +290,13 @@ export function SignalIcon({ className }: { className?: string }) {
 }
 
 
-export function EnvelopeIcon({ className, strokeColor = "currentColor" }: { className?: string, strokeColor?: string }) {
+export function EnvelopeIcon({
+  className,
+  strokeColor = "currentColor",
+}: {
+  className?: string;
+  strokeColor?: string;
+}) {
   return (
     <svg
       className={className}
@@ -298,20 +304,21 @@ export function EnvelopeIcon({ className, strokeColor = "currentColor" }: { clas
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g transform="translate(3.6 3.6) scale(0.7)">
+      {/* (24 – 24 × 0.8) / 2 = 2.4 ⇒ corrige a posição */}
+      <g transform="translate(2.4 2.4) scale(0.8)">
         <rect
           x="8"
           y="9"
           width="8"
           height="6"
           stroke={strokeColor}
-          strokeWidth="1"
+          strokeWidth="0.7"
           fill="none"
         />
         <path
           d="M8 9 L12 12 L16 9"
           stroke={strokeColor}
-          strokeWidth="1"
+          strokeWidth="0.7"
           fill="none"
         />
       </g>
@@ -319,7 +326,8 @@ export function EnvelopeIcon({ className, strokeColor = "currentColor" }: { clas
   );
 }
 
-export function CircleIntermediateIcon({ className, r = 6, strokeColor = "#60a5fa"}: { className?: string, r?: number, strokeColor?: string}) {
+
+export function CircleIntermediateIcon({ className, strokeColor = "#60a5fa"}: { className?: string, r?: number, strokeColor?: string}) {
   return (
     <svg
       className={className}
@@ -330,17 +338,17 @@ export function CircleIntermediateIcon({ className, r = 6, strokeColor = "#60a5f
       <circle
         cx="12"
         cy="12"
-        r= {r}
+        r= "6"
         fill="#dbeafe"
         stroke={strokeColor}
         strokeWidth="0.5"
       />
-      <circle cx="12" cy="12" r="5" stroke={strokeColor}strokeWidth="0.5" />
+      <circle cx="12" cy="12" r="5" stroke={strokeColor} strokeWidth="0.5" />
     </svg>
   );
 }
 
-export function DashedIntermediateCircleIcon({ className, r = 6.2, strokeWidth = 1, strokeColor = "#60a5fa"}: { className?: string, r?: number, strokeWidth?: number, strokeColor?: string}) {
+export function DashedIntermediateCircleIcon({ className, r = 6, strokeWidth = 0.5, strokeColor = "#60a5fa"}: { className?: string, r?: number, strokeWidth?: number, strokeColor?: string}) {
   return (
     <svg
       className={className}
@@ -354,7 +362,7 @@ export function DashedIntermediateCircleIcon({ className, r = 6.2, strokeWidth =
         r= {r}
         stroke={strokeColor}
         strokeWidth= {strokeWidth}
-        strokeDasharray="2 2"
+        strokeDasharray="3 1"
         fill="#dbeafe"
       />
     </svg>
@@ -685,7 +693,7 @@ export function InterCircleInterruptingMenssage ({ className }: { className?: st
       xmlns="http://www.w3.org/2000/svg"
     >
       <DashedIntermediateCircleIcon/>
-      <DashedIntermediateCircleIcon r = {4.5} strokeWidth = {0.8}/>
+      <DashedIntermediateCircleIcon r = {5} strokeWidth = {0.5}/>
       <EnvelopeIcon strokeColor="#60a5fa"/>
     
     </svg>
@@ -702,6 +710,21 @@ export function InterCircleNoInterruptingMenssage ({ className }: { className?: 
     >
       <CircleIntermediateIcon/>
       <EnvelopeIcon strokeColor="#60a5fa"/>
+    </svg>
+  );
+}
+
+export function InterCircleThrowMenssage ({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <CircleIntermediateIcon/>
+      <EnvelopeIcon strokeColor="#000000"/>
+    
     </svg>
   );
 }

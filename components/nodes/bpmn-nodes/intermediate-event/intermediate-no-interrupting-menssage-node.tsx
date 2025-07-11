@@ -13,7 +13,7 @@ function IntermediateNoInterruptingMenssage({ data, type, id }: NodeProps<NodeDa
   const inputRef = useRef<HTMLInputElement>(null);
 
   // Use our fixed node size
-  const size = 70;
+  const size = 60;
 
   useEffect(() => {
     if (data.isNew) {
