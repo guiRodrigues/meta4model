@@ -111,7 +111,7 @@ export function CompensationIcon({ className }: { className?: string }) {
   )
 }
 
-export function DocumentIcon({ className }: { className?: string }) {
+export function DocumentIcon({ className, strokeColor = "currentColor" }: { className?: string, strokeColor?: string }) {
   return (
     <svg
       className={className}
@@ -120,7 +120,7 @@ export function DocumentIcon({ className }: { className?: string }) {
       xmlns="http://www.w3.org/2000/svg"
     >
       {/* Reduz tamanho em 30% (scale 0.7) e centraliza com translate */}
-      <g transform="translate(3.6 3.6) scale(0.7)">
+      <g transform="translate(6 6 ) scale(0.5)">
         {/* Contorno do “documento” */}
         <rect
           x="7"
@@ -128,7 +128,7 @@ export function DocumentIcon({ className }: { className?: string }) {
           width="10"
           height="10"
           rx="1"
-          stroke="currentColor"
+          stroke= {strokeColor}
           strokeWidth="1"
           fill="none"
         />
@@ -139,7 +139,7 @@ export function DocumentIcon({ className }: { className?: string }) {
           y1="10"
           x2="15"
           y2="10"
-          stroke="currentColor"
+          stroke= {strokeColor}
           strokeWidth="1"
           strokeLinecap="round"
         />
@@ -148,7 +148,7 @@ export function DocumentIcon({ className }: { className?: string }) {
           y1="13"
           x2="15"
           y2="13"
-          stroke="currentColor"
+          stroke= {strokeColor}
           strokeWidth="1"
           strokeLinecap="round"
         />
@@ -157,7 +157,7 @@ export function DocumentIcon({ className }: { className?: string }) {
           y1="16"
           x2="15"
           y2="16"
-          stroke="currentColor"
+          stroke= {strokeColor}
           strokeWidth="1"
           strokeLinecap="round"
         />
@@ -753,8 +753,35 @@ export function InterCircleNoInterruptingTimer ({ className }: { className?: str
       xmlns="http://www.w3.org/2000/svg"
     >
       <DashedIntermediateCircleIcon/>
-      
       <ClockIcon strokeColor="#60a5fa" />
+    </svg>
+  );
+}
+
+export function InterCircleInterruptingConditional ({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <CircleIntermediateIcon/>
+      <DocumentIcon strokeColor="#60a5fa" />
+    </svg>
+  );
+}
+
+export function InterCircleNoInterruptingConditional ({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <DashedIntermediateCircleIcon/>
+      <DocumentIcon strokeColor="#60a5fa" />
     </svg>
   );
 }
