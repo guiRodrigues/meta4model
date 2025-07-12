@@ -268,7 +268,7 @@ export function ErrorIcon({ className }: { className?: string }) {
 }
 
 
-export function SignalIcon({ className }: { className?: string }) {
+export function SignalIcon({ className, strokeColor = "currentColor"}: { className?: string, strokeColor?: string}) {
   return (
     <svg
       className={className}
@@ -280,7 +280,7 @@ export function SignalIcon({ className }: { className?: string }) {
       <g transform="translate(3.6 3.6) scale(0.7)">
         <polygon
           points="12,7 16,15 8,15"
-          stroke="currentColor"
+          stroke= {strokeColor}
           strokeWidth="1"
           fill="none"
         />
@@ -785,7 +785,44 @@ export function InterCircleNoInterruptingConditional ({ className }: { className
     </svg>
   );
 }
-  
+  export function InterCircleInterruptigSignal ({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <CircleIntermediateIcon/>
+      <SignalIcon strokeColor="#60a5fa" />
+    </svg>
+  );
+}
 
+ export function InterCircleNoInterruptigSignal ({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <DashedIntermediateCircleIcon/>
+      <SignalIcon strokeColor="#60a5fa" />
+    </svg>
+  );
+}
 
-
+ export function InterCircleThrowSignal ({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <CircleIntermediateIcon/>
+      <SignalIcon strokeColor="#000000ff" />
+    </svg>
+  );
+}
