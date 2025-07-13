@@ -8,10 +8,11 @@ import {
 } from "reactflow";
 import { NodeData } from "@/types/kaos-types";
 import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
+import { Plus, Trash2 } from "lucide-react";
 
 function Pool({ id, data }: NodeProps<NodeData>) {
   const { setNodes, getNode } = useReactFlow();
+  const { deleteElements } = useReactFlow();
   const node = useStore((store) => store.getNodes().find((n) => n.id === id));
   const childLanes = useStore((s) =>
     s.getNodes().filter((n) => n.parentId === id && n.type === "lane")
@@ -27,53 +28,73 @@ function Pool({ id, data }: NodeProps<NodeData>) {
     let totalHeight = 0;
     let currentY = 0;
 
-    // Ordenar as lanes pela sua posição Y para garantir a ordem correta
+    // Encontra a largura máxima entre todas as lanes filhas
+    const maxWidth = Math.max(...childLanes.map((lane) => lane.width || 0));
+
+    const poolWidth =
+      maxWidth > 0 ? maxWidth + 40 : currentPoolNode.width || 800;
+
+    // Ordena as lanes pela sua posição Y para garantir a ordem correta
     const sortedLanes = [...childLanes].sort(
       (a, b) => a.position.y - b.position.y
     );
 
-    const nodesToUpdate = new Map();
-    let positionChanged = false;
+    const nodesToUpdate: { [key: string]: any } = {};
+    let changesOccurred = false;
 
     sortedLanes.forEach((lane) => {
       const laneHeight = lane.height || 100;
-      if (lane.position.y !== currentY) {
-        nodesToUpdate.set(lane.id, {
-          ...lane,
-          position: { ...lane.position, y: currentY },
-        });
-        positionChanged = true;
+      const laneWidth = lane.width || 0;
+      const laneNeedsUpdate =
+        lane.position.y !== currentY || laneWidth !== maxWidth;
+
+      if (laneNeedsUpdate) {
+        nodesToUpdate[lane.id] = {
+          position: { x: lane.position.x, y: currentY },
+          width: maxWidth,
+        };
+        changesOccurred = true;
       }
+
       currentY += laneHeight;
       totalHeight += laneHeight;
     });
 
     const minHeight = totalHeight > 0 ? totalHeight : 100;
     const heightChanged = currentPoolNode.height !== minHeight;
+    const widthChanged = currentPoolNode.width !== poolWidth;
 
-    if (heightChanged || positionChanged) {
+    if (heightChanged || widthChanged || changesOccurred) {
       setNodes((nds) =>
         nds.map((n) => {
           if (n.id === id) {
             return {
               ...n,
               height: minHeight,
-              style: { ...n.style, height: `${minHeight}px` },
+              width: poolWidth,
+              style: {
+                ...n.style,
+                height: `${minHeight}px`,
+                width: `${poolWidth}px`,
+              },
             };
           }
-          if (nodesToUpdate.has(n.id)) {
-            return nodesToUpdate.get(n.id);
+          if (nodesToUpdate[n.id]) {
+            const { position, width } = nodesToUpdate[n.id];
+            return {
+              ...n,
+              position,
+              width,
+              style: { ...n.style, width: `${width}px` },
+            };
           }
           return n;
         })
       );
     }
-  }, [childLanes, getNode, getNode, id, setNodes]);
+  }, [childLanes, getNode, id, setNodes]);
 
-  const onDelete = () => {
-    const nodesToRemove = [id, ...childLanes.map((lane) => lane.id)];
-    setNodes((nds) => nds.filter((n) => !nodesToRemove.includes(n.id)));
-  };
+  const onDelete = () => deleteElements({ nodes: [{ id }] });
 
   const handleDoubleClick = () => {
     setIsEditing(true);
@@ -126,18 +147,21 @@ function Pool({ id, data }: NodeProps<NodeData>) {
     >
       <NodeResizer handleClassName="opacity-0" lineClassName="opacity-0" />
 
-      <NodeToolbar>
+      <NodeToolbar className="flex gap-2 p-1">
         <Button
           onClick={onDelete}
           size="sm"
-          className="bg-red-500 text-white hover:bg-red-600"
+          variant="destructive"
+          className="h-8 px-2.5"
         >
+          <Trash2 className="h-3.5 w-3.5 mr-1" />
           Excluir Pool
         </Button>
         <Button
           onClick={addLane}
           size="sm"
-          className="bg-slate-800 text-white hover:bg-slate-700"
+          variant="secondary"
+          className="h-8 px-2.5 bg-gray-200 text-gray-800 hover:bg-gray-300"
         >
           <Plus className="h-4 w-4 mr-1" />
           Adicionar Lane

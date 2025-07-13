@@ -8,6 +8,8 @@ import {
 } from "reactflow";
 import useDetachNodes from "@/hooks/use-detach-nodes";
 import { NodeData } from "@/types/kaos-types";
+import { Button } from "@/components/ui/button";
+import { Trash2 } from "lucide-react";
 
 function Lane({ id, data, selected }: NodeProps<NodeData>) {
   const { setNodes } = useReactFlow();
@@ -72,7 +74,15 @@ function Lane({ id, data, selected }: NodeProps<NodeData>) {
         onResize={onResize} // handler onResize
       />
       <NodeToolbar>
-        <button onClick={onDelete}>Delete</button>
+        <Button
+          onClick={onDelete}
+          size="sm"
+          variant="destructive"
+          className="h-8 px-2.5"
+        >
+          <Trash2 className="h-3.5 w-3.5 mr-1" />
+          Excluir Lane
+        </Button>
       </NodeToolbar>
       {isEditing ? (
         <div className="flex justify-center mt-1">
