@@ -9,7 +9,8 @@ import {
 import useDetachNodes from "@/hooks/use-detach-nodes";
 import { NodeData } from "@/types/kaos-types";
 
-function Lane({ id, data }: NodeProps<NodeData>) {
+function Lane({ id, data, selected }: NodeProps<NodeData>) {
+  const { setNodes } = useReactFlow();
   const node = useStore((store) => store.getNodes().find((n) => n.id === id));
   const width = node?.width ?? 760;
   const height = node?.height ?? 100;
@@ -19,6 +20,26 @@ function Lane({ id, data }: NodeProps<NodeData>) {
   const detachNodes = useDetachNodes();
   const [label, setLabel] = useState(data.label);
   const [isEditing, setIsEditing] = useState(false);
+
+  const onResize = (event: React.SyntheticEvent | any, params: any) => {
+    setNodes((nds) =>
+      nds.map((n) => {
+        if (n.id === id) {
+          return {
+            ...n,
+            width: params.width,
+            height: params.height,
+            data: {
+              ...n.data,
+              width: params.width,
+              height: params.height,
+            },
+          };
+        }
+        return n;
+      })
+    );
+  };
 
   const onDelete = () => deleteElements({ nodes: [{ id }] });
   const handleDoubleClick = () => {
@@ -44,7 +65,12 @@ function Lane({ id, data }: NodeProps<NodeData>) {
       }}
       onDoubleClick={handleDoubleClick}
     >
-      <NodeResizer handleClassName="opacity-0" lineClassName="opacity-0"/>
+      <NodeResizer
+        isVisible={selected} // Use selected from props
+        minWidth={300}
+        minHeight={100}
+        onResize={onResize} // handler onResize
+      />
       <NodeToolbar>
         <button onClick={onDelete}>Delete</button>
       </NodeToolbar>

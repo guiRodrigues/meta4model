@@ -21,15 +21,37 @@ function Pool({ id, data }: NodeProps<NodeData>) {
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
-    const poolHeight = childLanes.reduce(
-      (acc, lane) => acc + (lane.height || 100),
-      0
+    const currentPoolNode = getNode(id);
+    if (!currentPoolNode) return;
+
+    let totalHeight = 0;
+    let currentY = 0;
+
+    // Ordenar as lanes pela sua posição Y para garantir a ordem correta
+    const sortedLanes = [...childLanes].sort(
+      (a, b) => a.position.y - b.position.y
     );
-    const minHeight = poolHeight > 0 ? poolHeight : 170;
 
-    const currentNode = getNode(id);
+    const nodesToUpdate = new Map();
+    let positionChanged = false;
 
-    if (currentNode && currentNode.height !== minHeight) {
+    sortedLanes.forEach((lane) => {
+      const laneHeight = lane.height || 100;
+      if (lane.position.y !== currentY) {
+        nodesToUpdate.set(lane.id, {
+          ...lane,
+          position: { ...lane.position, y: currentY },
+        });
+        positionChanged = true;
+      }
+      currentY += laneHeight;
+      totalHeight += laneHeight;
+    });
+
+    const minHeight = totalHeight > 0 ? totalHeight : 100;
+    const heightChanged = currentPoolNode.height !== minHeight;
+
+    if (heightChanged || positionChanged) {
       setNodes((nds) =>
         nds.map((n) => {
           if (n.id === id) {
@@ -39,11 +61,14 @@ function Pool({ id, data }: NodeProps<NodeData>) {
               style: { ...n.style, height: `${minHeight}px` },
             };
           }
+          if (nodesToUpdate.has(n.id)) {
+            return nodesToUpdate.get(n.id);
+          }
           return n;
         })
       );
     }
-  }, [id, childLanes.length, getNode, setNodes]);
+  }, [childLanes, getNode, getNode, id, setNodes]);
 
   const onDelete = () => {
     const nodesToRemove = [id, ...childLanes.map((lane) => lane.id)];
@@ -136,8 +161,7 @@ function Pool({ id, data }: NodeProps<NodeData>) {
         </div>
       </div>
 
-      <div className="w-full h-full relative" style={{ left: "40px" }}>
-      </div>
+      <div className="w-full h-full relative" style={{ left: "40px" }}></div>
     </div>
   );
 }

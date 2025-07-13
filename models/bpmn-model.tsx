@@ -48,8 +48,6 @@ import type { ModelDefinition } from "@/types/model-types";
 import { validateConnection } from "@/utils/connection-validation";
 import {
   ArrowRight,
-  Database,
-  DatabaseZap,
   Diamond,
   File,
   Link,
@@ -131,7 +129,6 @@ export const bpmnModel: ModelDefinition = {
     intermediateInterruptingSignal: intermediateInterruptingSignalNode,
     intermediateNoInterruptingSignal: intermediateNoInterruptingSignalNode,
     intermediateThrowSignal: intermediateThrowSignalNode,
-    
   },
 
   edgeTypes: {
