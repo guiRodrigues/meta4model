@@ -12,6 +12,10 @@ export function useNodeDragHandlers() {
         return;
       }
 
+      if ((node.type === 'lane') && !node.parentId) {
+        return;
+      }
+
       const intersections = getIntersectingNodes(node).filter(
         (n) => n.type === 'pool' || n.type === 'lane'
       );

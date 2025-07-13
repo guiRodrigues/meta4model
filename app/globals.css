@@ -270,6 +270,10 @@
   filter: drop-shadow(0 0 5px rgba(59, 130, 246, 0.3));
 }
 
+.custom-node-resizer .react-flow__resizer {
+  @apply bg-transparent border-none;
+}
+
 /* Enhance the connection line */
 .react-flow__connection-path {
   stroke-width: 2;
