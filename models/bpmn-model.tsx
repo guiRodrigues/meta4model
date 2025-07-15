@@ -23,6 +23,9 @@ import {
   DiamondExclusiveIcon,
   DiamondIcon,
   DiamondParallelIcon,
+  InterCircleCancel,
+  InterCircleCompensation,
+  InterCircleError,
   InterCircleInterruptigSignal,
   InterCircleInterruptingConditional,
   InterCircleInterruptingEscalation,
@@ -30,6 +33,7 @@ import {
   InterCircleInterruptingMultiple,
   InterCircleInterruptingParallelMultiple,
   InterCircleInterruptingTimer,
+  InterCircleLink,
   InterCircleNoInterruptigSignal,
   InterCircleNoInterruptingConditional,
   InterCircleNoInterruptingEscalation,
@@ -37,6 +41,8 @@ import {
   InterCircleNoInterruptingMultiple,
   InterCircleNoInterruptingParallelMultiple,
   InterCircleNoInterruptingTimer,
+  InterCircleThrowCompensation,
+  InterCircleThrowLink,
   InterCircleThrowMenssage,
   InterCircleThrowMultiple,
   InterCircleThrowParallelMultiple,
@@ -103,6 +109,13 @@ import intermediateThrowParalleNode from "@/components/nodes/bpmn-nodes/intermed
 import intermediateInterruptingEscalationNode from "@/components/nodes/bpmn-nodes/intermediate-event/intermediate-interrupting-escalation-node";
 import intermediateNoInterruptingEscalationNode from "@/components/nodes/bpmn-nodes/intermediate-event/intermediate-no-interrupting-escalation-node";
 import intermediateThrowEscalationNode from "@/components/nodes/bpmn-nodes/intermediate-event/intermediate-throw-escalation-node";
+import intermediateInterruptingErrorNode from "@/components/nodes/bpmn-nodes/intermediate-event/intermediate-interrupting-error-node";
+import intermediateThrowCompensationNode from "@/components/nodes/bpmn-nodes/intermediate-event/intermediate-throw-compensation-node";
+import intermediateCompensationNode from "@/components/nodes/bpmn-nodes/intermediate-event/intermediate-compensation-node";
+import intermediateLinkNode from "@/components/nodes/bpmn-nodes/intermediate-event/intermediate-link-node";
+import intermediateThrowLinkNode from "@/components/nodes/bpmn-nodes/intermediate-event/intermediate-throw-link-node";
+import intermediateCancelNode from "@/components/nodes/bpmn-nodes/intermediate-event/intermediate-cancel-node";
+
 
 export const bpmnModel: ModelDefinition = {
   id: "bpmn",
@@ -154,7 +167,13 @@ export const bpmnModel: ModelDefinition = {
     intermediateThrowParalle: intermediateThrowParalleNode, // Assuming this is the same as interrupting conditional
     intermediateInterruptingEscalation: intermediateInterruptingEscalationNode, // Assuming this is the same as interrupting conditional
     intermediateNoInterruptingEscalation: intermediateNoInterruptingEscalationNode,
-    intermediateThrowEscalation: intermediateThrowEscalationNode
+    intermediateThrowEscalation: intermediateThrowEscalationNode,
+    intermediateInterruptingError: intermediateInterruptingErrorNode, // Assuming this is the same as interrupting conditional
+    intermediateThrowCompensation: intermediateThrowCompensationNode, // Assuming this is the same as interrupting conditional
+    intermediateCompensation: intermediateCompensationNode, // Assuming this is the same as interrupting conditional
+    intermediateLink: intermediateLinkNode, // Assuming this is the same as interrupting conditional
+    intermediateThrowLink: intermediateThrowLinkNode, // Assuming this is the same as interrupting conditional
+    intermediateCancel: intermediateCancelNode, // Assuming this is the same as interrupting conditional
   },
 
   edgeTypes: {
@@ -206,7 +225,7 @@ export const bpmnModel: ModelDefinition = {
     },
     {
       type: "startInterruptingError",
-      label: "Interrupting Error",
+      label: "intereme Error",
       category: "Events",
       diagramType: "BPMN Diagram",
       component: startInterruptingErrorNode,
@@ -352,7 +371,7 @@ export const bpmnModel: ModelDefinition = {
       label: "Interrupting Compensation",
       category: "Events",
       diagramType: "BPMN Diagram",
-      component: startNoInterruptingConditionalNode,
+      component: startInterruptingCompensationNode,
       icon: <CircleInterruptingCompensation className="h-5 w-5 text-green-500" />,
       color: "#3b82f6",
       description:
@@ -590,6 +609,72 @@ export const bpmnModel: ModelDefinition = {
         "Intermediate event in BPMN, used to capture events that occur during a process.",
     },
     {
+      type: "intermediateInterruptingError",
+      label: "Error",
+      category: "Events",
+      diagramType: "BPMN Diagram",
+      component: intermediateInterruptingErrorNode,
+      icon: < InterCircleError className="h-5 w-5 text-blue-500" />,
+      color: "#60a5fa",
+      description:
+        "Intermediate event in BPMN, used to capture events that occur during a process.",
+    },
+    {
+      type: "intermediateThrowCompensation",
+      label: "Throw Compensation",
+      category: "Events",
+      diagramType: "BPMN Diagram",
+      component: intermediateThrowCompensationNode,
+      icon: < InterCircleThrowCompensation className="h-5 w-5 text-blue-500" />,
+      color: "#60a5fa",
+      description:
+        "Intermediate event in BPMN, used to capture events that occur during a process.",
+    },
+    {
+      type: "intermediateCompensation",
+      label: "Compensation",
+      category: "Events",
+      diagramType: "BPMN Diagram",
+      component: intermediateCompensationNode,
+      icon: < InterCircleCompensation className="h-5 w-5 text-blue-500" />,
+      color: "#60a5fa",
+      description:
+        "Intermediate event in BPMN, used to capture events that occur during a process.",
+    },
+    {
+      type: "intermediateLink",
+      label: "Link",
+      category: "Events",
+      diagramType: "BPMN Diagram",
+      component: intermediateLinkNode,
+      icon: < InterCircleLink className="h-5 w-5 text-blue-500" />,
+      color: "#60a5fa",
+      description:
+        "Intermediate event in BPMN, used to capture events that occur during a process.",
+    },
+    {
+      type: "intermediateThrowLink",
+      label: "Throw Link",
+      category: "Events",
+      diagramType: "BPMN Diagram",
+      component: intermediateThrowLinkNode,
+      icon: < InterCircleThrowLink className="h-5 w-5 text-blue-500" />,
+      color: "#60a5fa",
+      description:
+        "Intermediate event in BPMN, used to capture events that occur during a process.",
+    },
+    {
+      type: "intermediateCancel",
+      label: "Cancel",
+      category: "Events",
+      diagramType: "BPMN Diagram",
+      component: intermediateCancelNode,
+      icon: <InterCircleCancel className="h-5 w-5 text-blue-500" />,
+      color: "#60a5fa",
+      description:
+        "Intermediate event in BPMN, used to capture events that occur during a process.",
+    },
+    {
       type: "end",
       label: "End",
       category: "Events",
@@ -791,7 +876,13 @@ export const bpmnModel: ModelDefinition = {
         "intermediateThrowParalle",
         "intermediateInterruptingEscalation",
         "intermediateNoInterruptingEscalation",
-        "intermediateThrowEscalation"
+        "intermediateThrowEscalation",
+        "intermediateInterruptingError",
+        "intermediateThrowCompensation",
+        "intermediateCompensation",
+        "intermediateLink",
+        "intermediateThrowLink",
+        "intermediateCancel",
       ],
     },
   ],

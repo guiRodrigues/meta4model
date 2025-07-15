@@ -199,7 +199,7 @@ export function PlusIcon({ className, strokeColor = 'currentColor'}: { className
   );
 }
 
-export function ArrowIcon({ className }: { className?: string }) {
+export function ArrowIcon({ className , strokeColor = 'currentColor'}: { className?: string, strokeColor?: string}) {
     return (
     <svg
       className={className}
@@ -211,7 +211,7 @@ export function ArrowIcon({ className }: { className?: string }) {
       <g transform="translate(3.6 3.6) scale(0.7)">
         <path
           d="M12 7 L7 15 L12 11 L17 15 L12 7 Z"
-          stroke="currentColor"
+          stroke= {strokeColor}
           strokeWidth="1"
           fill="none"
           strokeLinejoin="round"
@@ -221,6 +221,47 @@ export function ArrowIcon({ className }: { className?: string }) {
   );
 }
 
+export function InterArrowRight({ className, strokeColor = 'currentColor'}: { className?: string, strokeColor?: string}) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g transform="translate(3.6, 3.6) scale(0.7)">
+        <path
+          d="M10 8L14 12L10 16"
+          stroke= {strokeColor}
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </g>
+    </svg>
+  );
+}
+
+export function IconX({ className, strokeColor = 'currentColor' }: { className?: string, strokeColor?: string}) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g transform="translate(3.6, 3.6) scale(0.7)">
+        <path
+          d="M8 8L16 16M16 8L8 16"
+          stroke={strokeColor}
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </g>
+    </svg>
+  );
+}
 
 
 export function DashedCircleIcon({ className, r = 6}: { className?: string, r?: number }) {
@@ -244,7 +285,7 @@ export function DashedCircleIcon({ className, r = 6}: { className?: string, r?: 
   )
 }
 
-export function ErrorIcon({ className }: { className?: string }) {
+export function ErrorIcon({ className, strokeColor = 'currentColor' }: { className?: string, strokeColor?: string }) {
   return (
     <svg
       className={className}
@@ -256,7 +297,7 @@ export function ErrorIcon({ className }: { className?: string }) {
       <g transform="translate(3.6 3.6) scale(0.7)">
         <path
           d="M8 16 V8 L16 16 V8"
-          stroke="currentColor"
+          stroke= {strokeColor}
           strokeWidth="1"
           fill="none"
           strokeLinecap="round"
@@ -920,7 +961,7 @@ export function InterCircleInterruptingEscalation ({ className }: { className?: 
       xmlns="http://www.w3.org/2000/svg"
     >
       <CircleIntermediateIcon/>
-      <CompensationIcon strokeColor ="#60a5fa"/>
+      <ArrowIcon strokeColor ="#60a5fa"/>
     </svg>
   );
 }
@@ -934,7 +975,7 @@ export function InterCircleNoInterruptingEscalation ({ className }: { className?
       xmlns="http://www.w3.org/2000/svg"
     >
       <DashedIntermediateCircleIcon/>
-      <CompensationIcon strokeColor ="#60a5fa"/>
+      <ArrowIcon strokeColor ="#60a5fa"/>
     </svg>
   );
 }
@@ -948,8 +989,91 @@ export function InterCircleThrowEscalation ({ className }: { className?: string 
       xmlns="http://www.w3.org/2000/svg"
     >
       <CircleIntermediateIcon/>
+      <ArrowIcon strokeColor ="#000000"/>
+    </svg>
+  );
+}
+
+export function InterCircleError ({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <CircleIntermediateIcon/>
+      <ErrorIcon strokeColor ="#60a5fa"/>
+    </svg>
+  );
+}
+
+export function InterCircleCompensation ({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <CircleIntermediateIcon/>
+      <CompensationIcon strokeColor ="#60a5fa"/>
+    </svg>
+  );
+}
+
+export function InterCircleThrowCompensation ({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <CircleIntermediateIcon/>
       <CompensationIcon strokeColor ="#000000"/>
     </svg>
   );
 }
 
+export function InterCircleLink ({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <CircleIntermediateIcon/>
+      <InterArrowRight strokeColor ="#60a5fa"/>
+    </svg>
+  );
+}
+
+export function InterCircleThrowLink ({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <CircleIntermediateIcon/>
+      <InterArrowRight strokeColor ="#000000"/>
+    </svg>
+  );
+}
+
+export function InterCircleCancel  ({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <CircleIntermediateIcon/>
+      <IconX strokeColor ="#60a5fa"/>
+    </svg>
+  );
+}
