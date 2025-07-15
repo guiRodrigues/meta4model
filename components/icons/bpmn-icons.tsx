@@ -167,7 +167,7 @@ export function DocumentIcon({ className, strokeColor = "currentColor" }: { clas
 }
 
 
-export function PlusIcon({ className }: { className?: string }) {
+export function PlusIcon({ className, strokeColor = 'currentColor'}: { className?: string, strokeColor?: string}) {
   return (
     <svg
       className={className}
@@ -181,7 +181,7 @@ export function PlusIcon({ className }: { className?: string }) {
         y1="9"
         x2="12"
         y2="15"
-        stroke="currentColor"
+        stroke= {strokeColor}
         strokeWidth="1"
         strokeLinecap="round"
       />
@@ -191,7 +191,7 @@ export function PlusIcon({ className }: { className?: string }) {
         y1="12"
         x2="15"
         y2="12"
-        stroke="currentColor"
+        stroke= {strokeColor}
         strokeWidth="1"
         strokeLinecap="round"
       />
@@ -865,6 +865,48 @@ export function InterCircleThrowMultiple ({ className }: { className?: string })
     >
       <CircleIntermediateIcon/>
       <PolygonIcon strokeColor ="#000000"/>
+    </svg>
+  );
+}
+
+export function InterCircleInterruptingParallelMultiple ({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <CircleIntermediateIcon/>
+      <PlusIcon strokeColor ="#60a5fa"/>
+    </svg>
+  );
+}
+
+export function InterCircleNoInterruptingParallelMultiple ({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <DashedIntermediateCircleIcon/>
+      <PlusIcon strokeColor ="#60a5fa"/>
+    </svg>
+  );
+}
+
+export function InterCircleThrowParallelMultiple ({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <CircleIntermediateIcon/>
+      <PlusIcon strokeColor ="#000000"/>
     </svg>
   );
 }
