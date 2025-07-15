@@ -25,12 +25,14 @@ import {
   DiamondParallelIcon,
   InterCircleInterruptigSignal,
   InterCircleInterruptingConditional,
+  InterCircleInterruptingEscalation,
   InterCircleInterruptingMenssage,
   InterCircleInterruptingMultiple,
   InterCircleInterruptingParallelMultiple,
   InterCircleInterruptingTimer,
   InterCircleNoInterruptigSignal,
   InterCircleNoInterruptingConditional,
+  InterCircleNoInterruptingEscalation,
   InterCircleNoInterruptingMenssage,
   InterCircleNoInterruptingMultiple,
   InterCircleNoInterruptingParallelMultiple,
@@ -98,6 +100,9 @@ import intermediateThrowMultipleNode from "@/components/nodes/bpmn-nodes/interme
 import intermediateInterruptingParalleNode from "@/components/nodes/bpmn-nodes/intermediate-event/intermediate-interrupting-Paralle-node";
 import intermediateNoInterruptingParalleNode from "@/components/nodes/bpmn-nodes/intermediate-event/intermediate-no-interrupting-Paralle-node";
 import intermediateThrowParalleNode from "@/components/nodes/bpmn-nodes/intermediate-event/intermediate-throw-paralle-node";
+import intermediateInterruptingEscalationNode from "@/components/nodes/bpmn-nodes/intermediate-event/intermediate-interrupting-escalation-node";
+import intermediateNoInterruptingEscalationNode from "@/components/nodes/bpmn-nodes/intermediate-event/intermediate-no-interrupting-escalation-node";
+import intermediateThrowEscalationNode from "@/components/nodes/bpmn-nodes/intermediate-event/intermediate-throw-escalation-node";
 
 export const bpmnModel: ModelDefinition = {
   id: "bpmn",
@@ -147,6 +152,9 @@ export const bpmnModel: ModelDefinition = {
     intermediateInterruptingParalle: intermediateInterruptingParalleNode, // Assuming this is the same as interrupting conditional
     intermediateNoInterruptingParalle: intermediateNoInterruptingParalleNode, // Assuming this is the same as interrupting conditional
     intermediateThrowParalle: intermediateThrowParalleNode, // Assuming this is the same as interrupting conditional
+    intermediateInterruptingEscalation: intermediateInterruptingEscalationNode, // Assuming this is the same as interrupting conditional
+    intermediateNoInterruptingEscalation: intermediateNoInterruptingEscalationNode,
+    intermediateThrowEscalation: intermediateThrowEscalationNode
   },
 
   edgeTypes: {
@@ -549,6 +557,39 @@ export const bpmnModel: ModelDefinition = {
         "Intermediate event in BPMN, used to capture events that occur during a process.",
     },
     {
+      type: "intermediateInterruptingEscalation",
+      label: "Interrupting Escalation",
+      category: "Events",
+      diagramType: "BPMN Diagram",
+      component: intermediateInterruptingEscalationNode,
+      icon: <InterCircleInterruptingEscalation className="h-5 w-5 text-blue-500" />,
+      color: "#60a5fa",
+      description:
+        "Intermediate event in BPMN, used to capture events that occur during a process.",
+    },
+    {
+      type: "intermediateNoInterruptingEscalation",
+      label: "No Interrupting Escalation",
+      category: "Events",
+      diagramType: "BPMN Diagram",
+      component: intermediateNoInterruptingEscalationNode,
+      icon: <InterCircleNoInterruptingEscalation className="h-5 w-5 text-blue-500" />,
+      color: "#60a5fa",
+      description:
+        "Intermediate event in BPMN, used to capture events that occur during a process.",
+    },
+    {
+      type: "intermediateThrowEscalation",
+      label: "Throw Escalation",
+      category: "Events",
+      diagramType: "BPMN Diagram",
+      component: intermediatThrowMultipleNode,
+      icon: <InterCircleThrowMenssage className="h-5 w-5 text-blue-500" />,
+      color: "#60a5fa",
+      description:
+        "Intermediate event in BPMN, used to capture events that occur during a process.",
+    },
+    {
       type: "end",
       label: "End",
       category: "Events",
@@ -748,6 +789,9 @@ export const bpmnModel: ModelDefinition = {
         "intermediateInterruptingParalle",
         "intermediateNoInterruptingParalle",
         "intermediateThrowParalle",
+        "intermediateInterruptingEscalation",
+        "intermediateNoInterruptingEscalation",
+        "intermediateThrowEscalation"
       ],
     },
   ],

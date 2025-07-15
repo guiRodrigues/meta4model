@@ -78,7 +78,7 @@ export function PolygonIcon({ className, strokeColor = 'currentColor'}: { classN
   );
 }
 
-export function CompensationIcon({ className }: { className?: string }) {
+export function CompensationIcon({ className, strokeColor = 'currentColo' }: { className?: string, strokeColor?: string}) {
   return (
     <svg
       className={className}
@@ -91,7 +91,7 @@ export function CompensationIcon({ className }: { className?: string }) {
         {/* Primeiro triângulo (seta apontando à esquerda) */}
         <polygon
           points="8,12 12,8 12,16"
-          stroke="currentColor"
+          stroke= {strokeColor}
           strokeWidth="1"
           fill="none"
           strokeLinejoin="round"
@@ -100,7 +100,7 @@ export function CompensationIcon({ className }: { className?: string }) {
         {/* Segundo triângulo (seta apontando à esquerda) */}
         <polygon
           points="12,12 16,8 16,16"
-          stroke="currentColor"
+          stroke= {strokeColor}
           strokeWidth="1"
           fill="none"
           strokeLinejoin="round"
@@ -907,6 +907,48 @@ export function InterCircleThrowParallelMultiple ({ className }: { className?: s
     >
       <CircleIntermediateIcon/>
       <PlusIcon strokeColor ="#000000"/>
+    </svg>
+  );
+}
+
+export function InterCircleInterruptingEscalation ({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <CircleIntermediateIcon/>
+      <CompensationIcon strokeColor ="#60a5fa"/>
+    </svg>
+  );
+}
+
+export function InterCircleNoInterruptingEscalation ({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <DashedIntermediateCircleIcon/>
+      <CompensationIcon strokeColor ="#60a5fa"/>
+    </svg>
+  );
+}
+
+export function InterCircleThrowEscalation ({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <CircleIntermediateIcon/>
+      <CompensationIcon strokeColor ="#000000"/>
     </svg>
   );
 }
