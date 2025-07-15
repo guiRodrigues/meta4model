@@ -48,6 +48,21 @@ export function useNodeDragHandlers() {
           .sort(sortNodes);
 
         setNodes(nextNodes);
+      } else if (!intersections.length && node.parentId) {
+        // Se não houver interseção e o node tinha parentId, removê-lo
+        const nextNodes: Node[] = getNodes()
+          .map((n) => {
+            if (n.id === node.id) {
+              return {
+                ...n,
+                parentId: undefined,
+                extent: undefined,
+              } as Node;
+            }
+            return n;
+          })
+          .sort(sortNodes);
+        setNodes(nextNodes);
       }
     },
     [getIntersectingNodes, getNodes, setNodes]

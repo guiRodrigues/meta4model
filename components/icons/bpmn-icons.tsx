@@ -9,7 +9,7 @@ export function CircleIcon({ className}: { className?: string}) {
       <circle
         cx="12"
         cy="12"
-        r= "6"
+        r= "7"
         fill="#dcfce7"
         stroke="currentColor"
         strokeWidth="0.8"
@@ -56,7 +56,7 @@ export function ClockIcon({ className, strokeColor = "currentColor" }: { classNa
   )
 }
 
-export function PolygonIcon({ className }: { className?: string }) {
+export function PolygonIcon({ className, strokeColor = 'currentColor'}: { className?: string, strokeColor?: string}) {
   return (
     <svg
       className={className}
@@ -68,7 +68,7 @@ export function PolygonIcon({ className }: { className?: string }) {
       <g transform="translate(3.6 3.6) scale(0.7)">
         <polygon
           points="12,7 16.76,10.46 14.94,16.04 9.06,16.04 7.24,10.46"
-          stroke="currentColor"
+          stroke= {strokeColor}
           strokeWidth="1"
           fill="none"
           strokeLinejoin="round"
@@ -618,7 +618,7 @@ export function CircleEndIcon({ className }: { className?: string }) {
       <circle
         cx="12"
         cy="12"
-        r="9"
+        r="6"
         fill="#fee2e2"
         stroke="currentColor"
         strokeWidth="1.8"
@@ -822,7 +822,50 @@ export function InterCircleNoInterruptingConditional ({ className }: { className
       xmlns="http://www.w3.org/2000/svg"
     >
       <CircleIntermediateIcon/>
-      <SignalIcon strokeColor="#000000ff" />
+      <SignalIcon strokeColor="#000000" />
     </svg>
   );
 }
+
+export function InterCircleInterruptingMultiple ({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <CircleIntermediateIcon/>
+      <PolygonIcon strokeColor ="#60a5fa"/>
+    </svg>
+  );
+}
+
+export function InterCircleNoInterruptingMultiple ({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <DashedIntermediateCircleIcon/>
+      <PolygonIcon strokeColor ="#60a5fa"/>
+    </svg>
+  );
+}
+
+export function InterCircleThrowMultiple ({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <CircleIntermediateIcon/>
+      <PolygonIcon strokeColor ="#000000"/>
+    </svg>
+  );
+}
+

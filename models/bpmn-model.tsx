@@ -26,12 +26,15 @@ import {
   InterCircleInterruptigSignal,
   InterCircleInterruptingConditional,
   InterCircleInterruptingMenssage,
+  InterCircleInterruptingMultiple,
   InterCircleInterruptingTimer,
   InterCircleNoInterruptigSignal,
   InterCircleNoInterruptingConditional,
   InterCircleNoInterruptingMenssage,
+  InterCircleNoInterruptingMultiple,
   InterCircleNoInterruptingTimer,
   InterCircleThrowMenssage,
+  InterCircleThrowMultiple,
   InterCircleThrowSignal,
 } from "@/components/icons/bpmn-icons";
 import { RectangleIcon } from "@/components/icons/kaos-icons";
@@ -86,6 +89,9 @@ import intermediateNoInterruptingConditionalNode from "@/components/nodes/bpmn-n
 import intermediateInterruptingSignalNode from "@/components/nodes/bpmn-nodes/intermediate-event/intermediate-interrupting-signal-node";
 import intermediateNoInterruptingSignalNode from "@/components/nodes/bpmn-nodes/intermediate-event/intermediate-no-interrupting-signal-node";
 import intermediateThrowSignalNode from "@/components/nodes/bpmn-nodes/intermediate-event/intermediate-throw-signal-node";
+import intermediateInterruptingMultipleNode from "@/components/nodes/bpmn-nodes/intermediate-event/intermediate-interrupting-multiple-node";
+import intermediateNoInterruptingMultipleNode from "@/components/nodes/bpmn-nodes/intermediate-event/intermediate-no-interrupting-multiple-node";import intermediatThrowMultipleNode from "@/components/nodes/bpmn-nodes/intermediate-event/intermediate-throw-multiple-node";
+import intermediateThrowMultipleNode from "@/components/nodes/bpmn-nodes/intermediate-event/intermediate-throw-multiple-node";
 
 export const bpmnModel: ModelDefinition = {
   id: "bpmn",
@@ -129,6 +135,10 @@ export const bpmnModel: ModelDefinition = {
     intermediateInterruptingSignal: intermediateInterruptingSignalNode,
     intermediateNoInterruptingSignal: intermediateNoInterruptingSignalNode,
     intermediateThrowSignal: intermediateThrowSignalNode,
+    intermediateInterruptingMultiple: intermediateInterruptingMultipleNode,
+    intermediateNoInterruptingMultiple: intermediateNoInterruptingMultipleNode,
+    intermediateThrowMultiple: intermediateThrowMultipleNode, // Assuming this is the same as interrupting conditional
+
   },
 
   edgeTypes: {
@@ -173,7 +183,7 @@ export const bpmnModel: ModelDefinition = {
       category: "Events",
       diagramType: "BPMN Diagram",
       component: StartNode,
-      icon: <CircleIcon className="h-5 w-5 text-green-500" />,
+      icon: <CircleIcon className="h-5 w-5 text-green-500 mr-4" />,
       color: "#3b82f6",
       description:
         "Start event in BPMN, indicating the beginning of a process.",
@@ -454,7 +464,7 @@ export const bpmnModel: ModelDefinition = {
         "Intermediate event in BPMN, used to capture events that occur during a process.",
     },
     {
-      type: "intermediateNoThrowSignal",
+      type: "intermediateThrowSignal",
       label: "Throw Signal",
       category: "Events",
       diagramType: "BPMN Diagram",
@@ -465,12 +475,45 @@ export const bpmnModel: ModelDefinition = {
         "Intermediate event in BPMN, used to capture events that occur during a process.",
     },
     {
+      type: "intermediateInterruptingMultiple",
+      label: "Interrupting Multiple",
+      category: "Events",
+      diagramType: "BPMN Diagram",
+      component: intermediateInterruptingMultipleNode,
+      icon: <InterCircleInterruptingMultiple className="h-5 w-5 text-blue-500" />,
+      color: "#60a5fa",
+      description:
+        "Intermediate event in BPMN, used to capture events that occur during a process.",
+    },
+    {
+      type: "intermediateNoInterruptingMultiple",
+      label: "No Interrupting Multiple",
+      category: "Events",
+      diagramType: "BPMN Diagram",
+      component: intermediateNoInterruptingMultipleNode,
+      icon: <InterCircleNoInterruptingMultiple className="h-5 w-5 text-blue-500" />,
+      color: "#60a5fa",
+      description:
+        "Intermediate event in BPMN, used to capture events that occur during a process.",
+    },
+    {
+      type: "intermediateThrowMultiple",
+      label: "Throw Multiple",
+      category: "Events",
+      diagramType: "BPMN Diagram",
+      component: intermediateThrowMultipleNode,
+      icon: <InterCircleThrowMultiple className="h-5 w-5 text-blue-500" />,
+      color: "#60a5fa",
+      description:
+        "Intermediate event in BPMN, used to capture events that occur during a process.",
+    },
+    {
       type: "end",
       label: "End",
       category: "Events",
       diagramType: "BPMN Diagram",
       component: EndNode,
-      icon: <CircleEndIcon className="h-5 w-5 text-red-500" />,
+      icon: <CircleEndIcon className="h-5 w-5 text-red-500 mr-2" />,
       color: "#ef4444",
       description: "End event in BPMN, indicating the conclusion of a process.",
     },
@@ -658,6 +701,10 @@ export const bpmnModel: ModelDefinition = {
         "intermediateInterruptingSignal",
         "intermediateNoInterruptingSignal",
         "intermediateThrowSignal",
+        "intermediateThrowMultiple",
+        "intermediateInterruptingMultiple",
+        "intermediateNoInterruptingMultiple",
+        
       ],
     },
   ],

@@ -48,8 +48,6 @@ function FloatingEdgeBase({ id, source, target, style, markerEnd, renderEdge, da
   // Call the render function provided by the specific edge type
   return (
     <>
-      {/* Add an invisible, wider path for easier clicking */}
-      <path d={interactionPath} className="react-flow__edge-interaction" strokeLinecap="round" strokeLinejoin="round" />
       {renderEdge({
         id,
         edgePath,
@@ -63,6 +61,20 @@ function FloatingEdgeBase({ id, source, target, style, markerEnd, renderEdge, da
         markerEnd,
         data,
       })}
+      {/* Add an invisible, wider path for easier clicking (on top) */}
+      <path
+        d={interactionPath}
+        className="react-flow__edge-interaction"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        style={{
+          fill: "none",
+          stroke: "transparent",
+          strokeWidth: 16,
+          cursor: "pointer",
+          pointerEvents: "stroke",
+        }}
+      />
     </>
   )
 }
