@@ -3,24 +3,44 @@
 import type React from "react";
 
 import { memo, useState, useEffect, useRef } from "react";
-import { Handle, NodeToolbar, Position, useReactFlow, useStore, type NodeProps } from "reactflow";
+import {
+  Handle,
+  NodeToolbar,
+  Position,
+  useReactFlow,
+  useStore,
+  type NodeProps,
+} from "reactflow";
 import type { NodeData } from "@/types/kaos-types";
-import { CircleEndIcon, InterCircleCompensation, InterCircleError, InterCircleInterruptigSignal, InterCircleInterruptingMenssage, InterCircleInterruptingMultiple, InterCircleInterruptingParallelMultiple, InterCircleInterruptingTimer, InterCircleNoInterruptigSignal, InterCircleNoInterruptingParallelMultiple, InterCircleThrowCompensation, InterCircleThrowSignal } from "@/components/icons/bpmn-icons";
+import {
+  CircleEndIcon,
+  InterCircleCompensation,
+  InterCircleError,
+  InterCircleInterruptigSignal,
+  InterCircleInterruptingMenssage,
+  InterCircleInterruptingMultiple,
+  InterCircleInterruptingParallelMultiple,
+  InterCircleInterruptingTimer,
+  InterCircleNoInterruptigSignal,
+  InterCircleNoInterruptingParallelMultiple,
+  InterCircleThrowCompensation,
+  InterCircleThrowSignal,
+} from "@/components/icons/bpmn-icons";
 import useDetachNodes from "@/hooks/use-detach-nodes";
 
-function intermediateCompensation ({ data, type, id }: NodeProps<NodeData>) {
+function intermediateCompensation({ data, type, id }: NodeProps<NodeData>) {
   const [isEditing, setIsEditing] = useState(false);
   const [label, setLabel] = useState(data.label);
   const inputRef = useRef<HTMLInputElement>(null);
   const hasParent = useStore((store) => {
-      const node = store.getNodes().find((n) => n.id === id);
-      return !!node?.parentId;
-    });
-    const { deleteElements } = useReactFlow();
-    const detachNodes = useDetachNodes();
-  
-    const onDelete = () => deleteElements({ nodes: [{ id }] });
-    const onDetach = () => detachNodes([id]);
+    const node = store.getNodes().find((n) => n.id === id);
+    return !!node?.parentId;
+  });
+  const { deleteElements } = useReactFlow();
+  const detachNodes = useDetachNodes();
+
+  const onDelete = () => deleteElements({ nodes: [{ id }] });
+  const onDetach = () => detachNodes([id]);
   // Use our fixed node size
   const size = 60;
 
@@ -71,7 +91,9 @@ function intermediateCompensation ({ data, type, id }: NodeProps<NodeData>) {
       style={{ width: `${size}px`, height: `${size}px` }}
     >
       <div className="pt-0 pb-0">
-        <InterCircleCompensation className={`h-${size} w-${size} text-red-500`} />
+        <InterCircleCompensation
+          className={`h-${size} w-${size} text-red-500`}
+        />
       </div>
 
       <Handle
@@ -81,10 +103,17 @@ function intermediateCompensation ({ data, type, id }: NodeProps<NodeData>) {
         style={{ left: -4 }} // Move handle up by 4px
       />
 
+      <Handle
+        type="source"
+        position={Position.Right}
+        className="!bg-blue-500 react-flow__handle-right"
+        style={{ right: -4 }} // Move handle up by 4px
+      />
+
       <NodeToolbar className="nodrag">
-              <button onClick={onDelete}>Delete</button>
-              {hasParent && <button onClick={onDetach}>Detach</button>}
-            </NodeToolbar>
+        <button onClick={onDelete}>Delete</button>
+        {hasParent && <button onClick={onDetach}>Detach</button>}
+      </NodeToolbar>
 
       <div className="absolute inset-0 flex items-center justify-center text-center">
         {isEditing ? (

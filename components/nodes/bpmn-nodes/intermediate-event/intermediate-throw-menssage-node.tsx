@@ -81,6 +81,13 @@ function IntermediateThrowMenssage({ data, type, id }: NodeProps<NodeData>) {
         style={{ left: -4 }} // Move handle up by 4px
       />
 
+      <Handle
+        type="source"
+        position={Position.Right}
+        className="!bg-blue-500 react-flow__handle-right"
+        style={{ right: -4 }} // Move handle up by 4px
+      />
+
       <NodeToolbar className="nodrag">
               <button onClick={onDelete}>Delete</button>
               {hasParent && <button onClick={onDetach}>Detach</button>}
