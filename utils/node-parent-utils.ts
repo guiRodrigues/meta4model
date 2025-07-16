@@ -38,25 +38,3 @@ export const getNodePositionInsideParent = (
 
   return position;
 };
-
-// Retorna a posição absoluta do node somando as posições de todos os pais
-export function getAbsoluteNodePosition(
-  node: Node,
-  nodes: Node[]
-): { x: number; y: number } {
-  let x = node.position.x;
-  let y = node.position.y;
-  let parentNode = node.parentNode
-    ? nodes.find((n) => n.id === node.parentNode)
-    : undefined;
-
-  while (parentNode) {
-    x += parentNode.position.x;
-    y += parentNode.position.y;
-    parentNode = parentNode.parentNode
-      ? nodes.find((n) => n.id === parentNode.parentNode)
-      : undefined;
-  }
-
-  return { x, y };
-}
