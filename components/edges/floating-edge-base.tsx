@@ -1,6 +1,7 @@
+import type React from "react";
 import { memo } from "react";
-import type { EdgeProps } from "reactflow";
-import { getBezierPath } from "reactflow";
+import { getBezierPath, useNodes, type EdgeProps } from "reactflow";
+import { getEdgeParams } from "@/utils/edge-utils";
 
 export interface FloatingEdgeBaseProps extends EdgeProps {
   renderEdge: (params: {
@@ -10,6 +11,8 @@ export interface FloatingEdgeBaseProps extends EdgeProps {
     sourceY: number;
     targetX: number;
     targetY: number;
+    sourcePos: "top" | "right" | "bottom" | "left";
+    targetPos: "top" | "right" | "bottom" | "left";
     style?: React.CSSProperties;
     markerEnd?: string;
     data?: any;
@@ -19,6 +22,8 @@ export interface FloatingEdgeBaseProps extends EdgeProps {
 function FloatingEdgeBase(props: FloatingEdgeBaseProps) {
   const {
     id,
+    source,
+    target,
     sourceX,
     sourceY,
     targetX,
@@ -31,23 +36,41 @@ function FloatingEdgeBase(props: FloatingEdgeBaseProps) {
     renderEdge,
   } = props;
 
+  const nodes = useNodes();
+  const sourceNode = nodes.find((node) => node.id === source);
+  const targetNode = nodes.find((node) => node.id === target);
+
+  if (!sourceNode || !targetNode) {
+    return null;
+  }
+
+  // Calculate edge parameters
+  const { sourcePos, targetPos } = getEdgeParams(
+    sourceNode,
+    targetNode
+  );
+
   const [edgePath] = getBezierPath({
     sourceX,
     sourceY,
-    sourcePosition,
+    sourcePosition: sourcePos,
+    targetPosition: targetPos,
     targetX,
     targetY,
-    targetPosition,
   });
 
+  // Create a wider invisible path for easier interaction
+  const interactionPath = edgePath;
+
+  // Call the render function provided by the specific edge type
   return (
     <>
+      {/* Add an invisible, wider path for easier clicking */}
       <path
-        d={edgePath}
-        fill="none"
-        stroke="transparent"
-        strokeWidth={20}
+        d={interactionPath}
         className="react-flow__edge-interaction"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       {renderEdge({
         id,
@@ -56,6 +79,8 @@ function FloatingEdgeBase(props: FloatingEdgeBaseProps) {
         sourceY,
         targetX,
         targetY,
+        sourcePos,
+        targetPos,
         style,
         markerEnd,
         data,

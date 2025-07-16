@@ -1,14 +1,14 @@
-import { type Node } from "reactflow";
+import { type Node } from 'reactflow';
 
 // we have to make sure that parent nodes are rendered before their children
 export const sortNodes = (a: Node, b: Node): number => {
   if (a.type === b.type) {
     return 0;
   }
-  return a.type === "group" && b.type !== "group" ? -1 : 1;
+  return a.type === 'group' && b.type !== 'group' ? -1 : 1;
 };
 
-export const getId = (prefix = "node") => `${prefix}_${Math.random() * 10000}`;
+export const getId = (prefix = 'node') => `${prefix}_${Math.random() * 10000}`;
 
 export const getNodePositionInsideParent = (
   node: Partial<Node>,
