@@ -1220,6 +1220,8 @@ function DiagramEditor({ model }: { model: ModelDefinition }) {
         return "General relationship";
       case "aggregation":
         return "Groups related elements";
+      case "sequence":
+        return "Defines a sequence of operations";
       default:
         return customConnection ? "Custom connection type" : "";
     }

@@ -1,28 +1,15 @@
 import type { Node } from "reactflow"
 import { findBestConnectionPoints } from "./node-connection-utils"
-import { getAbsoluteNodePosition } from "./node-parent-utils"
 
 // Calculate the position where the edge should start/end based on the node's position and dimensions
-export function getEdgeParams(source: Node, target: Node, nodes: Node[]) {
-  // Se nodes for fornecido, calcula a posição absoluta
-  let sourceAbs = source.position;
-  let targetAbs = target.position;
-  if (nodes) {
-    sourceAbs = getAbsoluteNodePosition(source, nodes);
-    targetAbs = getAbsoluteNodePosition(target, nodes);
-  }
-
+export function getEdgeParams(source: Node, target: Node,) {
   // Get the best connection points
   const {
     sourcePoint,
     targetPoint,
     sourcePos: bestSourcePos,
     targetPos: bestTargetPos,
-  } = findBestConnectionPoints(
-    { ...source, position: sourceAbs },
-    { ...target, position: targetAbs },
-    nodes
-  );
+  } = findBestConnectionPoints(source, target)
 
   // If we have valid connection points, use them
   if (sourcePoint && targetPoint) {
@@ -43,10 +30,10 @@ export function getEdgeParams(source: Node, target: Node, nodes: Node[]) {
   const targetHeight = target.height || 80
 
   // Get node center coordinates
-  const sourceX = sourceAbs.x + sourceWidth / 2
-  const sourceY = sourceAbs.y + sourceHeight / 2
-  const targetX = targetAbs.x + targetWidth / 2
-  const targetY = targetAbs.y + targetHeight / 2
+  const sourceX = source.position.x + sourceWidth / 2
+  const sourceY = source.position.y + sourceHeight / 2
+  const targetX = target.position.x + targetWidth / 2
+  const targetY = target.position.y + targetHeight / 2
 
   // Calculate the direction from source to target
   const dx = targetX - sourceX
@@ -73,32 +60,32 @@ export function getEdgeParams(source: Node, target: Node, nodes: Node[]) {
   // Source point
   if (sourcePos === "top") {
     sx = sourceX
-    sy = sourceAbs.y
+    sy = source.position.y
   } else if (sourcePos === "right") {
-    sx = sourceAbs.x + sourceWidth
+    sx = source.position.x + sourceWidth
     sy = sourceY
   } else if (sourcePos === "bottom") {
     sx = sourceX
-    sy = sourceAbs.y + sourceHeight
+    sy = source.position.y + sourceHeight
   } else {
     // left
-    sx = sourceAbs.x
+    sx = source.position.x
     sy = sourceY
   }
 
   // Target point
   if (targetPos === "top") {
     tx = targetX
-    ty = targetAbs.y
+    ty = target.position.y
   } else if (targetPos === "right") {
-    tx = targetAbs.x + targetWidth
+    tx = target.position.x + targetWidth
     ty = targetY
   } else if (targetPos === "bottom") {
     tx = targetX
-    ty = targetAbs.y + targetHeight
+    ty = target.position.y + targetHeight
   } else {
     // left
-    tx = targetAbs.x
+    tx = target.position.x
     ty = targetY
   }
 

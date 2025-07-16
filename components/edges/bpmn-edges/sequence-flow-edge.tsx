@@ -1,37 +1,34 @@
 import { memo } from "react";
 import type { EdgeProps } from "reactflow";
-import FloatingEdgeBase from "../floating-edge-base";
+import FloatingEdgeBase from "@/components/edges/floating-edge-base";
 
 function SequenceFlowEdge(props: EdgeProps) {
   return (
     <FloatingEdgeBase
       {...props}
-      renderEdge={({ id, edgePath, style, markerEnd }) => {
-        // Create a custom marker ID for the purple arrow
+      renderEdge={({ id, edgePath }) => {
         const markerId = `sequence-arrow-${id}`;
 
         return (
           <>
-            {/* Define the purple arrow marker */}
             <defs>
               <marker
                 id={markerId}
                 viewBox="0 0 10 10"
-                refX="5"
+                refX="8"
                 refY="5"
-                markerWidth="15" // Standardized size
-                markerHeight="15" // Standardized size
-                orient="auto"
+                markerWidth="8"
+                markerHeight="8"
+                orient="auto-start-reverse"
               >
-                <path d="M 0 0 L 10 5 L 0 10 z" fill="#4b5563" />
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#374151" />
               </marker>
             </defs>
-
             <path
               id={id}
-              d={edgePath}
+              d={edgePath} // Usando o caminho correto
               className="react-flow__edge-path"
-              style={{ ...style, stroke: "#374151" }} // Keep purple for this edge
+              style={{ stroke: "#374151" }}
               markerEnd={`url(#${markerId})`}
               strokeWidth={2}
             />

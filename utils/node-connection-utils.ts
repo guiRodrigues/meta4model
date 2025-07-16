@@ -1,12 +1,11 @@
 import type { Node } from "reactflow";
-import { getAbsoluteNodePosition } from "./node-parent-utils";
 
 // Get all valid connection points for a node
-export function getNodeConnectionPoints(node: Node, nodes: Node[]) {
+export function getNodeConnectionPoints(node: Node) {
   if (!node.width || !node.height)
     return { top: null, right: null, bottom: null, left: null, center: null };
 
-  const { x, y } = getAbsoluteNodePosition(node, nodes);
+  const { x, y } = node.position;
   const width = node.width;
   const height = node.height;
   const centerX = x + width / 2;
@@ -22,9 +21,9 @@ export function getNodeConnectionPoints(node: Node, nodes: Node[]) {
 }
 
 // Find the best connection point based on the source and target positions
-export function findBestConnectionPoints(source: Node, target: Node, nodes: Node[]) {
-  const sourcePoints = getNodeConnectionPoints(source, nodes);
-  const targetPoints = getNodeConnectionPoints(target, nodes);
+export function findBestConnectionPoints(source: Node, target: Node) {
+  const sourcePoints = getNodeConnectionPoints(source);
+  const targetPoints = getNodeConnectionPoints(target);
 
   // Get center points
   const sourceCenter = sourcePoints.center;
