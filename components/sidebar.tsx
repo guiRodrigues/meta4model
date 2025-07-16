@@ -489,7 +489,7 @@ export function Sidebar({
                                   </AccordionTrigger>
                                   <AccordionContent className="px-2 pb-2">
                                     <div className="space-y-2">
-                                      {model.defaultNodes.filter(node => node.category === "Events" && node.type === "end").map(node => (
+                                      {model.defaultNodes.filter(node => node.category === "Events" && node.type.startsWith("end")).map(node => (
                                         <Button
                                           key={node.type}
                                           variant="outline"

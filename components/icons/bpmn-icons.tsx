@@ -661,7 +661,7 @@ export function CircleEndIcon({ className }: { className?: string }) {
         cy="12"
         r="6"
         fill="#fee2e2"
-        stroke="currentColor"
+        stroke="#ef4444"
         strokeWidth="1.8"
       />
     </svg>
@@ -678,9 +678,9 @@ export function DiamondIcon({ className }: { className?: string }) {
     >
       <polygon
         points="12,3 21,12 12,21 3,12"
-        fill="#f3f4f6"
-        stroke="black"
-        strokeWidth="0.5"
+        fill="#fef3c7"
+        stroke="#d97706"
+        strokeWidth="1.5"
       />
     </svg>
   );
@@ -696,12 +696,12 @@ export function DiamondExclusiveIcon({ className }: { className?: string }) {
     >
       <polygon
         points="12,3 21,12 12,21 3,12"
-        fill="#f3f4f6"
-        stroke="black"
-        strokeWidth="0.5"
+        fill="#fef3c7"
+        stroke="#d97706"
+        strokeWidth="1.5"
       />
-      <line x1="9" y1="9" x2="15" y2="15" stroke="black" strokeWidth="2" />
-      <line x1="15" y1="9" x2="9" y2="15" stroke="black" strokeWidth="2" />
+      <line x1="9" y1="9" x2="15" y2="15" stroke="#b45309" strokeWidth="2" />
+      <line x1="15" y1="9" x2="9" y2="15" stroke="#b45309" strokeWidth="2" />
     </svg>
   );
 }
@@ -716,12 +716,12 @@ export function DiamondParallelIcon({ className }: { className?: string }) {
     >
       <polygon
         points="12,3 21,12 12,21 3,12"
-        fill="#f3f4f6"
-        stroke="black"
-        strokeWidth="0.5"
+        fill="#fef3c7"
+        stroke="#d97706"
+        strokeWidth="1.5"
       />
-      <line x1="12" y1="8" x2="12" y2="16" stroke="black" strokeWidth="2" />
-      <line x1="8" y1="12" x2="16" y2="12" stroke="black" strokeWidth="2" />
+      <line x1="12" y1="8" x2="12" y2="16" stroke="#b45309" strokeWidth="2" />
+      <line x1="8" y1="12" x2="16" y2="12" stroke="#b45309" strokeWidth="2" />
     </svg>
   );
 }
@@ -1074,6 +1074,207 @@ export function InterCircleCancel  ({ className }: { className?: string }) {
     >
       <CircleIntermediateIcon/>
       <IconX strokeColor ="#60a5fa"/>
+    </svg>
+  );
+}
+
+// End Event Icons
+export function CircleEndTerminateIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <CircleEndIcon />
+      <circle
+        cx="12"
+        cy="12"
+        r="4"
+        fill="#ef4444"
+      />
+    </svg>
+  );
+}
+
+export function CircleEndErrorIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <CircleEndIcon />
+      <ErrorIcon strokeColor="#ef4444" />
+    </svg>
+  );
+}
+
+export function CircleEndEscalationIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <CircleEndIcon />
+      <ArrowIcon strokeColor="#ef4444" />
+    </svg>
+  );
+}
+
+export function CircleEndCancelIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <CircleEndIcon />
+      <IconX strokeColor="#ef4444" />
+    </svg>
+  );
+}
+
+export function CircleEndCompensationIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <CircleEndIcon />
+      <CompensationIcon strokeColor="#ef4444" />
+    </svg>
+  );
+}
+
+export function CircleEndSignalIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <CircleEndIcon />
+      <SignalIcon strokeColor="#ef4444" />
+    </svg>
+  );
+}
+
+export function CircleEndMessageIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <CircleEndIcon />
+      <EnvelopeIcon strokeColor="#ef4444" />
+    </svg>
+  );
+}
+
+export function CircleEndMultipleIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <CircleEndIcon />
+      <PolygonIcon strokeColor="#ef4444" />
+    </svg>
+  );
+}
+
+// Gateway Icons
+export function DiamondInclusiveIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <polygon
+        points="12,3 21,12 12,21 3,12"
+        fill="#fef3c7"
+        stroke="#d97706"
+        strokeWidth="1.5"
+      />
+      <circle
+        cx="12"
+        cy="12"
+        r="3"
+        fill="none"
+        stroke="#b45309"
+        strokeWidth="2"
+      />
+    </svg>
+  );
+}
+
+export function DiamondComplexIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <polygon
+        points="12,3 21,12 12,21 3,12"
+        fill="#fef3c7"
+        stroke="#d97706"
+        strokeWidth="1.5"
+      />
+      <polygon
+        points="12,8 14,10 12,12 10,10"
+        fill="#b45309"
+      />
+      <polygon
+        points="12,12 14,14 12,16 10,14"
+        fill="#b45309"
+      />
+    </svg>
+  );
+}
+
+export function DiamondEventBasedIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <polygon
+        points="12,3 21,12 12,21 3,12"
+        fill="#fef3c7"
+        stroke="#d97706"
+        strokeWidth="1.5"
+      />
+      <circle
+        cx="12"
+        cy="12"
+        r="5"
+        fill="none"
+        stroke="#b45309"
+        strokeWidth="1"
+      />
+      <polygon
+        points="12,9 13.5,11.5 12,14 10.5,11.5"
+        fill="#b45309"
+      />
     </svg>
   );
 }
