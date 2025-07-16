@@ -1,14 +1,14 @@
-import { type Node } from 'reactflow';
+import { type Node } from "reactflow";
 
 // we have to make sure that parent nodes are rendered before their children
 export const sortNodes = (a: Node, b: Node): number => {
   if (a.type === b.type) {
     return 0;
   }
-  return a.type === 'group' && b.type !== 'group' ? -1 : 1;
+  return a.type === "group" && b.type !== "group" ? -1 : 1;
 };
 
-export const getId = (prefix = 'node') => `${prefix}_${Math.random() * 10000}`;
+export const getId = (prefix = "node") => `${prefix}_${Math.random() * 10000}`;
 
 export const getNodePositionInsideParent = (
   node: Partial<Node>,
@@ -40,16 +40,23 @@ export const getNodePositionInsideParent = (
 };
 
 // Retorna a posição absoluta do node somando as posições de todos os pais
-export function getAbsoluteNodePosition(node: Node, nodes: Node[]): { x: number; y: number } {
+export function getAbsoluteNodePosition(
+  node: Node,
+  nodes: Node[]
+): { x: number; y: number } {
   let x = node.position.x;
   let y = node.position.y;
-  let current = node;
-  while (current.parentId) {
-    const parent = nodes.find((n) => n.id === current.parentId);
-    if (!parent) break;
-    x += parent.position.x;
-    y += parent.position.y;
-    current = parent;
+  let parentNode = node.parentNode
+    ? nodes.find((n) => n.id === node.parentNode)
+    : undefined;
+
+  while (parentNode) {
+    x += parentNode.position.x;
+    y += parentNode.position.y;
+    parentNode = parentNode.parentNode
+      ? nodes.find((n) => n.id === parentNode.parentNode)
+      : undefined;
   }
+
   return { x, y };
 }

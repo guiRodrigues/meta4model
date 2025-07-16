@@ -30,7 +30,7 @@ function FloatingEdgeBase({ id, source, target, style, markerEnd, renderEdge, da
   }
 
   // Calculate edge parameters
-  const { sx, sy, tx, ty, sourcePos, targetPos } = getEdgeParams(sourceNode, targetNode)
+  const { sx, sy, tx, ty, sourcePos, targetPos } = getEdgeParams(sourceNode, targetNode, nodes)
 
   // Get the bezier path
   const [edgePath] = getBezierPath({

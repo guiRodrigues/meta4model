@@ -502,7 +502,7 @@ function DiagramEditor({ model }: { model: ModelDefinition }) {
       }
 
       // Add the selected edge type to the connection
-      const edge: Edge = { ...params, type: selectedEdgeType };
+      const edge: Edge = { ...params, type: selectedEdgeType, zIndex: 1 };
 
       // Add custom connection data if it's a custom connection
       const customConnection = customConnections.find(
@@ -623,6 +623,7 @@ function DiagramEditor({ model }: { model: ModelDefinition }) {
           isNew: true,
           diagramType: diagramType || null,
         },
+        zIndex: type === "pool" || type === "lane" ? 0 : 1,
       };
       setNodes((nds) => nds.concat(newNode));
     },
@@ -721,6 +722,7 @@ function DiagramEditor({ model }: { model: ModelDefinition }) {
           isNew: true,
           diagramType: nodeDiagramType,
         },
+        zIndex: type === "pool" || type === "lane" ? 0 : 1,
       };
       setNodes((nds) => nds.concat(newNode));
     },

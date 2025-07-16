@@ -3,7 +3,7 @@ import { findBestConnectionPoints } from "./node-connection-utils"
 import { getAbsoluteNodePosition } from "./node-parent-utils"
 
 // Calculate the position where the edge should start/end based on the node's position and dimensions
-export function getEdgeParams(source: Node, target: Node, nodes?: Node[]) {
+export function getEdgeParams(source: Node, target: Node, nodes: Node[]) {
   // Se nodes for fornecido, calcula a posição absoluta
   let sourceAbs = source.position;
   let targetAbs = target.position;
@@ -20,7 +20,8 @@ export function getEdgeParams(source: Node, target: Node, nodes?: Node[]) {
     targetPos: bestTargetPos,
   } = findBestConnectionPoints(
     { ...source, position: sourceAbs },
-    { ...target, position: targetAbs }
+    { ...target, position: targetAbs },
+    nodes
   );
 
   // If we have valid connection points, use them
