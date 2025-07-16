@@ -6,53 +6,81 @@ function NonInitiatingMessageFlowEdge(props: EdgeProps) {
   return (
     <FloatingEdgeBase
       {...props}
-      renderEdge={({ id, edgePath, sourceX, sourceY, targetX, targetY, style, data }) => {
-        const color = data?.color || "#555";
-        const lineStyle = data?.lineStyle || "solid";
-        const label = data?.label || "";
-        const lineSvgCode = data?.lineSvgCode;
-        const markerSvgCode = data?.markerSvgCode;
+      renderEdge={({
+        id,
+        edgePath,
+        sourceX,
+        sourceY,
+        targetX,
+        targetY,
+        style,
+        markerEnd,
+      }) => {
+        // Create a custom marker ID for the yellow arrow
+        const markerId = `message-arrow-${id}`;
 
-        let strokeDasharray = "";
-        if (lineStyle === "dashed") strokeDasharray = "5,5";
-        if (lineStyle === "dotted") strokeDasharray = "1,3";
-
-        const markerId = `custom-marker-${id}`;
+        // Calculate the midpoint of the path
         const midX = (sourceX + targetX) / 2;
         const midY = (sourceY + targetY) / 2;
 
         return (
           <>
-            {markerSvgCode && (
-              <defs>
-                <marker
-                  id={markerId}
-                  viewBox="0 0 10 10"
-                  refX="5"
-                  refY="5"
-                  markerWidth="15"
-                  markerHeight="15"
-                  orient="auto"
-                  dangerouslySetInnerHTML={{ __html: markerSvgCode }}
+            {/* Define the yellow arrow marker */}
+            <defs>
+              <marker
+                id={markerId}
+                viewBox="0 0 10 10"
+                refX="5"
+                refY="5"
+                markerWidth="15" // Standardized size
+                markerHeight="15" // Standardized size
+                orient="auto-start-reverse"
+              >
+                <path
+                  d="M 0 0 L 10 5 L 0 10 z"
+                  fill="white"
+                  stroke="#4b5563"
+                  strokeWidth="1"
                 />
-              </defs>
-            )}
+              </marker>
+            </defs>
+
             <path
               id={id}
-              d={edgePath}
+              style={{ ...style, strokeDasharray: "3,3", stroke: "#374151" }}
               className="react-flow__edge-path"
-              style={{ ...style, stroke: color, strokeDasharray }}
-              markerEnd={markerSvgCode ? `url(#${markerId})` : undefined}
+              d={edgePath}
+              markerEnd={`url(#${markerId})`}
               strokeWidth={2}
             />
-            {lineSvgCode && (
-              <g dangerouslySetInnerHTML={{ __html: lineSvgCode }} />
-            )}
-            {label && (
-              <text x={midX} y={midY} textAnchor="middle" dominantBaseline="middle" fill={color} fontSize={12} fontWeight={500} pointerEvents="none">
-                {label}
-              </text>
-            )}
+
+            <circle
+              cx={sourceX}
+              cy={sourceY}
+              r="3"
+              fill="white"
+              stroke="#4b5563"
+              strokeWidth="1.5"
+            />
+
+            <g transform={`translate(${midX - 8}, ${midY - 6})`}>
+              <rect
+                x="0"
+                y="0"
+                width="16"
+                height="12"
+                fill="#6b7280"
+                stroke="black"
+                strokeWidth="1.2"
+                rx="2"
+              />
+              <path
+                d="M 0 0 L 8 6 L 16 0"
+                stroke="black"
+                strokeWidth="1.2"
+                fill="none"
+              />
+            </g>
           </>
         );
       }}

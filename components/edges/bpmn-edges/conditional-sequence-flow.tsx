@@ -6,53 +6,52 @@ function ConditionalSequenceFlowEdge(props: EdgeProps) {
   return (
     <FloatingEdgeBase
       {...props}
-      renderEdge={({ id, edgePath, sourceX, sourceY, targetX, targetY, style, data }) => {
-        const color = data?.color || "#555";
-        const lineStyle = data?.lineStyle || "solid";
-        const label = data?.label || "";
-        const lineSvgCode = data?.lineSvgCode;
-        const markerSvgCode = data?.markerSvgCode;
+      renderEdge={({ id, edgePath, style, sourceX, sourceY, markerEnd }) => {
+        // Create a custom marker ID for the purple arrow
+        const markerId = `sequence-arrow-${id}`;
 
-        let strokeDasharray = "";
-        if (lineStyle === "dashed") strokeDasharray = "5,5";
-        if (lineStyle === "dotted") strokeDasharray = "1,3";
+        const width = 22;
+        const height = 12;
 
-        const markerId = `custom-marker-${id}`;
-        const midX = (sourceX + targetX) / 2;
-        const midY = (sourceY + targetY) / 2;
+        // vértices do losango com base em sourceX/sourceY
+        const diamondPoints = [
+          `${sourceX - width / 2},${sourceY}`, // esquerda
+          `${sourceX},${sourceY - height / 2}`, // topo
+          `${sourceX + width / 2},${sourceY}`, // direita
+          `${sourceX},${sourceY + height / 2}`, // base
+        ].join(" ");
 
         return (
           <>
-            {markerSvgCode && (
-              <defs>
-                <marker
-                  id={markerId}
-                  viewBox="0 0 10 10"
-                  refX="5"
-                  refY="5"
-                  markerWidth="15"
-                  markerHeight="15"
-                  orient="auto"
-                  dangerouslySetInnerHTML={{ __html: markerSvgCode }}
-                />
-              </defs>
-            )}
+            {/* Define the purple arrow marker */}
+            <defs>
+              <marker
+                id={markerId}
+                viewBox="0 0 10 10"
+                refX="5"
+                refY="5"
+                markerWidth="15" // Standardized size
+                markerHeight="15" // Standardized size
+                orient="auto"
+              >
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#4b5563" />
+              </marker>
+            </defs>
+
             <path
               id={id}
               d={edgePath}
               className="react-flow__edge-path"
-              style={{ ...style, stroke: color, strokeDasharray }}
-              markerEnd={markerSvgCode ? `url(#${markerId})` : undefined}
+              style={{ ...style, stroke: "#374151" }} // Keep purple for this edge
+              markerEnd={`url(#${markerId})`}
               strokeWidth={2}
             />
-            {lineSvgCode && (
-              <g dangerouslySetInnerHTML={{ __html: lineSvgCode }} />
-            )}
-            {label && (
-              <text x={midX} y={midY} textAnchor="middle" dominantBaseline="middle" fill={color} fontSize={12} fontWeight={500} pointerEvents="none">
-                {label}
-              </text>
-            )}
+
+            <polygon
+              points={diamondPoints}
+              stroke="#4b5563"
+              fill="white"
+            />
           </>
         );
       }}
