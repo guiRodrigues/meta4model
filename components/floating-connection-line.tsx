@@ -85,8 +85,9 @@ function FloatingConnectionLine({ fromNode, toX, toY, fromPosition, toPosition }
     edgePath = path
   } else {
     // If not hovering over a node, create a path to the cursor
-    sx = fromNode.position.x + (fromNode.width || 0) / 2
-    sy = fromNode.position.y + (fromNode.height || 0)
+    const sourceAbsPos = fromNode.positionAbsolute ?? fromNode.position;
+    sx = sourceAbsPos.x + (fromNode.width || 0) / 2
+    sy = sourceAbsPos.y + (fromNode.height || 0)
     tx = toX
     ty = toY
 

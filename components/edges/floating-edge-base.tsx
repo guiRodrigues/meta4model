@@ -45,18 +45,18 @@ function FloatingEdgeBase(props: FloatingEdgeBaseProps) {
   }
 
   // Calculate edge parameters
-  const { sourcePos, targetPos } = getEdgeParams(
+  const {sx, sy, tx, ty , sourcePos, targetPos } = getEdgeParams(
     sourceNode,
     targetNode
   );
 
   const [edgePath] = getBezierPath({
-    sourceX,
-    sourceY,
+    sourceX: sx,
+    sourceY: sy,
     sourcePosition: sourcePos,
     targetPosition: targetPos,
-    targetX,
-    targetY,
+    targetX: tx,
+    targetY: ty,
   });
 
   // Create a wider invisible path for easier interaction
@@ -75,10 +75,10 @@ function FloatingEdgeBase(props: FloatingEdgeBaseProps) {
       {renderEdge({
         id,
         edgePath,
-        sourceX,
-        sourceY,
-        targetX,
-        targetY,
+        sourceX: sx,
+        sourceY: sy,
+        targetX: tx,
+        targetY: ty,
         sourcePos,
         targetPos,
         style,

@@ -4,8 +4,14 @@ import type { Node } from "reactflow";
 export function getNodeConnectionPoints(node: Node) {
   if (!node.width || !node.height)
     return { top: null, right: null, bottom: null, left: null, center: null };
+  
 
-  const { x, y } = node.position;
+  if (!node.positionAbsolute) {
+    return { top: null, right: null, bottom: null, left: null, center: null };
+  }
+
+  
+  const { x, y } = node.positionAbsolute;
   const width = node.width;
   const height = node.height;
   const centerX = x + width / 2;
