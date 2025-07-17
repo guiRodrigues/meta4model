@@ -103,6 +103,14 @@ export function Sidebar({
       // If no diagram type is selected yet, allow all nodes
       if (!currentDiagramType) return false
 
+      // Special case for BPMN: always allow standard BPMN nodes regardless of custom nodes
+      if (model.id === "bpmn" && currentDiagramType === "BPMN Diagram") {
+        // If it's a standard BPMN node (not custom), always allow it
+        if (nodeType !== "custom") {
+          return false;
+        }
+      }
+
       // If the current diagram type doesn't match the node's diagram type, disable it
       if (currentDiagramType !== nodeDiagramType) return true
 
@@ -116,9 +124,9 @@ export function Sidebar({
             responsibility: "Responsibility Diagram",
             object: "Object Diagram",
             operation: "Operation Diagram",
-          }
+            bpmn: "BPMN Diagram",
+          };
 
-          // Check if any of the custom node's diagram types match the current diagram type
           const nodeSupportsCurrentDiagram = customNode.diagramTypes.some(
             (type) => diagramTypeMap[type] === currentDiagramType,
           )
@@ -130,7 +138,7 @@ export function Sidebar({
 
       return false
     },
-    [currentDiagramType, customNodes],
+    [currentDiagramType, customNodes, model.id],
   )
 
   // Helper function to get a readable name for a node type
@@ -306,6 +314,7 @@ export function Sidebar({
                           responsibility: "Responsibility Diagram",
                           object: "Object Diagram",
                           operation: "Operation Diagram",
+                          bpmn: "BPMN Diagram",
                         }
 
                         // Check if this node is compatible with the current diagram
@@ -346,6 +355,7 @@ export function Sidebar({
                                           responsibility: "Responsibility",
                                           object: "Object",
                                           operation: "Operation",
+                                          bpmn: "BPMN",
                                         }
                                         return typeNames[type] || type
                                       })
