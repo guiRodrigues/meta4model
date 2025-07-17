@@ -10,6 +10,7 @@ import Hexagon from "./hexagon";
 import Rectangle from "./rectangle";
 import Ellipse from "./ellipse";
 import RectangleTask from "./rectangle-task";
+import TextAnnotation from "./text-line";
 
 // Register all shape components
 ShapeComponents.parallelogram = Parallelogram;
@@ -18,6 +19,7 @@ ShapeComponents.hexagon = Hexagon;
 ShapeComponents.rectangle = Rectangle;
 ShapeComponents.ellipse = Ellipse;
 ShapeComponents.rectangleTask = RectangleTask; // Assuming RectangleTask is a variant of Rectangle
+ShapeComponents.textAnnotation = TextAnnotation; // Assuming TextAnnotation is a shape component
 
 function Shape({ type, width, height, ...svgAttributes }: ShapeComponentProps) {
   const ShapeComponent = ShapeComponents[type];

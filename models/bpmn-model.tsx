@@ -94,6 +94,7 @@ import {
   RectangleEllipsis,
   RectangleHorizontal,
   Slash,
+  TextIcon,
 } from "lucide-react";
 import startNoInterruptingTimerNode from "@/components/nodes/bpmn-nodes/start-event/start-no-interrupting-timer-node.";
 import startInterruptingSignal from "@/components/nodes/bpmn-nodes/start-event/start-interrupting-signal-node";
@@ -141,6 +142,7 @@ import intermediateLinkNode from "@/components/nodes/bpmn-nodes/intermediate-eve
 import intermediateThrowLinkNode from "@/components/nodes/bpmn-nodes/intermediate-event/intermediate-throw-link-node";
 import intermediateCancelNode from "@/components/nodes/bpmn-nodes/intermediate-event/intermediate-cancel-node";
 import dataNode from "@/components/nodes/bpmn-nodes/data-node";
+import textAnnotation from "@/components/nodes/text-annotation";
 
 
 export const bpmnModel: ModelDefinition = {
@@ -175,6 +177,7 @@ export const bpmnModel: ModelDefinition = {
     startNonInterruptingMessage: startNoInterruptingMsg, 
     task: TaskNode,
     data: dataNode,
+    textAnnotation: textAnnotation,
     startInterruptingTimer: startInterruptingTimerNode,
     startNoInterruptingTimer: startNoInterruptingTimerNode, 
     startInterruptingConditional: startInterruptingConditionalNode, 
@@ -912,7 +915,18 @@ export const bpmnModel: ModelDefinition = {
       color: "#a855f7",
       description:
         "Data object in BPMN, representing data used or produced by the process.",
-    }
+    },
+    {
+      type: "textAnnotation",
+      label: "Text Annotation",
+      category: "Artifacts",
+      diagramType: "BPMN Diagram",
+      component: textAnnotation,
+      icon: <TextIcon className="h-5 w-5 text-gray-500" />,
+      color: "#a855f7",
+      description:
+        "Text annotation in BPMN, used to add comments or explanations to the diagram.",
+    },
   ],
 
   defaultConnections: [
@@ -1040,6 +1054,7 @@ export const bpmnModel: ModelDefinition = {
         "parallel",
         "task",
         "data",
+        "textAnnotation",
         "startNonInterruptingMessage",
         "startInterruptingTimer",
         "startInterruptingConditional",

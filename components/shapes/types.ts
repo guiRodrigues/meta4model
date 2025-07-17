@@ -18,7 +18,8 @@ export type ShapeType =
   | "hexagon"
   | "rectangle"
   | "ellipse"
-  | "rectangleTask";
+  | "rectangleTask"
+  | "textAnnotation"
 
 export interface ShapeComponentProps extends ShapeProps {
   type: ShapeType;
