@@ -1,6 +1,8 @@
 import AssociationEdge from "@/components/edges/bpmn-edges/association-edge";
 import SequenceFlowEdge from "@/components/edges/bpmn-edges/sequence-flow-edge";
 import MessageFlowEdge from "@/components/edges/bpmn-edges/message-flow-edge";
+import CustomNode from "@/components/nodes/custom-node";
+import CustomEdge from "@/components/edges/custom-edge";
 import {
   CircleEndIcon,
   CircleIcon,
@@ -162,6 +164,7 @@ export const bpmnModel: ModelDefinition = {
     endTerminate: EndTerminateEventNode,
     endError: EndErrorEventNode,
     endEscalation: EndEscalationEventNode,
+    custom: CustomNode,
     endCancel: EndCancelEventNode,
     endCompensation: EndCompensationEventNode,
     endSignal: EndSignalEventNode,
@@ -204,6 +207,7 @@ export const bpmnModel: ModelDefinition = {
     intermediateThrowSignal: intermediateThrowSignalNode,
     intermediateInterruptingMultiple: intermediateInterruptingMultipleNode,
     intermediateNoInterruptingMultiple: intermediateNoInterruptingMultipleNode,
+    custom: CustomNode,
     intermediateThrowMultiple: intermediateThrowMultipleNode, // Assuming this is the same as interrupting conditional
     intermediateInterruptingParalle: intermediateInterruptingParalleNode, // Assuming this is the same as interrupting conditional
     intermediateNoInterruptingParalle: intermediateNoInterruptingParalleNode, // Assuming this is the same as interrupting conditional
@@ -224,6 +228,7 @@ export const bpmnModel: ModelDefinition = {
     conditionalSequence: conditionalSequenceFlowEdge,
     defaultSequence: defaultSequenceFlowEdge,
     association: AssociationEdge,
+    custom: CustomEdge,
     directionalAssociation: directionalAssociationEdge,
     biDirectionalAssociation: biDirectionalAssociationEdge,
     dataAssociation: dataAssociationEdge,
@@ -1097,6 +1102,7 @@ export const bpmnModel: ModelDefinition = {
         "intermediateLink",
         "intermediateThrowLink",
         "intermediateCancel",
+        "custom",
       ],
     },
   ],

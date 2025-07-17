@@ -368,7 +368,7 @@ export function EnvelopeIcon({
 }
 
 
-export function CircleIntermediateIcon({ className, strokeColor = "#60a5fa"}: { className?: string, r?: number, strokeColor?: string}) {
+export function CircleIntermediateIcon({ className, strokeColor = "#60a5fa"}: { className?: string, r?: number, strokeColor?: string, }) {
   return (
     <svg
       className={className}
@@ -380,7 +380,7 @@ export function CircleIntermediateIcon({ className, strokeColor = "#60a5fa"}: { 
         cx="12"
         cy="12"
         r= "6"
-        fill="#dbeafe"
+        fill = "#dbeafe"
         stroke={strokeColor}
         strokeWidth="0.5"
       />
@@ -662,7 +662,7 @@ export function CircleEndIcon({ className }: { className?: string }) {
         r="6"
         fill="#fee2e2"
         stroke="#ef4444"
-        strokeWidth="1.8"
+        strokeWidth="1.5"
       />
     </svg>
   );
@@ -1237,14 +1237,17 @@ export function DiamondComplexIcon({ className }: { className?: string }) {
         stroke="#d97706"
         strokeWidth="1.5"
       />
-      <polygon
-        points="12,8 14,10 12,12 10,10"
+      <text
+        x="12"
+        y="12.5"
+        textAnchor="middle"
+        dominantBaseline="central"
+        fontSize="16"
+        fontWeight="bold"
         fill="#b45309"
-      />
-      <polygon
-        points="12,12 14,14 12,16 10,14"
-        fill="#b45309"
-      />
+      >
+        *
+      </text>
     </svg>
   );
 }
@@ -1257,24 +1260,9 @@ export function DiamondEventBasedIcon({ className }: { className?: string }) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <polygon
-        points="12,3 21,12 12,21 3,12"
-        fill="#fef3c7"
-        stroke="#d97706"
-        strokeWidth="1.5"
-      />
-      <circle
-        cx="12"
-        cy="12"
-        r="5"
-        fill="none"
-        stroke="#b45309"
-        strokeWidth="1"
-      />
-      <polygon
-        points="12,9 13.5,11.5 12,14 10.5,11.5"
-        fill="#b45309"
-      />
+      <DiamondIcon/>
+      <CircleIntermediateIcon strokeColor="#b45309"/>
+      <PolygonIcon strokeColor="#b45309" />
     </svg>
   );
 }

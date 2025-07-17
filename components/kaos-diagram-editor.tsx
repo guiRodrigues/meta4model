@@ -176,6 +176,13 @@ function DiagramEditor({ model }: { model: ModelDefinition }) {
     updateDiagramState(nodes, edges);
   }, [nodes, edges, updateDiagramState]);
 
+  // Efeito para garantir que o modelo BPMN sempre use o diagrama tipo BPMN
+  useEffect(() => {
+    if (model && model.id === "bpmn" && currentDiagramType !== "BPMN Diagram" && nodes.length > 0) {
+      setCurrentDiagramType("BPMN Diagram");
+    }
+  }, [model, nodes.length, currentDiagramType]);
+
   // Use the model's node types and edge types
   const nodeTypes = useMemo(() => model?.nodeTypes || {}, [model]);
   const edgeTypes = useMemo(() => {
@@ -198,6 +205,11 @@ function DiagramEditor({ model }: { model: ModelDefinition }) {
     (nodeType: string, diagramType?: string): string => {
       // If a specific diagram type is provided, use it
       if (diagramType) return diagramType;
+
+      // Special case for BPMN model - always return "BPMN Diagram" for all nodes including custom
+      if (model.id === "bpmn") {
+        return "BPMN Diagram";
+      }
 
       // Find the diagram type that includes this node type
       const matchingDiagramType = model.diagramTypes?.find((dt) =>

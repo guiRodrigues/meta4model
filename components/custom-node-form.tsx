@@ -234,6 +234,7 @@ export function CustomNodeForm({ onSave, isCustomModel = false }: CustomNodeForm
                       { id: "responsibility", label: "Responsibility Diagram" },
                       { id: "object", label: "Object Diagram" },
                       { id: "operation", label: "Operation Diagram" },
+                      { id: "bpmn", label: "BPMN Diagram" },
                     ].map((type) => (
                       <div key={type.id} className="flex items-center space-x-2">
                         <input
