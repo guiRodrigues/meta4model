@@ -6,6 +6,7 @@ import { kaosModel } from "@/models/kaos-model"
 import { customModel } from "@/models/custom-model" // Import the custom model
 import { InfoIcon, ArrowRight } from "lucide-react"
 import Link from "next/link"
+import { bpmnModel } from "@/models/bpmn-model"
 
 export default function ModelSelectionPage() {
   const router = useRouter()
@@ -30,6 +31,15 @@ export default function ModelSelectionPage() {
       borderColor: "border-purple-200",
       documentationUrl: documentationLink,
       description: kaosModel.description.endsWith(".") ? kaosModel.description : `${kaosModel.description}.`,
+    },
+    {
+      ...bpmnModel,
+      color: "bg-[#d0ebff]",
+      textColor: "text-[#0c4a6e]",
+      buttonColor: "bg-[#0c4a6e] text-white",
+      borderColor: "border-blue-200",
+      documentationUrl: "#",
+      description: bpmnModel.description.endsWith(".") ? bpmnModel.description : `${bpmnModel.description}.`,
     },
     {
       ...customModel,
@@ -73,7 +83,7 @@ export default function ModelSelectionPage() {
           </div>
 
           <div className="flex justify-center">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-2xl">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-1xl">
               {/* Available models */}
               {availableModels.map((model) => (
                 <div
@@ -132,11 +142,10 @@ export default function ModelSelectionPage() {
                     {/* Full-width Select button - same background color for both */}
                     <button
                       onClick={() => handleSelectModel(model)}
-                      className={`w-full py-2.5 px-4 rounded-lg flex items-center justify-center gap-2 ${
-                        model.id === "custom" ? "bg-gray-900 text-[#f9fafb]" : "bg-[#141b2a] text-[#e5d4f7]"
-                      } font-medium transition-transform hover:scale-[1.02] flex-none`}
+                      className={`w-full py-2.5 px-4 rounded-lg flex items-center justify-center gap-2 ${model.id === "custom" ? "bg-gray-900 text-[#f9fafb]" : "bg-[#141b2a] text-[#e5d4f7]"
+                        } font-medium transition-transform hover:scale-[1.02] flex-none`}
                     >
-                      <span>{model.id === "custom" ? "Start from Scratch" : "Start with KAOS"}</span>
+                      <span>{model.id === "custom" ? "Start from Scratch" : `Start with ${model.name}`}</span>
                       <ArrowRight className="h-4 w-4" />
                     </button>
                   </div>

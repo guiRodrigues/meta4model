@@ -270,6 +270,10 @@
   filter: drop-shadow(0 0 5px rgba(59, 130, 246, 0.3));
 }
 
+.custom-node-resizer .react-flow__resizer {
+  @apply bg-transparent border-none;
+}
+
 /* Enhance the connection line */
 .react-flow__connection-path {
   stroke-width: 2;
@@ -604,3 +608,37 @@ button[class*="bg-primary"]:hover,
   pointer-events: none;
   z-index: 1000;
 }
+
+  .edge-label-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    pointer-events: all;
+  }
+  .edge-label-text {
+    font-size: 12px;
+    padding: 3px 8px;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    color: #374151;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  }
+  .edge-label-input {
+    width: 140px;
+    padding: 4px 6px;
+    font-size: 12px;
+    text-align: center;
+    border: 1px solid #cbd5e1;
+    border-radius: 5px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  .edge-label-input:focus {
+    outline: 2px solid #3b82f6;
+    outline-offset: 1px;
+    border-color: transparent;
+  }

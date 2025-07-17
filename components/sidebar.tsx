@@ -17,6 +17,8 @@ import type { DiagramData } from "@/utils/import-export-utils"
 import { HelpCircle } from "lucide-react"
 import { QuickTipsDialog } from "@/components/quick-tips-dialog"
 import type { ModelDefinition } from "@/types/model-types"
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion"
+import { CircleIcon, CircleIntermediateIcon, CircleEndIcon } from "@/components/icons/bpmn-icons"
 
 interface SidebarProps {
   model: ModelDefinition
@@ -101,6 +103,14 @@ export function Sidebar({
       // If no diagram type is selected yet, allow all nodes
       if (!currentDiagramType) return false
 
+      // Special case for BPMN: always allow standard BPMN nodes regardless of custom nodes
+      if (model.id === "bpmn" && currentDiagramType === "BPMN Diagram") {
+        // If it's a standard BPMN node (not custom), always allow it
+        if (nodeType !== "custom") {
+          return false;
+        }
+      }
+
       // If the current diagram type doesn't match the node's diagram type, disable it
       if (currentDiagramType !== nodeDiagramType) return true
 
@@ -114,9 +124,9 @@ export function Sidebar({
             responsibility: "Responsibility Diagram",
             object: "Object Diagram",
             operation: "Operation Diagram",
-          }
+            bpmn: "BPMN Diagram",
+          };
 
-          // Check if any of the custom node's diagram types match the current diagram type
           const nodeSupportsCurrentDiagram = customNode.diagramTypes.some(
             (type) => diagramTypeMap[type] === currentDiagramType,
           )
@@ -128,7 +138,7 @@ export function Sidebar({
 
       return false
     },
-    [currentDiagramType, customNodes],
+    [currentDiagramType, customNodes, model.id],
   )
 
   // Helper function to get a readable name for a node type
@@ -304,6 +314,7 @@ export function Sidebar({
                           responsibility: "Responsibility Diagram",
                           object: "Object Diagram",
                           operation: "Operation Diagram",
+                          bpmn: "BPMN Diagram",
                         }
 
                         // Check if this node is compatible with the current diagram
@@ -344,6 +355,7 @@ export function Sidebar({
                                           responsibility: "Responsibility",
                                           object: "Object",
                                           operation: "Operation",
+                                          bpmn: "BPMN",
                                         }
                                         return typeNames[type] || type
                                       })
@@ -386,45 +398,226 @@ export function Sidebar({
                     {model.name} Nodes
                   </h3>
 
-                  {/* Render nodes grouped by diagram type */}
-                  {Object.entries(nodesByDiagramType).map(([category, nodes]) => (
-                    <div key={category} className="space-y-2 pb-2">
-                      <div className="flex items-center justify-between">
-                        <h4 className="text-sm font-semibold">{category}</h4>
-                        <div className="h-px flex-1 bg-gray-200 mx-2"></div>
+                  {/* Renderização condicional: gaveta de Events estilizada só para BPMN */}
+                  {model.id === 'bpmn' ? (
+                    <>
+                      <div className="space-y-2 pb-2">
+                        <Accordion type="single" collapsible className="w-full bg-gray-50 rounded-lg shadow-sm border border-gray-200">
+                          <AccordionItem value="events-group">
+                            <AccordionTrigger className="text-sm px-4 py-3 hover:bg-gray-100 transition-colors rounded-t-lg">
+                              Events
+                            </AccordionTrigger>
+                            <AccordionContent className="px-2 pb-3 pt-1">
+                              <Accordion type="multiple" className="w-full">
+                                {/* Subgaveta Start Events */}
+                                <AccordionItem value="start-events">
+                                  <AccordionTrigger className="text-sm px-3 py-2 hover:bg-gray-100 transition-colors rounded-md">
+                                    <CircleIcon className="h-5 w-5 text-green-500 mr-3 align-middle" />
+                                    Start Events
+                                  </AccordionTrigger>
+                                  <AccordionContent className="px-2 pb-2">
+                                    <div className="space-y-2">
+                                      {model.defaultNodes.filter(node => node.category === "Events" && node.type.startsWith("start")).map(node => (
+                                        <Button
+                                          key={node.type}
+                                          variant="outline"
+                                          className={`flex w-full justify-start gap-2 bg-white/90 hover:bg-white/100 transition-colors px-3 py-2 rounded-md ${
+                                            isNodeDisabled(node.type, node.diagramType || "", undefined)
+                                              ? "opacity-50 cursor-not-allowed"
+                                              : ""
+                                          }`}
+                                          draggable={!isNodeDisabled(node.type, node.diagramType || "", undefined)}
+                                          onDragStart={event =>
+                                            !isNodeDisabled(node.type, node.diagramType || "", undefined) &&
+                                            onDragStart(event, node.type, node.label, node.diagramType || "")
+                                          }
+                                          onDragEnd={onDragEnd}
+                                          onClick={() =>
+                                            !isNodeDisabled(node.type, node.diagramType || "", undefined) &&
+                                            onAddNode(node.type, node.label)
+                                          }
+                                          disabled={isNodeDisabled(node.type, node.diagramType || "", undefined)}
+                                        >
+                                          {typeof node.icon === "string" ? (
+                                            <div className="h-5 w-5 mr-2" dangerouslySetInnerHTML={{ __html: node.icon }} />
+                                          ) : (
+                                            node.icon
+                                          )}
+                                          <span>{node.label}</span>
+                                        </Button>
+                                      ))}
+                                    </div>
+                                  </AccordionContent>
+                                </AccordionItem>
+                                <div className="border-t my-1" />
+                                {/* Subgaveta Intermediate Events */}
+                                <AccordionItem value="intermediate-events">
+                                  <AccordionTrigger className="text-sm px-3 py-2 hover:bg-gray-100 transition-colors rounded-md">
+                                    <CircleIntermediateIcon className="h-5 w-5 text-blue-500 mr-3 align-middle" />
+                                    Intermediate Events
+                                  </AccordionTrigger>
+                                  <AccordionContent className="px-2 pb-2">
+                                    <div className="space-y-2">
+                                      {model.defaultNodes.filter(node => node.category === "Events" && node.type.startsWith("intermediate")).map(node => (
+                                        <Button
+                                          key={node.type}
+                                          variant="outline"
+                                          className={`flex w-full justify-start gap-2 bg-white/90 hover:bg-white/100 transition-colors px-3 py-2 rounded-md ${
+                                            isNodeDisabled(node.type, node.diagramType || "", undefined)
+                                              ? "opacity-50 cursor-not-allowed"
+                                              : ""
+                                          }`}
+                                          draggable={!isNodeDisabled(node.type, node.diagramType || "", undefined)}
+                                          onDragStart={event =>
+                                            !isNodeDisabled(node.type, node.diagramType || "", undefined) &&
+                                            onDragStart(event, node.type, node.label, node.diagramType || "")
+                                          }
+                                          onDragEnd={onDragEnd}
+                                          onClick={() =>
+                                            !isNodeDisabled(node.type, node.diagramType || "", undefined) &&
+                                            onAddNode(node.type, node.label)
+                                          }
+                                          disabled={isNodeDisabled(node.type, node.diagramType || "", undefined)}
+                                        >
+                                          {typeof node.icon === "string" ? (
+                                            <div className="h-5 w-5 mr-2" dangerouslySetInnerHTML={{ __html: node.icon }} />
+                                          ) : (
+                                            node.icon
+                                          )}
+                                          <span>{node.label}</span>
+                                        </Button>
+                                      ))}
+                                    </div>
+                                  </AccordionContent>
+                                </AccordionItem>
+                                <div className="border-t my-1" />
+                                {/* Subgaveta End Events */}
+                                <AccordionItem value="end-events">
+                                  <AccordionTrigger className="text-sm px-3 py-2 hover:bg-gray-100 transition-colors rounded-md">
+                                    <CircleEndIcon className="h-5 w-5 text-red-500 mr-3 align-middle" />
+                                    End Events
+                                  </AccordionTrigger>
+                                  <AccordionContent className="px-2 pb-2">
+                                    <div className="space-y-2">
+                                      {model.defaultNodes.filter(node => node.category === "Events" && node.type.startsWith("end")).map(node => (
+                                        <Button
+                                          key={node.type}
+                                          variant="outline"
+                                          className={`flex w-full justify-start gap-2 bg-white/90 hover:bg-white/100 transition-colors px-3 py-2 rounded-md ${
+                                            isNodeDisabled(node.type, node.diagramType || "", undefined)
+                                              ? "opacity-50 cursor-not-allowed"
+                                              : ""
+                                          }`}
+                                          draggable={!isNodeDisabled(node.type, node.diagramType || "", undefined)}
+                                          onDragStart={event =>
+                                            !isNodeDisabled(node.type, node.diagramType || "", undefined) &&
+                                            onDragStart(event, node.type, node.label, node.diagramType || "")
+                                          }
+                                          onDragEnd={onDragEnd}
+                                          onClick={() =>
+                                            !isNodeDisabled(node.type, node.diagramType || "", undefined) &&
+                                            onAddNode(node.type, node.label)
+                                          }
+                                          disabled={isNodeDisabled(node.type, node.diagramType || "", undefined)}
+                                        >
+                                          {typeof node.icon === "string" ? (
+                                            <div className="h-5 w-5 mr-2" dangerouslySetInnerHTML={{ __html: node.icon }} />
+                                          ) : (
+                                            node.icon
+                                          )}
+                                          <span>{node.label}</span>
+                                        </Button>
+                                      ))}
+                                    </div>
+                                  </AccordionContent>
+                                </AccordionItem>
+                              </Accordion>
+                            </AccordionContent>
+                          </AccordionItem>
+                        </Accordion>
                       </div>
-
-                      {nodes.map((node) => (
-                        <Button
-                          key={`${category}-${node.type}`}
-                          variant="outline"
-                          className={`flex w-full justify-start gap-2 bg-white/90 hover:bg-white/100 transition-colors ${
-                            isNodeDisabled(node.type, node.diagramType || "", undefined)
-                              ? "opacity-50 cursor-not-allowed"
-                              : ""
-                          }`}
-                          draggable={!isNodeDisabled(node.type, node.diagramType || "", undefined)}
-                          onDragStart={(event) =>
-                            !isNodeDisabled(node.type, node.diagramType || "", undefined) &&
-                            onDragStart(event, node.type, node.label, node.diagramType || "")
-                          }
-                          onDragEnd={onDragEnd}
-                          onClick={() =>
-                            !isNodeDisabled(node.type, node.diagramType || "", undefined) &&
-                            onAddNode(node.type, node.label)
-                          }
-                          disabled={isNodeDisabled(node.type, node.diagramType || "", undefined)}
-                        >
-                          {typeof node.icon === "string" ? (
-                            <div className="h-5 w-5 mr-2" dangerouslySetInnerHTML={{ __html: node.icon }} />
-                          ) : (
-                            node.icon
-                          )}
-                          <span>{node.label}</span>
-                        </Button>
+                      {/* Outros grupos estilizados como Accordions */}
+                      {Object.entries(nodesByDiagramType).filter(([category]) => category !== "Events").map(([category, nodes]) => (
+                        <Accordion key={category} type="single" collapsible className="w-full pb-2 bg-gray-50 rounded-lg shadow-sm border border-gray-200">
+                          <AccordionItem value={category}>
+                            <AccordionTrigger className="text-sm px-4 py-3 hover:bg-gray-100 transition-colors rounded-t-lg">{category}</AccordionTrigger>
+                            <AccordionContent className="px-2 pb-3 pt-1">
+                              <div className="space-y-2">
+                                {nodes.map((node) => (
+                                  <Button
+                                    key={`${category}-${node.type}`}
+                                    variant="outline"
+                                    className={`flex w-full justify-start gap-2 bg-white/90 hover:bg-white/100 transition-colors px-3 py-2 rounded-md ${
+                                      isNodeDisabled(node.type, node.diagramType || "", undefined)
+                                        ? "opacity-50 cursor-not-allowed"
+                                        : ""
+                                    }`}
+                                    draggable={!isNodeDisabled(node.type, node.diagramType || "", undefined)}
+                                    onDragStart={(event) =>
+                                      !isNodeDisabled(node.type, node.diagramType || "", undefined) &&
+                                      onDragStart(event, node.type, node.label, node.diagramType || "")
+                                    }
+                                    onDragEnd={onDragEnd}
+                                    onClick={() =>
+                                      !isNodeDisabled(node.type, node.diagramType || "", undefined) &&
+                                      onAddNode(node.type, node.label)
+                                    }
+                                    disabled={isNodeDisabled(node.type, node.diagramType || "", undefined)}
+                                  >
+                                    {typeof node.icon === "string" ? (
+                                      <div className="h-5 w-5 mr-2" dangerouslySetInnerHTML={{ __html: node.icon }} />
+                                    ) : (
+                                      node.icon
+                                    )}
+                                    <span>{node.label}</span>
+                                  </Button>
+                                ))}
+                              </div>
+                            </AccordionContent>
+                          </AccordionItem>
+                        </Accordion>
                       ))}
-                    </div>
-                  ))}
+                    </>
+                  ) : (
+                    // Para outros modelos, renderizar todos os grupos como listas simples
+                    Object.entries(nodesByDiagramType).map(([category, nodes]) => (
+                      <div key={category} className="space-y-2 pb-2">
+                        <div className="flex items-center justify-between">
+                          <h4 className="text-sm font-semibold">{category}</h4>
+                          <div className="h-px flex-1 bg-gray-200 mx-2"></div>
+                        </div>
+                        {nodes.map((node) => (
+                          <Button
+                            key={`${category}-${node.type}`}
+                            variant="outline"
+                            className={`flex w-full justify-start gap-2 bg-white/90 hover:bg-white/100 transition-colors ${
+                              isNodeDisabled(node.type, node.diagramType || "", undefined)
+                                ? "opacity-50 cursor-not-allowed"
+                                : ""
+                            }`}
+                            draggable={!isNodeDisabled(node.type, node.diagramType || "", undefined)}
+                            onDragStart={(event) =>
+                              !isNodeDisabled(node.type, node.diagramType || "", undefined) &&
+                              onDragStart(event, node.type, node.label, node.diagramType || "")
+                            }
+                            onDragEnd={onDragEnd}
+                            onClick={() =>
+                              !isNodeDisabled(node.type, node.diagramType || "", undefined) &&
+                              onAddNode(node.type, node.label)
+                            }
+                            disabled={isNodeDisabled(node.type, node.diagramType || "", undefined)}
+                          >
+                            {typeof node.icon === "string" ? (
+                              <div className="h-5 w-5 mr-2" dangerouslySetInnerHTML={{ __html: node.icon }} />
+                            ) : (
+                              node.icon
+                            )}
+                            <span>{node.label}</span>
+                          </Button>
+                        ))}
+                      </div>
+                    ))
+                  )}
 
                   {/* Reset Canvas Button */}
                   <div className="space-y-2 pb-2 mt-6 pt-4 border-t">

@@ -2,7 +2,7 @@ import type { Node } from "reactflow"
 import { findBestConnectionPoints } from "./node-connection-utils"
 
 // Calculate the position where the edge should start/end based on the node's position and dimensions
-export function getEdgeParams(source: Node, target: Node) {
+export function getEdgeParams(source: Node, target: Node,) {
   // Get the best connection points
   const {
     sourcePoint,
