@@ -88,6 +88,7 @@ import {
   ArrowRight,
   Diamond,
   File,
+  FileIcon,
   Link,
   MessageSquare,
   RectangleEllipsis,
@@ -139,6 +140,7 @@ import intermediateCompensationNode from "@/components/nodes/bpmn-nodes/intermed
 import intermediateLinkNode from "@/components/nodes/bpmn-nodes/intermediate-event/intermediate-link-node";
 import intermediateThrowLinkNode from "@/components/nodes/bpmn-nodes/intermediate-event/intermediate-throw-link-node";
 import intermediateCancelNode from "@/components/nodes/bpmn-nodes/intermediate-event/intermediate-cancel-node";
+import dataNode from "@/components/nodes/bpmn-nodes/data-node";
 
 
 export const bpmnModel: ModelDefinition = {
@@ -172,6 +174,7 @@ export const bpmnModel: ModelDefinition = {
     parallel: GatewayNode,
     startNonInterruptingMessage: startNoInterruptingMsg, 
     task: TaskNode,
+    data: dataNode,
     startInterruptingTimer: startInterruptingTimerNode,
     startNoInterruptingTimer: startNoInterruptingTimerNode, 
     startInterruptingConditional: startInterruptingConditionalNode, 
@@ -899,6 +902,17 @@ export const bpmnModel: ModelDefinition = {
       color: "gray",
       description: "Task in BPMN, representing a unit of work in the process.",
     },
+    {
+      type: "data",
+      label: "Data",
+      category: "Data",
+      diagramType: "BPMN Diagram",
+      component: dataNode,
+      icon: <FileIcon className="h-5 w-5 text-gray-500" />,
+      color: "#a855f7",
+      description:
+        "Data object in BPMN, representing data used or produced by the process.",
+    }
   ],
 
   defaultConnections: [
@@ -1025,6 +1039,7 @@ export const bpmnModel: ModelDefinition = {
         "exclusive",
         "parallel",
         "task",
+        "data",
         "startNonInterruptingMessage",
         "startInterruptingTimer",
         "startInterruptingConditional",

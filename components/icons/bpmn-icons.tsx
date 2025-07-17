@@ -1278,3 +1278,159 @@ export function DiamondEventBasedIcon({ className }: { className?: string }) {
     </svg>
   );
 }
+
+export function FileIcon({
+  className,
+  strokeColor = "currentColor",
+  fillColor = "#fafafa",
+}: {
+  className?: string;
+  strokeColor?: string;
+  fillColor?: string;
+}) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z"
+        stroke={strokeColor}
+        strokeWidth="1.5"
+        fill={fillColor}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M14 2v6h6"
+        stroke={strokeColor}
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+const CollectionMarker = ({ color = "currentColor" }) => (
+  <g stroke={color} strokeWidth="2" strokeLinecap="round">
+    <path d="M10 16v3" />
+    <path d="M12 16v3" />
+    <path d="M14 16v3" />
+  </g>
+);
+
+const DataInputArrow = ({ color = "currentColor" }) => (
+  <path
+    d="M8 10h5V8l4 4-4 4v-2H8v-2z"
+    fill={color}
+  />
+);
+
+const DataOutputArrow = ({ color = "currentColor" }) => (
+  <path
+    d="M8 10h5V8l4 4-4 4v-2H8v-2z"
+    stroke={color}
+    strokeWidth="1.5"
+    fill="none"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  />
+);
+
+export function DataObjectCollectionIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...props} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <FileIcon strokeColor={props.stroke} fillColor={props.fill?.toString()} />
+      <CollectionMarker color={props.stroke} />
+    </svg>
+  );
+}
+
+export function DataInputIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...props} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <FileIcon strokeColor={props.stroke} fillColor={props.fill?.toString()} />
+      <DataInputArrow color={props.stroke} />
+    </svg>
+  );
+}
+
+export function DataInputCollectionIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...props} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <FileIcon strokeColor={props.stroke} fillColor={props.fill?.toString()} />
+      <DataInputArrow color={props.stroke} />
+      <CollectionMarker color={props.stroke} />
+    </svg>
+  );
+}
+
+export function DataOutputIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...props} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <FileIcon strokeColor={props.stroke} fillColor={props.fill?.toString()} />
+      <DataOutputArrow color={props.stroke} />
+    </svg>
+  );
+}
+
+export function DataOutputCollectionIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...props} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <FileIcon strokeColor={props.stroke} fillColor={props.fill?.toString()} />
+      <DataOutputArrow color={props.stroke} />
+      <CollectionMarker color={props.stroke} />
+    </svg>
+  );
+}
+
+export function DataStoreIcon({
+  className,
+  strokeColor = "currentColor",
+  fillColor = "#fafafa",
+}: {
+  className?: string;
+  strokeColor?: string;
+  fillColor?: string;
+}) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M5 10V18C5 19.6569 8.13401 21 12 21C15.866 21 19 19.6569 19 18V10"
+        stroke={strokeColor}
+        strokeWidth="1.5"
+        fill={fillColor}
+      />
+      <ellipse
+        cx="12"
+        cy="10"
+        rx="7"
+        ry="3"
+        stroke={strokeColor}
+        strokeWidth="1.5"
+        fill={fillColor}
+      />
+      <path
+        d="M19 6C19 7.65685 15.866 9 12 9C8.13401 9 5 7.65685 5 6"
+        stroke={strokeColor}
+        strokeWidth="1.5"
+      />
+      <ellipse
+        cx="12"
+        cy="6"
+        rx="7"
+        ry="3"
+        stroke={strokeColor}
+        strokeWidth="1.5"
+      />
+    </svg>
+  );
+}
