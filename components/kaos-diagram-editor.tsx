@@ -81,7 +81,7 @@ function DiagramEditor({ model }: { model: ModelDefinition }) {
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   const [reactFlowInstance, setReactFlowInstance] = useState<any>(null);
   const [selectedEdgeType, setSelectedEdgeType] =
-    useState<string>("refinement");
+    useState<string>(model.id === "bpmn" ? "sequence" : "refinement");
   const [selectedNode, setSelectedNode] = useState<Node<NodeData> | null>(null);
   const [isReady, setIsReady] = useState(false);
   const [customNodes, setCustomNodes] = useState<CustomNodeDefinition[]>(() =>
@@ -434,7 +434,7 @@ function DiagramEditor({ model }: { model: ModelDefinition }) {
 
       // If the deleted connection is currently selected, reset to default
       if (selectedEdgeType === connectionId) {
-        setSelectedEdgeType("refinement");
+        model.name == "bpmn" ? setSelectedEdgeType("sequence") : setSelectedEdgeType("refinement");
       }
     },
     [selectedEdgeType]
